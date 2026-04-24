@@ -27,22 +27,24 @@ import { toast } from "@/hooks/use-toast";
 
 interface Props {
   onNavigate: (id: TabId) => void;
+  open: boolean;
+  onOpenChange: (open: boolean) => void;
 }
 
-export function CommandPalette({ onNavigate }: Props) {
-  const [open, setOpen] = useState(false);
+export function CommandPalette({ onNavigate, open, onOpenChange }: Props) {
+  const setOpen = onOpenChange;
   const { theme, toggleTheme } = useTheme();
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
       if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "k") {
         e.preventDefault();
-        setOpen((o) => !o);
+        setOpen(!open);
       }
     };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
-  }, []);
+  }, [open, setOpen]);
 
   const run = (fn: () => void) => () => {
     fn();

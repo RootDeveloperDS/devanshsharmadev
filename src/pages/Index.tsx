@@ -12,8 +12,7 @@ import type { TabId } from "@/components/portfolio/data";
 
 function PortfolioShell() {
   const [active, setActive] = useState<TabId>("overview");
-  // CommandPalette listens for Cmd+K internally; we keep an opener no-op for parity.
-  const [, forceOpen] = useState(0);
+  const [paletteOpen, setPaletteOpen] = useState(false);
 
   const handleNavigate = (id: TabId) => {
     setActive(id);
@@ -23,8 +22,8 @@ function PortfolioShell() {
   return (
     <div className="relative min-h-screen overflow-x-hidden">
       <AnimatedBackground />
-      <TopNav active={active} onChange={handleNavigate} onOpenPalette={() => forceOpen((n) => n + 1)} />
-      <CommandPalette onNavigate={handleNavigate} />
+      <TopNav active={active} onChange={handleNavigate} onOpenPalette={() => setPaletteOpen(true)} />
+      <CommandPalette onNavigate={handleNavigate} open={paletteOpen} onOpenChange={setPaletteOpen} />
 
       <main className="px-4 pb-24 pt-28 sm:px-6 sm:pt-32">
         <AnimatePresence mode="wait">
