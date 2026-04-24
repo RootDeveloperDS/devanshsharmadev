@@ -2,95 +2,98 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
+/*
+  Devansh Sharma — Portfolio OS
+  Dual-theme HSL design system. Never hardcode colors in components.
+  - data-theme="visar"     → Sci-Fi / VISAR neon
+  - data-theme="executive" → Professional / Executive clean
 */
 
 @layer base {
-  :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+  :root,
+  [data-theme="visar"] {
+    /* Core surfaces */
+    --background: 0 0% 2%;            /* #050505 */
+    --foreground: 180 100% 96%;
+    --card: 200 30% 5%;
+    --card-foreground: 180 100% 96%;
+    --popover: 200 40% 4%;
+    --popover-foreground: 180 100% 96%;
 
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    /* Brand */
+    --primary: 184 100% 50%;          /* #00F7FF cyan */
+    --primary-foreground: 0 0% 4%;
+    --primary-glow: 184 100% 65%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --secondary: 200 30% 10%;
+    --secondary-foreground: 180 60% 92%;
+    --muted: 200 25% 9%;
+    --muted-foreground: 195 20% 60%;
+    --accent: 184 90% 55%;
+    --accent-foreground: 0 0% 4%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    --destructive: 0 90% 55%;
+    --destructive-foreground: 0 0% 100%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    --border: 184 80% 30% / 0.35;
+    --input: 200 30% 12%;
+    --ring: 184 100% 50%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    --radius: 0.75rem;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    /* Tokens */
+    --grid-line: 184 100% 50% / 0.06;
+    --glow-color: 184 100% 50%;
+    --gradient-hero: radial-gradient(ellipse at top, hsl(184 100% 50% / 0.18), transparent 60%);
+    --gradient-text: linear-gradient(135deg, hsl(184 100% 75%), hsl(184 100% 50%) 60%, hsl(220 100% 70%));
+    --shadow-glow: 0 0 0 1px hsl(184 100% 50% / 0.35), 0 0 40px -10px hsl(184 100% 50% / 0.5);
+    --shadow-card: 0 8px 32px -12px hsl(0 0% 0% / 0.6);
+    --glass-bg: 200 40% 6% / 0.55;
+    --scanline: linear-gradient(transparent 50%, hsl(184 100% 50% / 0.04) 50%);
 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
-
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
-
-    --radius: 0.5rem;
-
-    --sidebar-background: 0 0% 98%;
-
-    --sidebar-foreground: 240 5.3% 26.1%;
-
-    --sidebar-primary: 240 5.9% 10%;
-
-    --sidebar-primary-foreground: 0 0% 98%;
-
-    --sidebar-accent: 240 4.8% 95.9%;
-
-    --sidebar-accent-foreground: 240 5.9% 10%;
-
-    --sidebar-border: 220 13% 91%;
-
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --font-display: 'Orbitron', 'Space Grotesk', system-ui, sans-serif;
+    --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+    --font-body: 'Inter', system-ui, sans-serif;
   }
 
-  .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
+  [data-theme="executive"] {
+    --background: 30 10% 98%;          /* #FAFAFA */
+    --foreground: 0 0% 7%;             /* #111 */
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 7%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 7%;
 
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
+    --primary: 218 30% 18%;
+    --primary-foreground: 0 0% 100%;
+    --primary-glow: 218 30% 30%;
 
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
+    --secondary: 220 14% 95%;
+    --secondary-foreground: 0 0% 7%;
+    --muted: 220 14% 95%;
+    --muted-foreground: 220 9% 42%;
+    --accent: 215 28% 32%;
+    --accent-foreground: 0 0% 100%;
 
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
+    --destructive: 0 72% 50%;
+    --destructive-foreground: 0 0% 100%;
 
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
+    --border: 220 13% 91%;
+    --input: 220 13% 91%;
+    --ring: 218 30% 18%;
 
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
+    --grid-line: 220 13% 88% / 0.6;
+    --glow-color: 220 13% 88%;
+    --gradient-hero: radial-gradient(ellipse at top, hsl(220 30% 90% / 0.6), transparent 70%);
+    --gradient-text: linear-gradient(135deg, hsl(0 0% 7%), hsl(218 30% 25%));
+    --shadow-glow: 0 1px 2px hsl(0 0% 0% / 0.04), 0 8px 24px -8px hsl(0 0% 0% / 0.08);
+    --shadow-card: 0 1px 2px hsl(0 0% 0% / 0.04), 0 12px 32px -12px hsl(0 0% 0% / 0.1);
+    --glass-bg: 0 0% 100% / 0.7;
+    --scanline: none;
 
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
-
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
-
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --font-display: 'Inter', system-ui, sans-serif;
+    --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+    --font-body: 'Inter', system-ui, sans-serif;
   }
 }
 
@@ -98,8 +101,102 @@ All colors MUST be HSL.
   * {
     @apply border-border;
   }
-
+  html {
+    color-scheme: dark;
+  }
+  html[data-theme="executive"] {
+    color-scheme: light;
+  }
   body {
     @apply bg-background text-foreground;
+    font-family: var(--font-body);
+    transition: background-color 500ms ease, color 500ms ease;
+    -webkit-font-smoothing: antialiased;
   }
+  ::selection {
+    background: hsl(var(--primary) / 0.3);
+    color: hsl(var(--foreground));
+  }
+}
+
+@layer components {
+  .font-display { font-family: var(--font-display); letter-spacing: -0.01em; }
+  .font-mono    { font-family: var(--font-mono); }
+
+  .text-gradient {
+    background: var(--gradient-text);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .glass {
+    background: hsl(var(--glass-bg));
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid hsl(var(--border));
+  }
+
+  .glow-border {
+    box-shadow: var(--shadow-glow);
+  }
+
+  .bento-card {
+    @apply relative overflow-hidden rounded-2xl glass p-6 transition-all duration-500;
+    box-shadow: var(--shadow-card);
+  }
+  .bento-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-glow), var(--shadow-card);
+  }
+
+  .grid-bg {
+    background-image:
+      linear-gradient(hsl(var(--grid-line)) 1px, transparent 1px),
+      linear-gradient(90deg, hsl(var(--grid-line)) 1px, transparent 1px);
+    background-size: 48px 48px;
+    mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, black 30%, transparent 80%);
+  }
+
+  .scanlines::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: var(--scanline);
+    background-size: 100% 4px;
+    opacity: 0.6;
+  }
+
+  .terminal-cursor::after {
+    content: "▋";
+    margin-left: 4px;
+    animation: blink 1s step-end infinite;
+    color: hsl(var(--primary));
+  }
+}
+
+@layer utilities {
+  .no-scrollbar::-webkit-scrollbar { display: none; }
+  .no-scrollbar { scrollbar-width: none; }
+}
+
+@keyframes blink {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0; }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-12px); }
+}
+
+@keyframes orbit {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 1; }
 }
