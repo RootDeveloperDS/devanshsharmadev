@@ -164,30 +164,30 @@ export function TerminalTab() {
   ];
 
   return (
-    <section className="mx-auto max-w-6xl">
+    <section className="mx-auto w-full max-w-6xl">
       <motion.div
         initial={{ opacity: 0, y: 12 }}
         animate={{ opacity: 1, y: 0 }}
-        className="mb-10"
+        className="mb-8 sm:mb-10"
       >
-        <p className="font-mono text-xs uppercase tracking-[0.25em] text-primary">
+        <p className="font-mono text-[10px] uppercase tracking-[0.25em] text-primary sm:text-xs">
           // node_04 · contact
         </p>
-        <h2 className="mt-2 font-display text-3xl font-bold sm:text-5xl">
+        <h2 className="mt-2 font-display text-2xl font-bold sm:text-5xl">
           {theme === "visar" ? (
             <>Open a <span className="text-gradient">Channel</span>.</>
           ) : (
             <>Let's <span className="text-gradient">talk</span>.</>
           )}
         </h2>
-        <p className="mt-3 max-w-xl text-muted-foreground">
+        <p className="mt-3 max-w-xl text-sm text-muted-foreground sm:text-base">
           {theme === "visar"
             ? "Direct line to the operator. Encrypted on intent, open on welcome."
             : "Drop a note for collaborations, roles, or product conversations."}
         </p>
       </motion.div>
 
-      <div className="grid gap-6 lg:grid-cols-[1.4fr_1fr]">
+      <div className="grid gap-4 sm:gap-6 lg:grid-cols-[1.4fr_1fr]">
         {theme === "visar" ? <TerminalView /> : <ExecutiveContactForm />}
 
         {/* Channels list */}
@@ -198,10 +198,10 @@ export function TerminalTab() {
               href={href}
               target={href.startsWith("http") ? "_blank" : undefined}
               rel="noopener noreferrer"
-              className="bento-card group flex items-center gap-4 !p-4 hover:border-primary/60"
+              className="bento-card group flex items-center gap-3 !p-3 hover:border-primary/60 sm:gap-4 sm:!p-4"
             >
-              <span className="grid h-10 w-10 place-items-center rounded-lg bg-primary/10 text-primary">
-                <Icon className="h-5 w-5" />
+              <span className="grid h-9 w-9 shrink-0 place-items-center rounded-lg bg-primary/10 text-primary sm:h-10 sm:w-10">
+                <Icon className="h-4 w-4 sm:h-5 sm:w-5" />
               </span>
               <div className="min-w-0 flex-1">
                 <div className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground">
@@ -217,7 +217,7 @@ export function TerminalTab() {
                     navigator.clipboard.writeText(value);
                     toast({ title: "Copied", description: value });
                   }}
-                  className="text-muted-foreground transition-colors hover:text-primary"
+                  className="shrink-0 text-muted-foreground transition-colors hover:text-primary"
                   aria-label="Copy email"
                 >
                   <Copy className="h-4 w-4" />
