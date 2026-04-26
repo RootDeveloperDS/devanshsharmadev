@@ -49,22 +49,22 @@ function TerminalView() {
   return (
     <div className="bento-card scanlines relative !p-0 overflow-hidden">
       {/* Title bar */}
-      <div className="flex items-center gap-2 border-b border-border bg-secondary/40 px-4 py-2">
-        <span className="h-3 w-3 rounded-full bg-destructive/70" />
-        <span className="h-3 w-3 rounded-full bg-yellow-500/70" />
-        <span className="h-3 w-3 rounded-full bg-primary/70" />
-        <span className="ml-3 font-mono text-[11px] text-muted-foreground">
+      <div className="flex items-center gap-2 border-b border-border bg-secondary/40 px-3 py-2 sm:px-4">
+        <span className="h-2.5 w-2.5 rounded-full bg-destructive/70 sm:h-3 sm:w-3" />
+        <span className="h-2.5 w-2.5 rounded-full bg-yellow-500/70 sm:h-3 sm:w-3" />
+        <span className="h-2.5 w-2.5 rounded-full bg-primary/70 sm:h-3 sm:w-3" />
+        <span className="ml-2 truncate font-mono text-[10px] text-muted-foreground sm:ml-3 sm:text-[11px]">
           devansh@visar:~ · /comms
         </span>
       </div>
 
-      <div ref={scrollRef} className="max-h-[460px] min-h-[360px] overflow-y-auto p-5 font-mono text-sm">
+      <div ref={scrollRef} className="max-h-[460px] min-h-[320px] overflow-y-auto p-3 font-mono text-xs sm:min-h-[360px] sm:p-5 sm:text-sm">
         {shown.map((line, i) => (
           <motion.div
             key={i}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            className="text-primary/90"
+            className="break-words text-primary/90"
           >
             {line}
           </motion.div>
@@ -76,20 +76,22 @@ function TerminalView() {
             animate={{ opacity: 1 }}
             className="mt-4 space-y-3"
           >
-            <div>
+            <div className="flex flex-wrap items-center gap-x-1 gap-y-1">
               <span className="text-primary">visitor@portfolio</span>
-              <span className="text-muted-foreground">:~$ set --name </span>
+              <span className="text-muted-foreground">:~$ set --name</span>
               <input
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 placeholder="your_name"
-                className="bg-transparent outline-none text-foreground placeholder:text-muted-foreground/50 w-40"
+                className="min-w-0 flex-1 bg-transparent outline-none text-foreground placeholder:text-muted-foreground/50 sm:w-40 sm:flex-none"
               />
             </div>
             <div>
-              <span className="text-primary">visitor@portfolio</span>
-              <span className="text-muted-foreground">:~$ compose </span>
-              <span className="terminal-cursor" />
+              <div className="flex flex-wrap items-center gap-x-1">
+                <span className="text-primary">visitor@portfolio</span>
+                <span className="text-muted-foreground">:~$ compose</span>
+                <span className="terminal-cursor" />
+              </div>
               <textarea
                 value={msg}
                 onChange={(e) => setMsg(e.target.value)}
@@ -98,7 +100,7 @@ function TerminalView() {
                 className="mt-2 w-full resize-none rounded-md border border-border bg-background/50 p-3 text-foreground placeholder:text-muted-foreground/50 outline-none focus:border-primary"
               />
             </div>
-            <Button onClick={handleSend} className="rounded-md">
+            <Button onClick={handleSend} className="w-full rounded-md sm:w-auto">
               <Send /> Transmit
             </Button>
           </motion.div>
@@ -162,30 +164,30 @@ export function TerminalTab() {
   ];
 
   return (
-    <section className="mx-auto max-w-6xl">
+    <section className="mx-auto w-full max-w-6xl">
       <motion.div
         initial={{ opacity: 0, y: 12 }}
         animate={{ opacity: 1, y: 0 }}
-        className="mb-10"
+        className="mb-8 sm:mb-10"
       >
-        <p className="font-mono text-xs uppercase tracking-[0.25em] text-primary">
+        <p className="font-mono text-[10px] uppercase tracking-[0.25em] text-primary sm:text-xs">
           // node_04 · contact
         </p>
-        <h2 className="mt-2 font-display text-3xl font-bold sm:text-5xl">
+        <h2 className="mt-2 font-display text-2xl font-bold sm:text-5xl">
           {theme === "visar" ? (
             <>Open a <span className="text-gradient">Channel</span>.</>
           ) : (
             <>Let's <span className="text-gradient">talk</span>.</>
           )}
         </h2>
-        <p className="mt-3 max-w-xl text-muted-foreground">
+        <p className="mt-3 max-w-xl text-sm text-muted-foreground sm:text-base">
           {theme === "visar"
             ? "Direct line to the operator. Encrypted on intent, open on welcome."
             : "Drop a note for collaborations, roles, or product conversations."}
         </p>
       </motion.div>
 
-      <div className="grid gap-6 lg:grid-cols-[1.4fr_1fr]">
+      <div className="grid gap-4 sm:gap-6 lg:grid-cols-[1.4fr_1fr]">
         {theme === "visar" ? <TerminalView /> : <ExecutiveContactForm />}
 
         {/* Channels list */}
@@ -196,10 +198,10 @@ export function TerminalTab() {
               href={href}
               target={href.startsWith("http") ? "_blank" : undefined}
               rel="noopener noreferrer"
-              className="bento-card group flex items-center gap-4 !p-4 hover:border-primary/60"
+              className="bento-card group flex items-center gap-3 !p-3 hover:border-primary/60 sm:gap-4 sm:!p-4"
             >
-              <span className="grid h-10 w-10 place-items-center rounded-lg bg-primary/10 text-primary">
-                <Icon className="h-5 w-5" />
+              <span className="grid h-9 w-9 shrink-0 place-items-center rounded-lg bg-primary/10 text-primary sm:h-10 sm:w-10">
+                <Icon className="h-4 w-4 sm:h-5 sm:w-5" />
               </span>
               <div className="min-w-0 flex-1">
                 <div className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground">
@@ -215,7 +217,7 @@ export function TerminalTab() {
                     navigator.clipboard.writeText(value);
                     toast({ title: "Copied", description: value });
                   }}
-                  className="text-muted-foreground transition-colors hover:text-primary"
+                  className="shrink-0 text-muted-foreground transition-colors hover:text-primary"
                   aria-label="Copy email"
                 >
                   <Copy className="h-4 w-4" />
