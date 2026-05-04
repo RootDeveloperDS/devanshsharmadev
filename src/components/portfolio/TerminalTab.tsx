@@ -160,10 +160,10 @@ function TerminalView() {
             animate={{ opacity: 1, y: 0 }}
             className="mt-4 space-y-1 whitespace-pre-wrap break-all text-primary"
           >
-            <div className="text-yellow-400">[ SENDING ] › transmitting packet...</div>
-            <div>[ SENT ] › signal received ✓</div>
+            <div className="text-yellow-400">[ SENDING ] › opening mail client...</div>
+            <div>[ SENT ] › draft prepared in your mail app ✓</div>
             <div className="text-muted-foreground">
-              › for direct contact, see channels below.
+              › just hit send in your inbox to deliver to {socials.email}
             </div>
           </motion.div>
         )}
