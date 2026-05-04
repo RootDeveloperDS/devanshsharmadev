@@ -39,16 +39,31 @@ function TerminalView() {
 
   useEffect(() => {
     scrollRef.current?.scrollTo({ top: scrollRef.current.scrollHeight, behavior: "smooth" });
-  }, [shown, sent]);
+  }, [shown, status]);
 
   const handleSend = () => {
-    if (!name.trim() || !msg.trim()) {
-      toast({ title: "Missing fields", description: "Enter your name and message." });
+    const trimmedName = name.trim();
+    const trimmedMsg = msg.trim();
+    if (!trimmedName || !trimmedMsg) {
+      const which = !trimmedName && !trimmedMsg
+        ? "name and message"
+        : !trimmedName
+          ? "name"
+          : "message";
+      setStatus("failed");
+      setErrorMsg(`missing required field: ${which}`);
+      toast({ title: "Missing fields", description: `Please enter your ${which}.` });
       return;
     }
-    setSent(true);
-    toast({ title: "Message queued", description: "Visual demo — connect a backend later." });
+    setErrorMsg("");
+    setStatus("sending");
+    window.setTimeout(() => {
+      setStatus("sent");
+      toast({ title: "Message queued", description: "Visual demo — connect a backend later." });
+    }, 900);
   };
+
+  const showForm = shown.length >= bootLines.length && status !== "sent";
 
   return (
     <div className="bento-card scanlines relative !p-0 overflow-hidden">
@@ -62,62 +77,87 @@ function TerminalView() {
         </span>
       </div>
 
-      <div ref={scrollRef} className="max-h-[460px] min-h-[320px] overflow-y-auto p-3 font-mono text-xs sm:min-h-[360px] sm:p-5 sm:text-sm">
+      <div
+        ref={scrollRef}
+        className="max-h-[460px] min-h-[320px] overflow-y-auto overflow-x-hidden p-3 font-mono text-[11px] leading-relaxed sm:min-h-[360px] sm:p-5 sm:text-sm"
+      >
         {shown.map((line, i) => (
           <motion.div
             key={i}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            className="break-words text-primary/90"
+            className="whitespace-pre-wrap break-all text-primary/90"
           >
             {line}
           </motion.div>
         ))}
 
-        {shown.length >= bootLines.length && !sent && (
+        {showForm && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             className="mt-4 space-y-3"
           >
-            <div className="flex flex-wrap items-center gap-x-1 gap-y-1">
-              <span className="text-primary">visitor@portfolio</span>
-              <span className="text-muted-foreground">:~$ set --name</span>
+            <div>
+              <div className="flex flex-wrap items-center gap-x-1 gap-y-1 whitespace-pre-wrap break-all">
+                <span className="text-primary">visitor@portfolio</span>
+                <span className="text-muted-foreground">:~$ set --name</span>
+              </div>
               <input
                 value={name}
-                onChange={(e) => setName(e.target.value)}
-                placeholder="your_name"
-                className="min-w-0 flex-1 bg-transparent outline-none text-foreground placeholder:text-muted-foreground/50 sm:w-40 sm:flex-none"
+                onChange={(e) => { setName(e.target.value); if (status === "failed") setStatus("idle"); }}
+                placeholder="your_name (required)"
+                aria-label="Your name"
+                required
+                className="mt-2 w-full rounded-md border border-border bg-background/50 px-3 py-2 text-foreground placeholder:text-muted-foreground/50 outline-none focus:border-primary"
               />
             </div>
             <div>
-              <div className="flex flex-wrap items-center gap-x-1">
+              <div className="flex flex-wrap items-center gap-x-1 whitespace-pre-wrap break-all">
                 <span className="text-primary">visitor@portfolio</span>
                 <span className="text-muted-foreground">:~$ compose</span>
                 <span className="terminal-cursor" />
               </div>
               <textarea
                 value={msg}
-                onChange={(e) => setMsg(e.target.value)}
-                placeholder="type your message..."
+                onChange={(e) => { setMsg(e.target.value); if (status === "failed") setStatus("idle"); }}
+                placeholder="type your message... (required)"
                 rows={4}
+                aria-label="Your message"
+                required
                 className="mt-2 w-full resize-none rounded-md border border-border bg-background/50 p-3 text-foreground placeholder:text-muted-foreground/50 outline-none focus:border-primary"
               />
             </div>
-            <Button onClick={handleSend} className="w-full rounded-md sm:w-auto">
-              <Send /> Transmit
+
+            {status === "sending" && (
+              <div className="whitespace-pre-wrap break-all text-yellow-400">
+                [ SENDING ] › transmitting packet...
+              </div>
+            )}
+            {status === "failed" && (
+              <div className="whitespace-pre-wrap break-all text-destructive">
+                [ FAILED ] › {errorMsg || "transmission aborted"}
+              </div>
+            )}
+
+            <Button
+              onClick={handleSend}
+              disabled={status === "sending"}
+              className="w-full rounded-md sm:w-auto"
+            >
+              <Send /> {status === "sending" ? "Transmitting..." : "Transmit"}
             </Button>
           </motion.div>
         )}
 
-        {sent && (
+        {status === "sent" && (
           <motion.div
             initial={{ opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
-            className="mt-4 space-y-1 text-primary"
+            className="mt-4 space-y-1 whitespace-pre-wrap break-all text-primary"
           >
-            <div>› transmitting...</div>
-            <div>› signal received ✓</div>
+            <div className="text-yellow-400">[ SENDING ] › transmitting packet...</div>
+            <div>[ SENT ] › signal received ✓</div>
             <div className="text-muted-foreground">
               › for direct contact, see channels below.
             </div>
