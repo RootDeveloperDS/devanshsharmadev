@@ -16,11 +16,15 @@ const bootLines = [
   "[ READY ] type a message and press send.",
 ];
 
+type TxStatus = "idle" | "sending" | "sent" | "failed";
+
 function TerminalView() {
   const [shown, setShown] = useState<string[]>([]);
   const [name, setName] = useState("");
   const [msg, setMsg] = useState("");
-  const [sent, setSent] = useState(false);
+  const [status, setStatus] = useState<TxStatus>("idle");
+  const [errorMsg, setErrorMsg] = useState<string>("");
+  const sent = status === "sent";
   const scrollRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
