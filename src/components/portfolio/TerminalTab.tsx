@@ -57,10 +57,14 @@ function TerminalView() {
     }
     setErrorMsg("");
     setStatus("sending");
+    const subject = `Portfolio contact — ${trimmedName}`;
+    const body = `${trimmedMsg}\n\n— ${trimmedName}`;
+    const mailto = `mailto:${socials.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
     window.setTimeout(() => {
+      window.location.href = mailto;
       setStatus("sent");
-      toast({ title: "Message queued", description: "Visual demo — connect a backend later." });
-    }, 900);
+      toast({ title: "Opening your mail app", description: `Ready to send to ${socials.email}` });
+    }, 500);
   };
 
   const showForm = shown.length >= bootLines.length && status !== "sent";
@@ -156,10 +160,10 @@ function TerminalView() {
             animate={{ opacity: 1, y: 0 }}
             className="mt-4 space-y-1 whitespace-pre-wrap break-all text-primary"
           >
-            <div className="text-yellow-400">[ SENDING ] › transmitting packet...</div>
-            <div>[ SENT ] › signal received ✓</div>
+            <div className="text-yellow-400">[ SENDING ] › opening mail client...</div>
+            <div>[ SENT ] › draft prepared in your mail app ✓</div>
             <div className="text-muted-foreground">
-              › for direct contact, see channels below.
+              › just hit send in your inbox to deliver to {socials.email}
             </div>
           </motion.div>
         )}
@@ -171,7 +175,19 @@ function TerminalView() {
 function ExecutiveContactForm() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    toast({ title: "Message queued", description: "Visual demo — connect a backend later." });
+    const form = e.currentTarget as HTMLFormElement;
+    const data = new FormData(form);
+    const name = String(data.get("name") || "").trim();
+    const email = String(data.get("email") || "").trim();
+    const message = String(data.get("message") || "").trim();
+    if (!name || !message) {
+      toast({ title: "Missing fields", description: "Please fill in your name and message." });
+      return;
+    }
+    const subject = `Portfolio contact — ${name}`;
+    const body = `${message}\n\n— ${name}${email ? ` (${email})` : ""}`;
+    window.location.href = `mailto:${socials.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    toast({ title: "Opening your mail app", description: `Ready to send to ${socials.email}` });
   };
 
   return (
@@ -179,16 +195,16 @@ function ExecutiveContactForm() {
       <div className="grid gap-4 sm:grid-cols-2">
         <div>
           <Label htmlFor="name">Name</Label>
-          <Input id="name" placeholder="Your name" className="mt-1.5" />
+          <Input id="name" name="name" placeholder="Your name" className="mt-1.5" required />
         </div>
         <div>
           <Label htmlFor="email">Email</Label>
-          <Input id="email" type="email" placeholder="you@company.com" className="mt-1.5" />
+          <Input id="email" name="email" type="email" placeholder="you@company.com" className="mt-1.5" />
         </div>
       </div>
       <div>
         <Label htmlFor="message">Message</Label>
-        <Textarea id="message" placeholder="What are you building?" rows={6} className="mt-1.5" />
+        <Textarea id="message" name="message" placeholder="What are you building?" rows={6} className="mt-1.5" required />
       </div>
       <Button type="submit" size="lg" className="rounded-md">
         <Send /> Send message
