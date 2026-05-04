@@ -57,10 +57,14 @@ function TerminalView() {
     }
     setErrorMsg("");
     setStatus("sending");
+    const subject = `Portfolio contact — ${trimmedName}`;
+    const body = `${trimmedMsg}\n\n— ${trimmedName}`;
+    const mailto = `mailto:${socials.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
     window.setTimeout(() => {
+      window.location.href = mailto;
       setStatus("sent");
-      toast({ title: "Message queued", description: "Visual demo — connect a backend later." });
-    }, 900);
+      toast({ title: "Opening your mail app", description: `Ready to send to ${socials.email}` });
+    }, 500);
   };
 
   const showForm = shown.length >= bootLines.length && status !== "sent";
