@@ -251,7 +251,7 @@ export function TerminalTab() {
         {theme === "visar" ? <TerminalView /> : <ExecutiveContactForm />}
 
         {/* Channels list */}
-        <div className="space-y-3">
+        <aside className="space-y-3">
           {channels.map(({ icon: Icon, label, value, href, copy }) => (
             <a
               key={label}
@@ -285,7 +285,7 @@ export function TerminalTab() {
               )}
             </a>
           ))}
-        </div>
+        </aside>
       </div>
     </section>
   );

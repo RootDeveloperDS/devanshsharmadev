@@ -103,22 +103,22 @@ export function OverviewTab({ onNavigate }: Props) {
         transition={{ duration: 0.6 }}
         className="mt-20 grid gap-6 md:grid-cols-[1.5fr_1fr]"
       >
-        <div className="bento-card">
+        <article className="bento-card">
           <p className="font-mono text-[10px] uppercase tracking-[0.25em] text-primary">
             // about.md
           </p>
           <p className="mt-4 text-base leading-relaxed text-muted-foreground">
             {profile.about}
           </p>
-        </div>
-        <div className="bento-card flex flex-col justify-center">
+        </article>
+        <aside className="bento-card flex flex-col justify-center">
           <p className="font-mono text-[10px] uppercase tracking-[0.25em] text-primary">
             // philosophy
           </p>
           <p className="mt-4 font-display text-2xl font-bold leading-tight text-foreground">
             "{profile.philosophy}"
           </p>
-        </div>
+        </aside>
       </motion.div>
     </section>
   );

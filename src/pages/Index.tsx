@@ -43,7 +43,7 @@ function PortfolioShell() {
       </main>
 
       <footer className="border-t border-border/60 py-6 text-center font-mono text-[10px] uppercase tracking-[0.25em] text-muted-foreground">
-        © 2025 Devansh Sharma // Compiled with intent.
+        © {new Date().getFullYear()} Devansh Sharma // Compiled with intent.
       </footer>
     </div>
   );

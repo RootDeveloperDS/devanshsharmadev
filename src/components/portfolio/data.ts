@@ -15,15 +15,23 @@ export const profile = {
   status: {
     state: "ONLINE",
     location: "REMOTE",
-    building: "VISAR EDGE v1.0",
+    building: "VISAR EDGE",
   },
 } as const;
 
 export const socials = {
-  email: "devanshsharma8029@gmail.com",
+  email: "developersofroot@gmail.com",
   linkedin: "https://linkedin.com/in/devanshsharma987",
   github: "https://github.com/RootDeveloperDS",
-  x: "https://x.com/",
+  x: "https://x.com/devanshsha6563",
+  website: "https://rootdeveloperds.odoo.com",
+  instagram: "https://www.instagram.com/pro_gamer_devansh",
+  telegram: "https://t.me/developerofroot",
+  devpost: "https://devpost.com/devanshsharma8029",
+  devfolio: "https://devfolio.co/@Devansh1Sharma",
+  medium: "https://medium.com/@devanshsharma8029",
+  devto: "https://dev.to/devansh_sharma_ds",
+  aboutme: "https://about.me/devanshsharma",
 } as const;
 
 export interface Project {
