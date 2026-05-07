@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Download, Terminal } from "lucide-react";
+import { Download, Terminal, Eye } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { profile } from "./data";
 import { HeroAvatar } from "./HeroAvatar";
@@ -70,8 +70,13 @@ export function OverviewTab({ onNavigate }: Props) {
             className="mt-8 flex flex-wrap gap-3"
           >
             <Button asChild size="lg" className="rounded-full">
+              <a href={profile.resumeUrl} target="_blank" rel="noopener noreferrer">
+                <Eye className="mr-2 h-4 w-4" /> View Résumé
+              </a>
+            </Button>
+            <Button asChild size="lg" variant="outline" className="rounded-full border-primary/40 text-foreground hover:bg-primary/10 hover:text-foreground">
               <a href={profile.resumeUrl} download>
-                <Download /> Download Résumé
+                <Download className="mr-2 h-4 w-4" /> Download
               </a>
             </Button>
             <Button

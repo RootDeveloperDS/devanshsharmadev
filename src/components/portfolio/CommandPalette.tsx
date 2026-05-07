@@ -14,6 +14,7 @@ import {
   ArrowRight,
   Cpu,
   Download,
+  Eye,
   Github,
   Linkedin,
   Mail,
@@ -99,6 +100,14 @@ export function CommandPalette({ onNavigate, open, onOpenChange }: Props) {
         </CommandGroup>
         <CommandSeparator />
         <CommandGroup heading="Actions">
+          <CommandItem
+            onSelect={run(() => {
+              window.open(profile.resumeUrl, "_blank");
+            })}
+          >
+            <Eye />
+            <span>View résumé</span>
+          </CommandItem>
           <CommandItem
             onSelect={run(() => {
               const a = document.createElement("a");
