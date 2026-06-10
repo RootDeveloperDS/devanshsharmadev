@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { ArrowUpRight, Github, Sparkles, Zap } from "lucide-react";
+import { ArrowUpRight, Github, Sparkles, Zap, Lock, Monitor, Trash2 } from "lucide-react";
 import { projects } from "./data";
 
 const spanClass: Record<string, string> = {
@@ -28,7 +28,7 @@ export function ProjectsTab() {
         </p>
       </motion.div>
 
-      <div className="grid auto-rows-[180px] gap-5 md:grid-cols-4">
+      <div className="grid auto-rows-[minmax(180px,auto)] gap-5 md:grid-cols-4">
         {/* VISAR EDGE — large hero tile */}
         <motion.article
           initial={{ opacity: 0, y: 24 }}
@@ -66,15 +66,28 @@ export function ProjectsTab() {
             <div className="pointer-events-none absolute -right-10 -top-10 h-32 w-32 rounded-full bg-primary/20 blur-3xl" />
           </div>
 
-          <a
-            href={projects[0].link}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="mt-4 inline-flex items-center gap-2 self-start text-sm font-medium text-primary hover:gap-3 transition-all"
-          >
-            <Github className="h-4 w-4" />
-            View repository <ArrowUpRight className="h-4 w-4" />
-          </a>
+          <div className="mt-4 flex flex-wrap gap-4">
+            {projects[0].github && (
+              <a
+                href={projects[0].github}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 text-sm font-medium text-primary hover:gap-3 transition-all"
+              >
+                <Github className="h-4 w-4" /> View repository
+              </a>
+            )}
+            {projects[0].live && (
+              <a
+                href={projects[0].live}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 text-sm font-medium text-primary hover:gap-3 transition-all"
+              >
+                <ArrowUpRight className="h-4 w-4" /> Live Demo
+              </a>
+            )}
+          </div>
         </motion.article>
 
         {/* J.A.R.V.I.S. — wide */}
@@ -103,14 +116,75 @@ export function ProjectsTab() {
               />
             ))}
           </div>
-          <a
-            href={projects[1].link}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="mt-2 inline-flex items-center gap-2 self-start text-xs font-medium text-primary hover:gap-3 transition-all"
-          >
-            <Github className="h-3.5 w-3.5" /> Mark 1 → 21 <ArrowUpRight className="h-3.5 w-3.5" />
-          </a>
+          <div className="mt-2 flex flex-wrap gap-4">
+            {projects[1].github && (
+              <a
+                href={projects[1].github}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 text-xs font-medium text-primary hover:gap-3 transition-all"
+              >
+                <Github className="h-3.5 w-3.5" /> Mark 1 → 21
+              </a>
+            )}
+            {projects[1].live && (
+              <a
+                href={projects[1].live}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 text-xs font-medium text-primary hover:gap-3 transition-all"
+              >
+                <ArrowUpRight className="h-3.5 w-3.5" /> Live Demo
+              </a>
+            )}
+          </div>
+        </motion.article>
+
+        {/* Neon Notes — wide */}
+        <motion.article
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.1 }}
+          className={`bento-card flex flex-col justify-between ${spanClass.wide}`}
+        >
+          <div>
+            <div className="flex items-center gap-2 text-primary">
+              <Lock className="h-5 w-5" />
+              <span className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground">Zero-Trust</span>
+            </div>
+            <h3 className="mt-3 font-display text-xl font-bold">{projects[2].name}</h3>
+            <p className="mt-2 text-sm text-muted-foreground">{projects[2].description}</p>
+          </div>
+          <div className="mt-4 flex gap-2">
+            {["Next.js", "Firebase", "ShadCN"].map((tech) => (
+              <span key={tech} className="rounded-full bg-primary/10 px-2 py-1 font-mono text-[10px] text-primary">
+                {tech}
+              </span>
+            ))}
+          </div>
+          <div className="mt-4 flex flex-wrap gap-4">
+            {projects[2].github && (
+              <a
+                href={projects[2].github}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 text-xs font-medium text-primary hover:gap-3 transition-all"
+              >
+                <Github className="h-3.5 w-3.5" /> GitHub
+              </a>
+            )}
+            {projects[2].live && (
+              <a
+                href={projects[2].live}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 text-xs font-medium text-primary hover:gap-3 transition-all"
+              >
+                <ArrowUpRight className="h-3.5 w-3.5" /> Live Product
+              </a>
+            )}
+          </div>
         </motion.article>
 
         {/* Workflow Automation — tall */}
@@ -118,13 +192,13 @@ export function ProjectsTab() {
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ delay: 0.1 }}
+          transition={{ delay: 0.15 }}
           className={`bento-card flex flex-col justify-between ${spanClass.tall}`}
         >
           <div>
             <Zap className="h-6 w-6 text-primary" />
-            <h3 className="mt-3 font-display text-xl font-bold">{projects[2].name}</h3>
-            <p className="mt-3 text-sm text-muted-foreground">{projects[2].description}</p>
+            <h3 className="mt-3 font-display text-xl font-bold">{projects[3].name}</h3>
+            <p className="mt-3 text-sm text-muted-foreground">{projects[3].description}</p>
           </div>
           <div className="mt-4 space-y-1.5 font-mono text-[10px] text-muted-foreground">
             <div>› optimize.fs()</div>
@@ -133,12 +207,56 @@ export function ProjectsTab() {
           </div>
         </motion.article>
 
+        {/* Viewport Detective — wide */}
+        <motion.article
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.2 }}
+          className={`bento-card flex flex-col justify-between ${spanClass.wide}`}
+        >
+          <div>
+            <Monitor className="h-6 w-6 text-primary" />
+            <h3 className="mt-3 font-display text-xl font-bold">{projects[4].name}</h3>
+            <p className="mt-2 text-sm text-muted-foreground">{projects[4].description}</p>
+          </div>
+          <div className="mt-4 flex flex-wrap gap-2">
+            {["Next.js 14", "TypeScript", "Tailwind"].map((tech) => (
+              <span key={tech} className="rounded-full bg-primary/10 px-2 py-1 font-mono text-[10px] text-primary">
+                {tech}
+              </span>
+            ))}
+          </div>
+          <div className="mt-4 flex flex-wrap gap-4">
+            {projects[4].github && (
+              <a
+                href={projects[4].github}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 text-xs font-medium text-primary hover:gap-3 transition-all"
+              >
+                <Github className="h-3.5 w-3.5" /> GitHub
+              </a>
+            )}
+            {projects[4].live && (
+              <a
+                href={projects[4].live}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 text-xs font-medium text-primary hover:gap-3 transition-all"
+              >
+                <ArrowUpRight className="h-3.5 w-3.5" /> Live Demo
+              </a>
+            )}
+          </div>
+        </motion.article>
+
         {/* Stats tile */}
         <motion.article
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ delay: 0.15 }}
+          transition={{ delay: 0.25 }}
           className="bento-card flex flex-col justify-center"
         >
           <p className="font-mono text-[10px] uppercase tracking-widest text-primary">// metrics</p>
@@ -158,12 +276,56 @@ export function ProjectsTab() {
           </div>
         </motion.article>
 
+        {/* WDC — wide */}
+        <motion.article
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.3 }}
+          className={`bento-card flex flex-col justify-between ${spanClass.wide}`}
+        >
+          <div>
+            <Trash2 className="h-6 w-6 text-primary" />
+            <h3 className="mt-3 font-display text-xl font-bold">{projects[5].name}</h3>
+            <p className="mt-2 text-sm text-muted-foreground">{projects[5].description}</p>
+          </div>
+          <div className="mt-4 flex flex-wrap gap-2">
+            {["Python 3", "Tkinter", "PyInstaller"].map((tech) => (
+              <span key={tech} className="rounded-full bg-primary/10 px-2 py-1 font-mono text-[10px] text-primary">
+                {tech}
+              </span>
+            ))}
+          </div>
+          <div className="mt-4 flex flex-wrap gap-4">
+            {projects[5].github && (
+              <a
+                href={projects[5].github}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 text-xs font-medium text-primary hover:gap-3 transition-all"
+              >
+                <Github className="h-3.5 w-3.5" /> GitHub
+              </a>
+            )}
+            {projects[5].live && (
+              <a
+                href={projects[5].live}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 text-xs font-medium text-primary hover:gap-3 transition-all"
+              >
+                <ArrowUpRight className="h-3.5 w-3.5" /> Download
+              </a>
+            )}
+          </div>
+        </motion.article>
+
         {/* What's next */}
         <motion.article
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ delay: 0.2 }}
+          transition={{ delay: 0.35 }}
           className="bento-card flex flex-col justify-between"
         >
           <div>

@@ -39,7 +39,8 @@ export interface Project {
   name: string;
   tagline: string;
   description: string;
-  link?: string;
+  github?: string;
+  live?: string;
   status?: string;
   span: "lg" | "wide" | "tall" | "sm";
 }
@@ -51,7 +52,8 @@ export const projects: Project[] = [
     tagline: "System-wide AI assistant • Beta soon",
     description:
       "An advanced, system-wide AI assistant featuring a persistent GUI and real-time context awareness across desktop and mobile. Background monitoring pipelines (including clipboard tracking) enable context-based, zero-click AI response generation. Designed with a highly modular system architecture.",
-    link: "https://github.com/RootDeveloperDS/VISAR-EDGE-V1.0.git",
+    live: "https://visaredge.vercel.app/",
+    //github: "https://github.com/RootDeveloperDS/VISAR-EDGE-V1.0/",
     status: "BETA SOON",
     span: "lg",
   },
@@ -61,7 +63,17 @@ export const projects: Project[] = [
     tagline: "Voice-enabled AI assistant • 21 iterations",
     description:
       "A comprehensive, voice-enabled AI assistant capable of executing deep system-level commands and opening local applications. Integrated conversational AI models facilitate reliable task execution across iterations.",
-    link: "https://github.com/RootDeveloperDS/J.A.R.V.I.S.",
+    github: "https://github.com/RootDeveloperDS/J.A.R.V.I.S./",
+    span: "wide",
+  },
+  {
+    id: "neon-notes",
+    name: "Neon Notes",
+    tagline: "Cyberpunk note-taking • Zero-trust",
+    description:
+      "A secure, cyberpunk-inspired note-taking workspace optimized for programming in shared computer labs. Engineered with a zero-trust mindset, featuring dual-session authentication and strict session lifecycle management.",
+    live: "https://neon-notes.vercel.app/",
+    github: "https://github.com/RootDeveloperDS/MY-NEON-NOTES/",
     span: "wide",
   },
   {
@@ -71,6 +83,26 @@ export const projects: Project[] = [
     description:
       "Standalone Python scripts focused on system optimization, complex file handling, and localized workflow automation. Replaced repetitive manual operational tasks with intelligent, conditional automation logic.",
     span: "tall",
+  },
+  {
+    id: "viewport-detective",
+    name: "Viewport Detective",
+    tagline: "Real-time viewport inspector",
+    description:
+      "A minimalistic, real-time browser viewport inspector designed to help developers debug responsive designs with precision. Features live dimension tracking, device pixel ratio, and breakpoint visualization.",
+    live: "https://viewportdetective.vercel.app/",
+    github: "https://github.com/RootDeveloperDS/ViewPort_Detective/",
+    span: "wide",
+  },
+  {
+    id: "wdc",
+    name: "WDC (Windows Deep Cleaner)",
+    tagline: "One-click system cleaner",
+    description:
+      "A lightweight, one-click desktop utility that deep-cleans Windows systems. It automates the removal of system temp files, prefetch data, and multi-browser caches through a minimal graphical interface.",
+    live: "https://rootdeveloperds.odoo.com/shop/wdc-windows-deep-cleaner-windows-5",
+    github: "https://github.com/RootDeveloperDS/WDC---Windows-Deep-Cleaner",
+    span: "wide",
   },
 ];
 
