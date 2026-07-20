@@ -2,13 +2,13 @@
 
 export const profile = {
   name: "Devansh Sharma",
-  title: "AI/ML-Focused Python Developer",
-  subtitle: "Applied AI Systems / Creator of VISAR Edge",
-  headline: "Building AI Systems That Evolve.",
+  title: "Applied AI Systems Architect",
+  subtitle: "Full Stack AI Architect / Creator of VISAR Edge",
+  headline: "Building Cognitive Systems That Evolve.",
   subheadline:
-    "I am Devansh Sharma, an AI/ML-Focused Python Developer. I turn AI from a simple tool into an interactive, system-wide layer. Creator of VISAR Edge.",
+    "I am Devansh Sharma, a Full Stack AI Architect. I turn AI from a simple tool into an interactive, system-wide cognitive layer. Creator of VISAR Edge.",
   about:
-    "Python developer focused on applied AI and intelligent systems. Strong capability in integrating AI models into functional, user-facing products with a strict focus on system performance, modular architecture, and solving practical engineering problems.",
+    "Cognitive Systems Engineer focused on applied AI and intelligent architectures. Strong capability in integrating LLMs, vision cores, and voice engines into high-performance, user-facing products with a strict focus on modularity, zero-idle telemetry, and production-level deployments.",
   philosophy: "If it can think, it can evolve.",
   resumeUrl: "/ResumePerfect.pdf",
   profileImage: "/profile.png",
@@ -67,17 +67,17 @@ export const projects: Project[] = [
   // ---------------------------------------------------------
   {
     id: "visar-edge",
-    name: "VISAR EDGE",
-    tagline: "System-wide AI assistant • Beta soon",
+    name: "V.I.S.A.R. E.D.G.E.",
+    tagline: "Futuristic AI Cognitive OS Layer • Beta Soon",
     description:
-      "An advanced, system-wide AI assistant featuring a persistent GUI and real-time context awareness across desktop and mobile. Background monitoring pipelines (including clipboard tracking) enable context-based, zero-click AI response generation. Designed with a highly modular system architecture.",
+      "A futuristic AI Cognitive Operating System layer for your PC built to see, hear, speak, and evolve. Features an optimized asynchronous multi-threaded boot engine shrinking startup latency from 18s down to 1.92s, fully decoupled autonomous agentic brain channels, a FAISS-powered local semantic RAG network, vision core layers, and Multiple Tools pipeline.",
     live: "https://visaredge.vercel.app/",
     //github: "https://github.com/RootDeveloperDS/VISAR-EDGE-V1.0/",
     status: "BETA SOON",
     span: "lg",
     categories: ["ai-core", "desktop", "fullstack"],
     flagship: true,
-    tech: ["Python", "PySide6", "Gemini API", "Async I/O"],
+    tech: ["Python", "PySide6", "Chromium Core", "FAISS Vector", "Asynchronous Architecture"],
     image: "https://github.com/RootDeveloperDS/CDN/blob/main/images/visar-dashboard1.png?raw=true",
   },
   {
@@ -309,14 +309,50 @@ export const experience = {
 };
 
 export const techStack = {
-  languages: ["Python", "C++", "SQL"],
-  frameworks: ["PySide6", "Tkinter", "Flask", "React", "FastAPI"],
-  ai: ["Gemini API", "Groq API", "OpenAI", "Scikit-Learn", "Pandas", "Numpy"],
+  languages: ["Python", "Kotlin", "TypeScript", "JavaScript", "C++", "SQL", "HTML5", "CSS3"],
+  frameworks: [
+    "PySide6", 
+    "Jetpack Compose", 
+    "Next.js 15", 
+    "TanStack Start", 
+    "React 19", 
+    "FastAPI", 
+    "Flask", 
+    "Tkinter", 
+    "Framer Motion", 
+    "GSAP 3", 
+    "Three.js", 
+    "Tailwind CSS v4", 
+    "ShadCN UI", 
+    "Radix UI"
+  ],
+  ai: [
+    "Google Genkit", 
+    "Gemini 2.0 Flash", 
+    "Groq SDK", 
+    "OpenAI API", 
+    "LangChain", 
+    "FAISS Vector Core", 
+    "Open Wake Word", 
+    "SpeechRecognition", 
+    "Edge TTS", 
+    "Scikit-Learn", 
+    "Pandas", 
+    "NumPy"
+  ],
   concepts: [
-    "Async Processing",
-    "I/O Pipelines",
-    "Modular Architecture",
-    "Hardware Acceleration",
+    "Asynchronous Thread Optimization",
+    "Multi-Threaded Module Pre-Warming",
+    "Dual-Branch Semantic Routing",
+    "Zero-Trust Session Architecture",
+    "Headless Bidirectional Socket Transport",
+    "Ephemeral Observability Gated Telemetry",
+    "Real-Time Generator Chunk Streaming",
+    "Firebase Multi-Tenant Authentication",
+    "Supabase RLS Data Infrastructures",
+    "PWA Shell Offline Hydration",
+    "GPU Accelerated Compositing Layers",
+    "Win32 Core Telemetry Engineering"
   ],
 };
 

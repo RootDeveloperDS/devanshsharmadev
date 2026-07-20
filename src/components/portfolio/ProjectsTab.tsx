@@ -14,6 +14,18 @@ const spanClass: Record<string, string> = {
   sm: "",
 };
 
+// Helper to instantly route GitHub images through a high-speed global Edge CDN
+function optimizeImage(url: string | undefined) {
+  if (!url) return url;
+  if (url.includes("github.com") && url.includes("/blob/main/")) {
+    return url
+      .replace("https://github.com/", "https://cdn.jsdelivr.net/gh/")
+      .replace("/blob/main/", "@main/")
+      .split("?")[0];
+  }
+  return url;
+}
+
 export function ProjectsTab() {
   return (
     <section className="mx-auto max-w-6xl">
@@ -80,12 +92,20 @@ export function ProjectsTab() {
             {project.image ? (
               <div className="relative mt-6 flex-1 flex flex-col justify-center items-center">
                 <img 
-                  src={project.image} 
+                  src={optimizeImage(project.image)} 
                   alt={`${project.name} Interface`} 
                   className={`max-w-full object-contain rounded-xl border border-primary/20 bg-black/40 p-1 shadow-[0_0_15px_rgba(var(--primary-rgb),0.1)] ${
                     project.span === "lg" ? "max-h-[24rem]" : "max-h-[14rem]"
                   }`}
-                  loading="lazy"
+                  loading={idx < 2 ? "eager" : "lazy"}
+                  fetchPriority={idx < 2 ? "high" : "auto"}
+                  onError={(e) => {
+                    // Bulletproof Fallback: If jsDelivr fails, revert to raw GitHub URL instantly
+                    const target = e.currentTarget;
+                    if (project.image && target.src !== project.image) {
+                      target.src = project.image;
+                    }
+                  }}
                 />
               </div>
             ) : project.id === "visar-edge" ? (

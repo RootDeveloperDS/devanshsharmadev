@@ -63,71 +63,48 @@ export function ExperienceTab() {
           </motion.div>
         </div>
 
-        {/* Tech orbit */}
-        <div className="relative">
-          <div className="bento-card overflow-visible">
-            <p className="font-mono text-[10px] uppercase tracking-widest text-primary">
-              // stack.orbit
-            </p>
-
-            {/* Orbit visualization */}
-            <div className="relative mx-auto my-6 hidden aspect-square w-full max-w-md md:block">
-              {/* Core */}
-              <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
-                <div className="relative grid h-16 w-16 place-items-center rounded-2xl border border-primary/40 bg-card shadow-[0_0_30px_hsl(var(--primary)/0.5)]">
-                  <Cpu className="h-7 w-7 text-primary" />
-                </div>
-              </div>
-
-              {ringConfig.map((ring) => (
-                <div
-                  key={ring.label}
-                  className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full border border-border"
-                  style={{
-                    width: ring.radius * 2,
-                    height: ring.radius * 2,
-                  }}
-                >
-                  <div
-                    className="absolute inset-0"
-                    style={{ animation: `orbit ${ring.duration}s linear infinite` }}
-                  >
-                    {ring.items.map((item, i) => {
-                      const angle = (i / ring.items.length) * 360;
-                      return (
-                        <div
-                          key={item}
-                          className="absolute left-1/2 top-1/2"
-                          style={{
-                            transform: `rotate(${angle}deg) translateY(-${ring.radius}px) rotate(-${angle}deg)`,
-                          }}
-                        >
-                          <div
-                            className="-translate-x-1/2 -translate-y-1/2 whitespace-nowrap rounded-full border border-primary/30 bg-card/80 px-3 py-1 font-mono text-[10px] uppercase tracking-wider text-foreground backdrop-blur transition-all hover:border-primary hover:text-primary"
-                            style={{ animation: `orbit ${ring.duration}s linear infinite reverse` }}
-                          >
-                            {item}
-                          </div>
-                        </div>
-                      );
-                    })}
-                  </div>
-                </div>
-              ))}
+        {/* Tech Ecosystem */}
+        <div className="relative min-w-0">
+          <div className="bento-card overflow-hidden relative min-w-0">
+            <div className="mb-6 flex items-center justify-between">
+              <p className="font-mono text-[10px] uppercase tracking-widest text-primary">
+                // stack.telemetry_stream
+              </p>
+              <Cpu className="h-5 w-5 text-primary/50" />
             </div>
 
-            {/* Mobile fallback grid */}
-            <div className="md:hidden mt-4 space-y-4">
+            {/* Dense Terminal Matrix Visualization */}
+            <div className="relative flex w-full flex-col gap-6 overflow-y-auto max-h-[400px] pr-2 custom-scrollbar">
+              <style>{`
+                .custom-scrollbar::-webkit-scrollbar {
+                  width: 4px;
+                }
+                .custom-scrollbar::-webkit-scrollbar-track {
+                  background: transparent;
+                }
+                .custom-scrollbar::-webkit-scrollbar-thumb {
+                  background: hsl(var(--primary) / 0.3);
+                  border-radius: 4px;
+                }
+                .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+                  background: hsl(var(--primary) / 0.6);
+                }
+              `}</style>
+
               {ringConfig.map((ring) => (
-                <div key={ring.label}>
-                  <p className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground mb-2">
-                    {ring.label}
-                  </p>
-                  <div className="flex flex-wrap gap-2">
-                    {ring.items.map((item) => (
+                <div key={ring.label} className="flex flex-col gap-3 relative z-0 w-full">
+                  <div className="flex items-center gap-3 px-1">
+                    <span className="h-px w-8 bg-primary/30" />
+                    <p className="font-mono text-[10px] uppercase tracking-widest text-primary/70">
+                      {ring.label}
+                    </p>
+                  </div>
+                  
+                  <div className="flex flex-wrap gap-2 px-1">
+                    {ring.items.map((item, i) => (
                       <span
-                        key={item}
-                        className="rounded-full border border-primary/30 bg-card/80 px-3 py-1 font-mono text-[10px] uppercase tracking-wider"
+                        key={`${item}-${i}`}
+                        className="rounded-md border border-primary/20 bg-background/50 px-3 py-1.5 font-mono text-[11px] uppercase tracking-wider text-foreground/80 backdrop-blur transition-all hover:border-primary hover:text-primary hover:bg-primary/10 hover:shadow-[0_0_15px_rgba(var(--primary-rgb),0.2)] cursor-default"
                       >
                         {item}
                       </span>
@@ -138,15 +115,15 @@ export function ExperienceTab() {
             </div>
 
             {/* Concepts */}
-            <div className="mt-6 border-t border-border pt-5">
-              <p className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground mb-3">
-                System Concepts
+            <div className="mt-8 border-t border-border/50 pt-5 relative z-20">
+              <p className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground mb-4">
+                System Architecture & Concepts
               </p>
               <div className="flex flex-wrap gap-2">
                 {techStack.concepts.map((c) => (
                   <span
                     key={c}
-                    className="rounded-md bg-secondary px-2.5 py-1 font-mono text-[11px] text-secondary-foreground"
+                    className="rounded-md bg-primary/10 border border-primary/20 px-3 py-1.5 font-mono text-[11px] text-primary"
                   >
                     {c}
                   </span>

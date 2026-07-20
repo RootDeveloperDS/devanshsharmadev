@@ -18,6 +18,18 @@ const FILTERS: { id: string; label: string }[] = [
   { id: "dev-tool",   label: "[ TOOLS ]" },
 ];
 
+// Helper to instantly route GitHub images through a high-speed global Edge CDN
+function optimizeImage(url: string | undefined) {
+  if (!url) return url;
+  if (url.includes("github.com") && url.includes("/blob/main/")) {
+    return url
+      .replace("https://github.com/", "https://cdn.jsdelivr.net/gh/")
+      .replace("/blob/main/", "@main/")
+      .split("?")[0];
+  }
+  return url;
+}
+
 interface AccordionMatrixProps {
   projects: Project[];
 }
@@ -151,10 +163,16 @@ export function AccordionMatrix({ projects }: AccordionMatrixProps) {
                                 <div className="absolute -left-px -bottom-px h-3 w-3 border-l-2 border-b-2 border-primary/60 rounded-bl-sm" />
                                 <div className="absolute -right-px -bottom-px h-3 w-3 border-r-2 border-b-2 border-primary/60 rounded-br-sm" />
                                 <img
-                                  src={project.image}
+                                  src={optimizeImage(project.image)}
                                   alt={`${project.name} preview`}
                                   className="w-full h-auto max-h-[400px] object-contain rounded-md"
                                   loading="lazy"
+                                  onError={(e) => {
+                                    const target = e.currentTarget;
+                                    if (project.image && target.src !== project.image) {
+                                      target.src = project.image;
+                                    }
+                                  }}
                                 />
                               </div>
                             </div>
