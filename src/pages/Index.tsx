@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useSearchParams } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
 import { ThemeProvider } from "@/components/portfolio/ThemeProvider";
 import { AnimatedBackground } from "@/components/portfolio/AnimatedBackground";
@@ -11,11 +12,12 @@ import { TerminalTab } from "@/components/portfolio/TerminalTab";
 import type { TabId } from "@/components/portfolio/data";
 
 function PortfolioShell() {
-  const [active, setActive] = useState<TabId>("overview");
+  const [searchParams, setSearchParams] = useSearchParams();
+  const active = (searchParams.get("tab") as TabId) || "overview";
   const [paletteOpen, setPaletteOpen] = useState(false);
 
   const handleNavigate = (id: TabId) => {
-    setActive(id);
+    setSearchParams({ tab: id });
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 

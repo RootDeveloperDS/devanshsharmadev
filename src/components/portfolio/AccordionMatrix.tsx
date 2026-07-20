@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useSearchParams } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { Github, ArrowUpRight, ChevronRight } from "lucide-react";
 import type { Project } from "./data";
@@ -35,16 +36,24 @@ interface AccordionMatrixProps {
 }
 
 export function AccordionMatrix({ projects }: AccordionMatrixProps) {
-  const [activeCategory, setActiveCategory] = useState<string>("all");
-  const [expandedId, setExpandedId] = useState<string | null>(null);
+  const [searchParams, setSearchParams] = useSearchParams();
+  const activeCategory = searchParams.get("category") || "all";
+  const expandedId = searchParams.get("project") || null;
 
   const filtered =
     activeCategory === "all"
       ? projects
       : projects.filter((p) => p.categories.includes(activeCategory as any));
 
-  const toggle = (id: string) =>
-    setExpandedId((prev) => (prev === id ? null : id));
+  const toggle = (id: string) => {
+    const newParams = new URLSearchParams(searchParams);
+    if (expandedId === id) {
+      newParams.delete("project");
+    } else {
+      newParams.set("project", id);
+    }
+    setSearchParams(newParams, { replace: true });
+  };
 
   return (
     <div className="mt-16">
@@ -65,8 +74,10 @@ export function AccordionMatrix({ projects }: AccordionMatrixProps) {
           <button
             key={f.id}
             onClick={() => {
-              setActiveCategory(f.id);
-              setExpandedId(null);
+              const newParams = new URLSearchParams(searchParams);
+              newParams.set("category", f.id);
+              newParams.delete("project");
+              setSearchParams(newParams, { replace: true });
             }}
             className={`font-mono text-[11px] uppercase tracking-widest px-3 py-1.5 rounded-sm border transition-all duration-200 ${
               activeCategory === f.id
