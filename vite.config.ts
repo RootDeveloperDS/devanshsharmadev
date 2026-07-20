@@ -11,6 +11,8 @@ export default defineConfig(({ mode }) => ({
     hmr: {
       overlay: false,
     },
+    // Add this allowedHosts option
+    allowedHosts: ["canopener-myth-unquote.ngrok-free.dev"],
   },
   plugins: [
     react(),
