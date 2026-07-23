@@ -10,6 +10,7 @@ import { ProjectsTab } from "@/components/portfolio/ProjectsTab";
 import { ExperienceTab } from "@/components/portfolio/ExperienceTab";
 import { TerminalTab } from "@/components/portfolio/TerminalTab";
 import type { TabId } from "@/components/portfolio/data";
+import { VisarAgentButton } from "@/components/portfolio/VisarAgentButton";
 
 function PortfolioShell() {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -47,6 +48,8 @@ function PortfolioShell() {
       <footer className="border-t border-border/60 py-6 text-center font-mono text-[10px] uppercase tracking-[0.25em] text-muted-foreground">
         © {new Date().getFullYear()} Devansh Sharma // Compiled with intent.
       </footer>
+
+      <VisarAgentButton />
     </div>
   );
 }
