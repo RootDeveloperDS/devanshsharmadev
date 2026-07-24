@@ -1,0 +1,27 @@
+{
+  "short_name": "Devansh Sharma",
+  "name": "Devansh Sharma",
+  "description": "Founder & Creator of VISAR Edge",
+  "icons": [
+    {
+      "src": "/favicon.ico",
+      "sizes": "64x64 32x32 24x24 16x16",
+      "type": "image/x-icon"
+    },
+    {
+      "src": "/profile.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "/profile.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ],
+  "start_url": "/",
+  "background_color": "#0a0a0f",
+  "theme_color": "#0a0a0f",
+  "display": "standalone",
+  "orientation": "portrait"
+}
