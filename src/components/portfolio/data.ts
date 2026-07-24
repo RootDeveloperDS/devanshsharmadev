@@ -21,18 +21,186 @@ export const profile = {
 
 export const socials = {
   email: "developersofroot@gmail.com",
-  linkedin: "https://linkedin.com/in/devanshsharma987",
-  github: "https://github.com/RootDeveloperDS",
-  x: "https://x.com/devanshsha6563",
   website: "https://rootdeveloperds.odoo.com",
+  portfolio: "https://devanshsharma.vercel.app",
+  portfolioRepo: "https://github.com/RootDeveloperDS/devanshsharmadev",
+  github: "https://github.com/RootDeveloperDS",
+  linkedin: "https://www.linkedin.com/in/devanshsharma987",
+  x: "https://x.com/devanshsha6563",
   instagram: "https://www.instagram.com/pro_gamer_devansh",
   telegram: "https://t.me/developerofroot",
+  telegramPersonal: "https://t.me/RootDeveloperDS",
+  huggingface: "https://huggingface.co/RootDeveloperDS",
   devpost: "https://devpost.com/devanshsharma8029",
   devfolio: "https://devfolio.co/@Devansh1Sharma",
   medium: "https://medium.com/@devanshsharma8029",
   devto: "https://dev.to/devansh_sharma_ds",
+  arratai: "https://aratt.ai/user/@devansh2",
+  reddit: "https://www.reddit.com/u/RootDeveloper-DS/",
   aboutme: "https://about.me/devanshsharma",
 } as const;
+
+export interface SocialItem {
+  id: string;
+  name: string;
+  category: "Code & AI" | "Professional" | "Social & Chat" | "Writing & Dev" | "Bio & Portfolios";
+  href: string;
+  iconName: string;
+  description: string;
+  featured?: boolean;
+  isRepo?: boolean;
+}
+
+export const socialItems: SocialItem[] = [
+  {
+    id: "portfolio-repo",
+    name: "Portfolio Source Code",
+    category: "Code & AI",
+    href: "https://github.com/RootDeveloperDS/devanshsharmadev",
+    iconName: "FolderGit2",
+    description: "Open-source codebase of this website",
+    featured: true,
+    isRepo: true,
+  },
+  {
+    id: "github",
+    name: "GitHub",
+    category: "Code & AI",
+    href: "https://github.com/RootDeveloperDS",
+    iconName: "Github",
+    description: "Open-source repositories & AI engines",
+    featured: true,
+  },
+  {
+    id: "huggingface",
+    name: "Hugging Face",
+    category: "Code & AI",
+    href: "https://huggingface.co/RootDeveloperDS",
+    iconName: "BrainCircuit",
+    description: "AI Models, datasets & neural spaces",
+    featured: true,
+  },
+  {
+    id: "linkedin",
+    name: "LinkedIn",
+    category: "Professional",
+    href: "https://www.linkedin.com/in/devanshsharma987",
+    iconName: "Linkedin",
+    description: "Professional updates & network",
+    featured: true,
+  },
+  {
+    id: "email",
+    name: "Email",
+    category: "Professional",
+    href: "mailto:developersofroot@gmail.com",
+    iconName: "Mail",
+    description: "developersofroot@gmail.com",
+    featured: true,
+  },
+  {
+    id: "website",
+    name: "Business Website",
+    category: "Professional",
+    href: "https://rootdeveloperds.odoo.com",
+    iconName: "Globe",
+    description: "Root Developer DS Official Platform",
+    featured: true,
+  },
+  {
+    id: "x",
+    name: "X / Twitter",
+    category: "Social & Chat",
+    href: "https://x.com/devanshsha6563",
+    iconName: "Twitter",
+    description: "AI tech thoughts & build logs",
+    featured: true,
+  },
+  {
+    id: "telegram",
+    name: "Telegram Channel",
+    category: "Social & Chat",
+    href: "https://t.me/developerofroot",
+    iconName: "Send",
+    description: "Official updates & announcement hub",
+    featured: true,
+  },
+  {
+    id: "telegram-personal",
+    name: "Personal Telegram",
+    category: "Social & Chat",
+    href: "https://t.me/RootDeveloperDS",
+    iconName: "MessageSquare",
+    description: "Direct 1-on-1 contact line",
+  },
+  {
+    id: "instagram",
+    name: "Instagram",
+    category: "Social & Chat",
+    href: "https://www.instagram.com/pro_gamer_devansh",
+    iconName: "Instagram",
+    description: "@pro_gamer_devansh",
+  },
+  {
+    id: "reddit",
+    name: "Reddit",
+    category: "Social & Chat",
+    href: "https://www.reddit.com/u/RootDeveloper-DS/",
+    iconName: "MessageCircle",
+    description: "u/RootDeveloper-DS",
+  },
+  {
+    id: "medium",
+    name: "Medium",
+    category: "Writing & Dev",
+    href: "https://medium.com/@devanshsharma8029",
+    iconName: "FileText",
+    description: "Deep tech articles & architectural posts",
+    featured: true,
+  },
+  {
+    id: "devto",
+    name: "Dev.to",
+    category: "Writing & Dev",
+    href: "https://dev.to/devansh_sharma_ds",
+    iconName: "Code2",
+    description: "Developer articles & tutorials",
+    featured: true,
+  },
+  {
+    id: "devpost",
+    name: "Devpost",
+    category: "Bio & Portfolios",
+    href: "https://devpost.com/devanshsharma8029",
+    iconName: "Trophy",
+    description: "Hackathon project submissions",
+    featured: true,
+  },
+  {
+    id: "devfolio",
+    name: "Devfolio",
+    category: "Bio & Portfolios",
+    href: "https://devfolio.co/@Devansh1Sharma",
+    iconName: "Layers",
+    description: "Hackathon developer portfolio",
+  },
+  {
+    id: "arratai",
+    name: "Arratai",
+    category: "Bio & Portfolios",
+    href: "https://aratt.ai/user/@devansh2",
+    iconName: "Sparkles",
+    description: "@devansh2 on Arratai",
+  },
+  {
+    id: "aboutme",
+    name: "About.me",
+    category: "Bio & Portfolios",
+    href: "https://about.me/devanshsharma",
+    iconName: "User",
+    description: "Personal bio page",
+  },
+];
 
 export interface Project {
   id: string;

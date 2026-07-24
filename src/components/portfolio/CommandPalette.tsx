@@ -23,7 +23,7 @@ import {
   Twitter,
 } from "lucide-react";
 import { useTheme } from "./ThemeProvider";
-import { socials, profile, tabs, type TabId } from "./data";
+import { socials, socialItems, profile, tabs, type TabId } from "./data";
 import { toast } from "@/hooks/use-toast";
 
 interface Props {
@@ -73,8 +73,18 @@ export function CommandPalette({ onNavigate, open, onOpenChange }: Props) {
             <span>Switch to {theme === "visar" ? "Executive" : "VISAR"} mode</span>
           </CommandItem>
         </CommandGroup>
+        <CommandGroup heading="Open Source Codebase">
+          <CommandItem
+            onSelect={run(() => window.open(socials.portfolioRepo, "_blank"))}
+            className="font-semibold text-primary"
+          >
+            <Github className="text-primary" />
+            <span>Open Portfolio Source Code (GitHub)</span>
+            <CommandShortcut className="font-mono text-primary font-bold">100% Open Source</CommandShortcut>
+          </CommandItem>
+        </CommandGroup>
         <CommandSeparator />
-        <CommandGroup heading="Contact & Links">
+        <CommandGroup heading="Contact & Social Network">
           <CommandItem
             onSelect={run(() => {
               navigator.clipboard.writeText(socials.email);
@@ -82,21 +92,21 @@ export function CommandPalette({ onNavigate, open, onOpenChange }: Props) {
             })}
           >
             <Mail />
-            <span>Copy email</span>
+            <span>Copy email address</span>
             <CommandShortcut className="font-mono">{socials.email}</CommandShortcut>
           </CommandItem>
-          <CommandItem onSelect={run(() => window.open(socials.linkedin, "_blank"))}>
-            <Linkedin />
-            <span>Open LinkedIn</span>
-          </CommandItem>
-          <CommandItem onSelect={run(() => window.open(socials.github, "_blank"))}>
-            <Github />
-            <span>Open GitHub</span>
-          </CommandItem>
-          <CommandItem onSelect={run(() => window.open(socials.x, "_blank"))}>
-            <Twitter />
-            <span>Open X (Twitter)</span>
-          </CommandItem>
+          {socialItems.map((item) => (
+            <CommandItem
+              key={item.id}
+              onSelect={run(() => window.open(item.href, "_blank"))}
+            >
+              <ArrowRight />
+              <span>Open {item.name}</span>
+              <CommandShortcut className="font-mono text-[10px] opacity-70">
+                {item.category}
+              </CommandShortcut>
+            </CommandItem>
+          ))}
         </CommandGroup>
         <CommandSeparator />
         <CommandGroup heading="Actions">

@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
-import { Copy, Github, Linkedin, Mail, Send, Twitter } from "lucide-react";
+import { Copy, Github, Linkedin, Mail, Send, Twitter, FolderGit2, Globe, MessageSquare } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -217,10 +217,14 @@ export function TerminalTab() {
   const { theme } = useTheme();
 
   const channels = [
+    { icon: FolderGit2, label: "Open Source Portfolio Repo", value: "RootDeveloperDS/devanshsharmadev", href: socials.portfolioRepo, featured: true },
     { icon: Mail, label: "Email", value: socials.email, href: `mailto:${socials.email}`, copy: true },
     { icon: Linkedin, label: "LinkedIn", value: "linkedin.com/in/devanshsharma987", href: socials.linkedin },
-    { icon: Github, label: "GitHub", value: "RootDeveloperDS", href: socials.github },
-    { icon: Twitter, label: "X (Twitter)", value: "@devansh", href: socials.x },
+    { icon: Github, label: "GitHub Profile", value: "RootDeveloperDS", href: socials.github },
+    { icon: Twitter, label: "X (Twitter)", value: "@devanshsha6563", href: socials.x },
+    { icon: Send, label: "Telegram Channel", value: "t.me/developerofroot", href: socials.telegram },
+    { icon: MessageSquare, label: "Personal Telegram", value: "t.me/RootDeveloperDS", href: socials.telegramPersonal },
+    { icon: Globe, label: "Business Website", value: "rootdeveloperds.odoo.com", href: socials.website },
   ];
 
   return (
