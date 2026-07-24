@@ -267,7 +267,7 @@ export const projects: Project[] = [
     tagline: "Native Android HUD & PC Telemetry Daemon",
     description:
       "A futuristic remote control ecosystem. The native Android client features a 3-tier boot timeline and a 60Hz holographic trackpad. The zero-overhead Python PC companion daemon manages real-time hardware telemetry streams, secure Drop-Pod multi-file transfers, and zero-latency acoustic audio pipelines.",
-    github: "https://github.com/RootDeveloperDS/visar-edge-mobile",
+    //github: "https://github.com/RootDeveloperDS/visar-edge-mobile",
     span: "wide",
     categories: ["mobile", "desktop", "api"],
     flagship: true,
@@ -281,7 +281,7 @@ export const projects: Project[] = [
     description:
       "High-performance automated UPSC/SSC news distillation engine. Built as a Progressive Web App (PWA) featuring an optimized substring search engine, daily AI-driven MCQ pipelines, and a persistent layout architecture.",
     live: "https://visarintel.vercel.app/",
-    github: "https://github.com/RootDeveloperDS/visar-intel",
+    //github: "https://github.com/RootDeveloperDS/visar-intel",
     span: "lg",
     flagship: true,
     categories: ["fullstack"],
@@ -309,7 +309,7 @@ export const projects: Project[] = [
     description:
       "The central web interface hosting binary distribution pathways, installation schemas, and ecosystem release tracking.",
     live: "https://visar-edge.vercel.app/",
-    github: "https://github.com/RootDeveloperDS/visar-edge-download-website",
+    //github: "https://github.com/RootDeveloperDS/visar-edge-download-website",
     span: "lg",
     flagship: true,
     categories: ["frontend"],
@@ -337,7 +337,7 @@ export const projects: Project[] = [
     description:
       "Advanced chat ecosystem equipped with a context-aware sliding window memory, native asynchronous generator streaming engines, and passwordless deep-linked URL authentication.",
     live: "https://visar-agent-08.vercel.app/",
-    github: "https://github.com/RootDeveloperDS/visar-agent-08",
+    //github: "https://github.com/RootDeveloperDS/visar-agent-08",
     span: "sm",
     flagship: true,
     categories: ["fullstack", "ai-core"],
@@ -369,8 +369,8 @@ export const projects: Project[] = [
     tagline: "Cyberpunk AI Assistant Interface",
     description:
       "A futuristic Next.js AI assistant web client featuring real-time token streaming, transparent error telemetry, horizontal smart replies, and dynamic URL parameter injection for instant model hot-swapping.",
-    live: "https://visar-0-5.vercel.app/",
-    github: "https://github.com/RootDeveloperDS/visar-edge-v0.5",
+    live: "https://visar-0-5.vercel.app/?opacity=1",
+    //github: "https://github.com/RootDeveloperDS/visar-edge-v0.5",
     span: "sm",
     categories: ["fullstack"],
     tech: ["Next.js", "Tailwind CSS", "Gemini Flash", "Groq SDK"],
@@ -396,7 +396,7 @@ export const projects: Project[] = [
     description:
       "A streamlined frontend metrics panel that maintains direct polling connections to the core VISAR backend to visualize live user socket connections.",
     live: "https://visaredge-dashboard.vercel.app/",
-    github: "https://github.com/RootDeveloperDS/visaredge-dashboard",
+    //github: "https://github.com/RootDeveloperDS/visaredge-dashboard",
     span: "sm",
     categories: ["frontend"],
     tech: ["React", "Tailwind CSS", "REST API"],
@@ -409,7 +409,7 @@ export const projects: Project[] = [
     description:
       "An elite, high-performance library offering 16 categories of sci-fi HUDs, cyber-warfare glitches, and living backgrounds. Engineered with Intersection Observer APIs to maintain strict 60 FPS rendering.",
     live: "https://visar-animations-lab.vercel.app/",
-    github: "https://github.com/RootDeveloperDS/visar-edge-lab",
+    //github: "https://github.com/RootDeveloperDS/visar-edge-lab",
     span: "sm",
     categories: ["frontend"],
     tech: ["React 18", "GSAP 3", "TypeScript", "Tailwind CSS"],

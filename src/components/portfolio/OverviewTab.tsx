@@ -145,7 +145,7 @@ export function OverviewTab({ onNavigate }: Props) {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: "-80px" }}
         transition={{ duration: 0.6 }}
-        className="mt-20 grid gap-6 md:grid-cols-[1.5fr_1fr]"
+        className="mt-16 sm:mt-20 grid gap-6 md:grid-cols-[1.5fr_1fr]"
       >
         <article className="bento-card">
           <p className="font-mono text-[10px] uppercase tracking-[0.25em] text-primary">

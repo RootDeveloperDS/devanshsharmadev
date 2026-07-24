@@ -28,6 +28,7 @@ import {
 } from "lucide-react";
 import { profile, socials, socialItems, tabs, type TabId } from "./data";
 import { Button } from "@/components/ui/button";
+import { useTheme } from "./ThemeProvider";
 
 interface FooterProps {
   onNavigate: (id: TabId) => void;
@@ -59,6 +60,12 @@ function renderSocialIcon(iconName: string, className: string = "h-4 w-4") {
 
 export function Footer({ onNavigate }: FooterProps) {
   const currentYear = new Date().getFullYear();
+  const { theme } = useTheme();
+
+  const isLight = theme === "executive";
+  const snakeSvgUrl = isLight
+    ? "https://raw.githubusercontent.com/RootDeveloperDS/RootDeveloperDS/output/github-contribution-grid-snake.svg"
+    : "https://raw.githubusercontent.com/RootDeveloperDS/RootDeveloperDS/output/github-contribution-grid-snake-dark.svg";
 
   // Group social items by category
   const categories = [
@@ -139,6 +146,22 @@ export function Footer({ onNavigate }: FooterProps) {
                   <span>Fork Codebase</span>
                 </a>
               </Button>
+            </div>
+          </div>
+
+          {/* GitHub Snake Stream Preview in Footer */}
+          <div className="relative z-10 mt-6 pt-5 border-t border-border/40 overflow-hidden">
+            <div className="flex items-center justify-between text-[11px] font-mono text-muted-foreground mb-2">
+              <span className="text-primary font-semibold">// LIVE CONTRIBUTION ACTIVITY</span>
+              <span>github.com/RootDeveloperDS</span>
+            </div>
+            <div className="overflow-x-auto rounded-lg border border-border/60 bg-background/50 p-2 backdrop-blur-sm">
+              <img
+                src={snakeSvgUrl}
+                alt="GitHub Contribution Snake Stream"
+                className="w-full min-w-[600px] h-auto object-contain transition-opacity duration-300"
+                loading="lazy"
+              />
             </div>
           </div>
         </motion.div>
