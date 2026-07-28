@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
-import { Download, Terminal, Eye } from "lucide-react";
+import { Download, Terminal, Eye, Github, FolderGit2, ArrowUpRight, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { profile } from "./data";
+import { profile, socials, socialItems } from "./data";
 import { HeroAvatar } from "./HeroAvatar";
 import type { TabId } from "./data";
 
@@ -10,6 +10,8 @@ interface Props {
 }
 
 export function OverviewTab({ onNavigate }: Props) {
+  const featuredSocials = socialItems.filter((s) => s.featured);
+
   return (
     <section className="mx-auto max-w-6xl">
       {/* Status strip */}
@@ -38,7 +40,7 @@ export function OverviewTab({ onNavigate }: Props) {
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.05 }}
-            className="mb-4 font-mono text-xs uppercase tracking-[0.25em] text-primary"
+            className="mb-4 font-mono text-xs uppercase tracking-[0.25em] text-primary font-semibold"
           >
             // {profile.title}
           </motion.p>
@@ -69,7 +71,13 @@ export function OverviewTab({ onNavigate }: Props) {
             transition={{ delay: 0.3 }}
             className="mt-8 flex flex-wrap gap-3"
           >
-            <Button asChild size="lg" className="rounded-full">
+            {/* Dominant Open Source Portfolio Button */}
+            <Button asChild size="lg" className="rounded-full bg-primary text-primary-foreground font-semibold shadow-md shadow-primary/20 hover:scale-[1.02] transition-all">
+              <a href={socials.portfolioRepo} target="_blank" rel="noopener noreferrer">
+                <Github className="mr-2 h-4 w-4" /> Open Source Code ↗
+              </a>
+            </Button>
+            <Button asChild size="lg" variant="outline" className="rounded-full border-primary/40 text-foreground hover:bg-primary/10 hover:text-foreground">
               <a href={profile.resumeUrl} target="_blank" rel="noopener noreferrer">
                 <Eye className="mr-2 h-4 w-4" /> View Résumé
               </a>
@@ -85,8 +93,39 @@ export function OverviewTab({ onNavigate }: Props) {
               className="rounded-full border-primary/40 text-foreground hover:bg-primary/10 hover:text-foreground"
               onClick={() => onNavigate("terminal")}
             >
-              <Terminal /> Initialize Terminal
+              <Terminal className="mr-2 h-4 w-4" /> Terminal Comms
             </Button>
+          </motion.div>
+
+          {/* Social Quick Ribbon Strip */}
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.4 }}
+            className="mt-8 pt-6 border-t border-border/40"
+          >
+            <div className="text-[11px] font-mono uppercase tracking-[0.18em] text-muted-foreground mb-3 flex items-center gap-2">
+              <Sparkles className="h-3.5 w-3.5 text-primary" />
+              <span>Connect Across Platforms</span>
+            </div>
+            <div className="flex flex-wrap items-center gap-2">
+              {featuredSocials.map((s) => (
+                <a
+                  key={s.id}
+                  href={s.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={`inline-flex items-center gap-1.5 rounded-lg border px-3 py-1.5 text-xs font-medium transition-all ${
+                    s.isRepo
+                      ? "border-primary/50 bg-primary/15 text-primary font-semibold hover:bg-primary/25"
+                      : "border-border/60 bg-secondary/30 text-foreground hover:border-primary/40 hover:bg-secondary/70 hover:text-primary"
+                  }`}
+                >
+                  <span>{s.name}</span>
+                  <ArrowUpRight className="h-3 w-3 opacity-60" />
+                </a>
+              ))}
+            </div>
           </motion.div>
         </div>
 
@@ -106,7 +145,7 @@ export function OverviewTab({ onNavigate }: Props) {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: "-80px" }}
         transition={{ duration: 0.6 }}
-        className="mt-20 grid gap-6 md:grid-cols-[1.5fr_1fr]"
+        className="mt-16 sm:mt-20 grid gap-6 md:grid-cols-[1.5fr_1fr]"
       >
         <article className="bento-card">
           <p className="font-mono text-[10px] uppercase tracking-[0.25em] text-primary">

@@ -14,6 +14,18 @@ const spanClass: Record<string, string> = {
   sm: "",
 };
 
+// Helper to instantly route GitHub images through a high-speed global Edge CDN
+function optimizeImage(url: string | undefined) {
+  if (!url) return url;
+  if (url.includes("github.com") && url.includes("/blob/main/")) {
+    return url
+      .replace("https://github.com/", "https://cdn.jsdelivr.net/gh/")
+      .replace("/blob/main/", "@main/")
+      .split("?")[0];
+  }
+  return url;
+}
+
 export function ProjectsTab() {
   return (
     <section className="mx-auto max-w-6xl">
@@ -37,6 +49,25 @@ export function ProjectsTab() {
       {/* ══════════════════════════════════════════════
           ZONE 1: CORE SYSTEMS — Flagship Bento Grid
       ══════════════════════════════════════════════ */}
+      <div className="mb-6 flex flex-wrap items-center justify-between gap-2.5 border-b border-border/60 pb-3">
+        <div className="flex flex-wrap items-center gap-2 sm:gap-2.5">
+          <span className="relative flex h-2 w-2">
+            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary opacity-75" />
+            <span className="relative inline-flex h-2 w-2 rounded-full bg-primary" />
+          </span>
+          <h3 className="font-mono text-xs uppercase tracking-[0.2em] text-primary font-bold">
+            // FLAGSHIP SYSTEMS
+          </h3>
+          <span className="rounded-full border border-primary/30 bg-primary/10 px-2.5 py-0.5 font-mono text-[10px] font-medium text-primary">
+            ⭐ Personal Favorites
+          </span>
+        </div>
+
+        <span className="hidden sm:inline-block font-mono text-[11px] text-muted-foreground">
+          Core architectures & passion builds
+        </span>
+      </div>
+
       <div className="grid auto-rows-[minmax(180px,auto)] gap-5 md:grid-cols-4">
         {flagshipProjects.map((project, idx) => (
           <motion.article
@@ -48,14 +79,13 @@ export function ProjectsTab() {
             className={`bento-card group flex flex-col justify-between ${spanClass[project.span] || ""}`}
           >
             <div>
-              {project.status && (
-                <div className="mb-3 flex items-center justify-between">
-                  <span className="rounded-full border border-primary/40 bg-primary/10 px-3 py-1 font-mono text-[10px] uppercase tracking-widest text-primary">
-                    ● {project.status}
-                  </span>
-                  <Sparkles className="h-5 w-5 text-primary opacity-70" />
-                </div>
-              )}
+              <div className="mb-3 flex items-center justify-between gap-2">
+                <span className="rounded-full border border-primary/40 bg-primary/10 px-3 py-1 font-mono text-[10px] uppercase tracking-widest text-primary font-semibold flex items-center gap-1.5">
+                  <span className="h-1.5 w-1.5 rounded-full bg-primary animate-pulse" />
+                  <span>{project.status ? `${project.status} · ⭐ FAVORITE` : "⭐ FLAGSHIP · PERSONAL FAVORITE"}</span>
+                </span>
+                <Sparkles className="h-4 w-4 text-primary opacity-70 shrink-0" />
+              </div>
               
               <h3 className={`font-display font-bold ${project.span === "lg" ? "text-3xl sm:text-4xl" : "text-xl"}`}>
                 {project.id === "visar-edge" ? (
@@ -80,12 +110,20 @@ export function ProjectsTab() {
             {project.image ? (
               <div className="relative mt-6 flex-1 flex flex-col justify-center items-center">
                 <img 
-                  src={project.image} 
+                  src={optimizeImage(project.image)} 
                   alt={`${project.name} Interface`} 
                   className={`max-w-full object-contain rounded-xl border border-primary/20 bg-black/40 p-1 shadow-[0_0_15px_rgba(var(--primary-rgb),0.1)] ${
                     project.span === "lg" ? "max-h-[24rem]" : "max-h-[14rem]"
                   }`}
-                  loading="lazy"
+                  loading={idx < 2 ? "eager" : "lazy"}
+                  fetchPriority={idx < 2 ? "high" : "auto"}
+                  onError={(e) => {
+                    // Bulletproof Fallback: If jsDelivr fails, revert to raw GitHub URL instantly
+                    const target = e.currentTarget;
+                    if (project.image && target.src !== project.image) {
+                      target.src = project.image;
+                    }
+                  }}
                 />
               </div>
             ) : project.id === "visar-edge" ? (

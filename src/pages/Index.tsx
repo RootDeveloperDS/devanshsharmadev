@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useSearchParams } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
 import { ThemeProvider } from "@/components/portfolio/ThemeProvider";
 import { AnimatedBackground } from "@/components/portfolio/AnimatedBackground";
@@ -8,14 +9,17 @@ import { OverviewTab } from "@/components/portfolio/OverviewTab";
 import { ProjectsTab } from "@/components/portfolio/ProjectsTab";
 import { ExperienceTab } from "@/components/portfolio/ExperienceTab";
 import { TerminalTab } from "@/components/portfolio/TerminalTab";
+import { Footer } from "@/components/portfolio/Footer";
 import type { TabId } from "@/components/portfolio/data";
+import { VisarAgentButton } from "@/components/portfolio/VisarAgentButton";
 
 function PortfolioShell() {
-  const [active, setActive] = useState<TabId>("overview");
+  const [searchParams, setSearchParams] = useSearchParams();
+  const active = (searchParams.get("tab") as TabId) || "overview";
   const [paletteOpen, setPaletteOpen] = useState(false);
 
   const handleNavigate = (id: TabId) => {
-    setActive(id);
+    setSearchParams({ tab: id });
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
@@ -42,9 +46,9 @@ function PortfolioShell() {
         </AnimatePresence>
       </main>
 
-      <footer className="border-t border-border/60 py-6 text-center font-mono text-[10px] uppercase tracking-[0.25em] text-muted-foreground">
-        © {new Date().getFullYear()} Devansh Sharma // Compiled with intent.
-      </footer>
+      <Footer onNavigate={handleNavigate} />
+
+      <VisarAgentButton />
     </div>
   );
 }

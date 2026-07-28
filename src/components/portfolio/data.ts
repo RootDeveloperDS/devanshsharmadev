@@ -2,13 +2,13 @@
 
 export const profile = {
   name: "Devansh Sharma",
-  title: "AI/ML-Focused Python Developer",
-  subtitle: "Applied AI Systems / Creator of VISAR Edge",
-  headline: "Building AI Systems That Evolve.",
+  title: "Applied AI Systems Architect",
+  subtitle: "Full Stack AI Architect / Creator of VISAR Edge",
+  headline: "Building Cognitive Systems That Evolve.",
   subheadline:
-    "I am Devansh Sharma, an AI/ML-Focused Python Developer. I turn AI from a simple tool into an interactive, system-wide layer. Creator of VISAR Edge.",
+    "I am Devansh Sharma, a Full Stack AI Architect. I turn AI from a simple tool into an interactive, system-wide cognitive layer. Creator of VISAR Edge.",
   about:
-    "Python developer focused on applied AI and intelligent systems. Strong capability in integrating AI models into functional, user-facing products with a strict focus on system performance, modular architecture, and solving practical engineering problems.",
+    "Cognitive Systems Engineer focused on applied AI and intelligent architectures. Strong capability in integrating LLMs, vision cores, and voice engines into high-performance, user-facing products with a strict focus on modularity, zero-idle telemetry, and production-level deployments.",
   philosophy: "If it can think, it can evolve.",
   resumeUrl: "/ResumePerfect.pdf",
   profileImage: "/profile.png",
@@ -21,18 +21,186 @@ export const profile = {
 
 export const socials = {
   email: "developersofroot@gmail.com",
-  linkedin: "https://linkedin.com/in/devanshsharma987",
-  github: "https://github.com/RootDeveloperDS",
-  x: "https://x.com/devanshsha6563",
   website: "https://rootdeveloperds.odoo.com",
+  portfolio: "https://devanshsharma.vercel.app",
+  portfolioRepo: "https://github.com/RootDeveloperDS/devanshsharmadev",
+  github: "https://github.com/RootDeveloperDS",
+  linkedin: "https://www.linkedin.com/in/devanshsharma987",
+  x: "https://x.com/devanshsha6563",
   instagram: "https://www.instagram.com/pro_gamer_devansh",
   telegram: "https://t.me/developerofroot",
+  telegramPersonal: "https://t.me/RootDeveloperDS",
+  huggingface: "https://huggingface.co/RootDeveloperDS",
   devpost: "https://devpost.com/devanshsharma8029",
   devfolio: "https://devfolio.co/@Devansh1Sharma",
   medium: "https://medium.com/@devanshsharma8029",
   devto: "https://dev.to/devansh_sharma_ds",
+  arratai: "https://aratt.ai/user/@devansh2",
+  reddit: "https://www.reddit.com/u/RootDeveloper-DS/",
   aboutme: "https://about.me/devanshsharma",
 } as const;
+
+export interface SocialItem {
+  id: string;
+  name: string;
+  category: "Code & AI" | "Professional" | "Social & Chat" | "Writing & Dev" | "Bio & Portfolios";
+  href: string;
+  iconName: string;
+  description: string;
+  featured?: boolean;
+  isRepo?: boolean;
+}
+
+export const socialItems: SocialItem[] = [
+  {
+    id: "portfolio-repo",
+    name: "Portfolio Source Code",
+    category: "Code & AI",
+    href: "https://github.com/RootDeveloperDS/devanshsharmadev",
+    iconName: "FolderGit2",
+    description: "Open-source codebase of this website",
+    featured: true,
+    isRepo: true,
+  },
+  {
+    id: "github",
+    name: "GitHub",
+    category: "Code & AI",
+    href: "https://github.com/RootDeveloperDS",
+    iconName: "Github",
+    description: "Open-source repositories & AI engines",
+    featured: true,
+  },
+  {
+    id: "huggingface",
+    name: "Hugging Face",
+    category: "Code & AI",
+    href: "https://huggingface.co/RootDeveloperDS",
+    iconName: "BrainCircuit",
+    description: "AI Models, datasets & neural spaces",
+    featured: true,
+  },
+  {
+    id: "linkedin",
+    name: "LinkedIn",
+    category: "Professional",
+    href: "https://www.linkedin.com/in/devanshsharma987",
+    iconName: "Linkedin",
+    description: "Professional updates & network",
+    featured: true,
+  },
+  {
+    id: "email",
+    name: "Email",
+    category: "Professional",
+    href: "mailto:developersofroot@gmail.com",
+    iconName: "Mail",
+    description: "developersofroot@gmail.com",
+    featured: true,
+  },
+  {
+    id: "website",
+    name: "Business Website",
+    category: "Professional",
+    href: "https://rootdeveloperds.odoo.com",
+    iconName: "Globe",
+    description: "Root Developer DS Official Platform",
+    featured: true,
+  },
+  {
+    id: "x",
+    name: "X / Twitter",
+    category: "Social & Chat",
+    href: "https://x.com/devanshsha6563",
+    iconName: "Twitter",
+    description: "AI tech thoughts & build logs",
+    featured: true,
+  },
+  {
+    id: "telegram",
+    name: "Telegram Channel",
+    category: "Social & Chat",
+    href: "https://t.me/developerofroot",
+    iconName: "Send",
+    description: "Official updates & announcement hub",
+    featured: true,
+  },
+  {
+    id: "telegram-personal",
+    name: "Personal Telegram",
+    category: "Social & Chat",
+    href: "https://t.me/RootDeveloperDS",
+    iconName: "MessageSquare",
+    description: "Direct 1-on-1 contact line",
+  },
+  {
+    id: "instagram",
+    name: "Instagram",
+    category: "Social & Chat",
+    href: "https://www.instagram.com/pro_gamer_devansh",
+    iconName: "Instagram",
+    description: "@pro_gamer_devansh",
+  },
+  {
+    id: "reddit",
+    name: "Reddit",
+    category: "Social & Chat",
+    href: "https://www.reddit.com/u/RootDeveloper-DS/",
+    iconName: "MessageCircle",
+    description: "u/RootDeveloper-DS",
+  },
+  {
+    id: "medium",
+    name: "Medium",
+    category: "Writing & Dev",
+    href: "https://medium.com/@devanshsharma8029",
+    iconName: "FileText",
+    description: "Deep tech articles & architectural posts",
+    featured: true,
+  },
+  {
+    id: "devto",
+    name: "Dev.to",
+    category: "Writing & Dev",
+    href: "https://dev.to/devansh_sharma_ds",
+    iconName: "Code2",
+    description: "Developer articles & tutorials",
+    featured: true,
+  },
+  {
+    id: "devpost",
+    name: "Devpost",
+    category: "Bio & Portfolios",
+    href: "https://devpost.com/devanshsharma8029",
+    iconName: "Trophy",
+    description: "Hackathon project submissions",
+    featured: true,
+  },
+  {
+    id: "devfolio",
+    name: "Devfolio",
+    category: "Bio & Portfolios",
+    href: "https://devfolio.co/@Devansh1Sharma",
+    iconName: "Layers",
+    description: "Hackathon developer portfolio",
+  },
+  {
+    id: "arratai",
+    name: "Arratai",
+    category: "Bio & Portfolios",
+    href: "https://aratt.ai/user/@devansh2",
+    iconName: "Sparkles",
+    description: "@devansh2 on Arratai",
+  },
+  {
+    id: "aboutme",
+    name: "About.me",
+    category: "Bio & Portfolios",
+    href: "https://about.me/devanshsharma",
+    iconName: "User",
+    description: "Personal bio page",
+  },
+];
 
 export interface Project {
   id: string;
@@ -67,17 +235,17 @@ export const projects: Project[] = [
   // ---------------------------------------------------------
   {
     id: "visar-edge",
-    name: "VISAR EDGE",
-    tagline: "System-wide AI assistant • Beta soon",
+    name: "V.I.S.A.R. E.D.G.E.",
+    tagline: "Futuristic AI Cognitive OS Layer • Beta Soon",
     description:
-      "An advanced, system-wide AI assistant featuring a persistent GUI and real-time context awareness across desktop and mobile. Background monitoring pipelines (including clipboard tracking) enable context-based, zero-click AI response generation. Designed with a highly modular system architecture.",
+      "A futuristic AI Cognitive Operating System layer for your PC built to see, hear, speak, and evolve. Features an optimized asynchronous multi-threaded boot engine shrinking startup latency from 18s down to 1.92s, fully decoupled autonomous agentic brain channels, a FAISS-powered local semantic RAG network, vision core layers, and Multiple Tools pipeline.",
     live: "https://visaredge.vercel.app/",
     //github: "https://github.com/RootDeveloperDS/VISAR-EDGE-V1.0/",
     status: "BETA SOON",
     span: "lg",
     categories: ["ai-core", "desktop", "fullstack"],
     flagship: true,
-    tech: ["Python", "PySide6", "Gemini API", "Async I/O"],
+    tech: ["Python", "PySide6", "Chromium Core", "FAISS Vector", "Asynchronous Architecture"],
     image: "https://github.com/RootDeveloperDS/CDN/blob/main/images/visar-dashboard1.png?raw=true",
   },
   {
@@ -99,7 +267,7 @@ export const projects: Project[] = [
     tagline: "Native Android HUD & PC Telemetry Daemon",
     description:
       "A futuristic remote control ecosystem. The native Android client features a 3-tier boot timeline and a 60Hz holographic trackpad. The zero-overhead Python PC companion daemon manages real-time hardware telemetry streams, secure Drop-Pod multi-file transfers, and zero-latency acoustic audio pipelines.",
-    github: "https://github.com/RootDeveloperDS/visar-edge-mobile",
+    //github: "https://github.com/RootDeveloperDS/visar-edge-mobile",
     span: "wide",
     categories: ["mobile", "desktop", "api"],
     flagship: true,
@@ -113,7 +281,7 @@ export const projects: Project[] = [
     description:
       "High-performance automated UPSC/SSC news distillation engine. Built as a Progressive Web App (PWA) featuring an optimized substring search engine, daily AI-driven MCQ pipelines, and a persistent layout architecture.",
     live: "https://visarintel.vercel.app/",
-    github: "https://github.com/RootDeveloperDS/visar-intel",
+    //github: "https://github.com/RootDeveloperDS/visar-intel",
     span: "lg",
     flagship: true,
     categories: ["fullstack"],
@@ -141,7 +309,7 @@ export const projects: Project[] = [
     description:
       "The central web interface hosting binary distribution pathways, installation schemas, and ecosystem release tracking.",
     live: "https://visar-edge.vercel.app/",
-    github: "https://github.com/RootDeveloperDS/visar-edge-download-website",
+    //github: "https://github.com/RootDeveloperDS/visar-edge-download-website",
     span: "lg",
     flagship: true,
     categories: ["frontend"],
@@ -169,7 +337,7 @@ export const projects: Project[] = [
     description:
       "Advanced chat ecosystem equipped with a context-aware sliding window memory, native asynchronous generator streaming engines, and passwordless deep-linked URL authentication.",
     live: "https://visar-agent-08.vercel.app/",
-    github: "https://github.com/RootDeveloperDS/visar-agent-08",
+    //github: "https://github.com/RootDeveloperDS/visar-agent-08",
     span: "sm",
     flagship: true,
     categories: ["fullstack", "ai-core"],
@@ -201,8 +369,8 @@ export const projects: Project[] = [
     tagline: "Cyberpunk AI Assistant Interface",
     description:
       "A futuristic Next.js AI assistant web client featuring real-time token streaming, transparent error telemetry, horizontal smart replies, and dynamic URL parameter injection for instant model hot-swapping.",
-    live: "https://visar-0-5.vercel.app/",
-    github: "https://github.com/RootDeveloperDS/visar-edge-v0.5",
+    live: "https://visar-0-5.vercel.app/?opacity=1",
+    //github: "https://github.com/RootDeveloperDS/visar-edge-v0.5",
     span: "sm",
     categories: ["fullstack"],
     tech: ["Next.js", "Tailwind CSS", "Gemini Flash", "Groq SDK"],
@@ -228,7 +396,7 @@ export const projects: Project[] = [
     description:
       "A streamlined frontend metrics panel that maintains direct polling connections to the core VISAR backend to visualize live user socket connections.",
     live: "https://visaredge-dashboard.vercel.app/",
-    github: "https://github.com/RootDeveloperDS/visaredge-dashboard",
+    //github: "https://github.com/RootDeveloperDS/visaredge-dashboard",
     span: "sm",
     categories: ["frontend"],
     tech: ["React", "Tailwind CSS", "REST API"],
@@ -241,7 +409,7 @@ export const projects: Project[] = [
     description:
       "An elite, high-performance library offering 16 categories of sci-fi HUDs, cyber-warfare glitches, and living backgrounds. Engineered with Intersection Observer APIs to maintain strict 60 FPS rendering.",
     live: "https://visar-animations-lab.vercel.app/",
-    github: "https://github.com/RootDeveloperDS/visar-edge-lab",
+    //github: "https://github.com/RootDeveloperDS/visar-edge-lab",
     span: "sm",
     categories: ["frontend"],
     tech: ["React 18", "GSAP 3", "TypeScript", "Tailwind CSS"],
@@ -309,14 +477,50 @@ export const experience = {
 };
 
 export const techStack = {
-  languages: ["Python", "C++", "SQL"],
-  frameworks: ["PySide6", "Tkinter", "Flask", "React", "FastAPI"],
-  ai: ["Gemini API", "Groq API", "OpenAI", "Scikit-Learn", "Pandas", "Numpy"],
+  languages: ["Python", "Kotlin", "TypeScript", "JavaScript", "C++", "SQL", "HTML5", "CSS3"],
+  frameworks: [
+    "PySide6", 
+    "Jetpack Compose", 
+    "Next.js 15", 
+    "TanStack Start", 
+    "React 19", 
+    "FastAPI", 
+    "Flask", 
+    "Tkinter", 
+    "Framer Motion", 
+    "GSAP 3", 
+    "Three.js", 
+    "Tailwind CSS v4", 
+    "ShadCN UI", 
+    "Radix UI"
+  ],
+  ai: [
+    "Google Genkit", 
+    "Gemini 2.0 Flash", 
+    "Groq SDK", 
+    "OpenAI API", 
+    "LangChain", 
+    "FAISS Vector Core", 
+    "Open Wake Word", 
+    "SpeechRecognition", 
+    "Edge TTS", 
+    "Scikit-Learn", 
+    "Pandas", 
+    "NumPy"
+  ],
   concepts: [
-    "Async Processing",
-    "I/O Pipelines",
-    "Modular Architecture",
-    "Hardware Acceleration",
+    "Asynchronous Thread Optimization",
+    "Multi-Threaded Module Pre-Warming",
+    "Dual-Branch Semantic Routing",
+    "Zero-Trust Session Architecture",
+    "Headless Bidirectional Socket Transport",
+    "Ephemeral Observability Gated Telemetry",
+    "Real-Time Generator Chunk Streaming",
+    "Firebase Multi-Tenant Authentication",
+    "Supabase RLS Data Infrastructures",
+    "PWA Shell Offline Hydration",
+    "GPU Accelerated Compositing Layers",
+    "Win32 Core Telemetry Engineering"
   ],
 };
 

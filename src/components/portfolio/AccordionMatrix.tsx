@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useSearchParams } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { Github, ArrowUpRight, ChevronRight } from "lucide-react";
 import type { Project } from "./data";
@@ -18,21 +19,41 @@ const FILTERS: { id: string; label: string }[] = [
   { id: "dev-tool",   label: "[ TOOLS ]" },
 ];
 
+// Helper to instantly route GitHub images through a high-speed global Edge CDN
+function optimizeImage(url: string | undefined) {
+  if (!url) return url;
+  if (url.includes("github.com") && url.includes("/blob/main/")) {
+    return url
+      .replace("https://github.com/", "https://cdn.jsdelivr.net/gh/")
+      .replace("/blob/main/", "@main/")
+      .split("?")[0];
+  }
+  return url;
+}
+
 interface AccordionMatrixProps {
   projects: Project[];
 }
 
 export function AccordionMatrix({ projects }: AccordionMatrixProps) {
-  const [activeCategory, setActiveCategory] = useState<string>("all");
-  const [expandedId, setExpandedId] = useState<string | null>(null);
+  const [searchParams, setSearchParams] = useSearchParams();
+  const activeCategory = searchParams.get("category") || "all";
+  const expandedId = searchParams.get("project") || null;
 
   const filtered =
     activeCategory === "all"
       ? projects
       : projects.filter((p) => p.categories.includes(activeCategory as any));
 
-  const toggle = (id: string) =>
-    setExpandedId((prev) => (prev === id ? null : id));
+  const toggle = (id: string) => {
+    const newParams = new URLSearchParams(searchParams);
+    if (expandedId === id) {
+      newParams.delete("project");
+    } else {
+      newParams.set("project", id);
+    }
+    setSearchParams(newParams, { replace: true });
+  };
 
   return (
     <div className="mt-16">
@@ -53,8 +74,10 @@ export function AccordionMatrix({ projects }: AccordionMatrixProps) {
           <button
             key={f.id}
             onClick={() => {
-              setActiveCategory(f.id);
-              setExpandedId(null);
+              const newParams = new URLSearchParams(searchParams);
+              newParams.set("category", f.id);
+              newParams.delete("project");
+              setSearchParams(newParams, { replace: true });
             }}
             className={`font-mono text-[11px] uppercase tracking-widest px-3 py-1.5 rounded-sm border transition-all duration-200 ${
               activeCategory === f.id
@@ -151,10 +174,16 @@ export function AccordionMatrix({ projects }: AccordionMatrixProps) {
                                 <div className="absolute -left-px -bottom-px h-3 w-3 border-l-2 border-b-2 border-primary/60 rounded-bl-sm" />
                                 <div className="absolute -right-px -bottom-px h-3 w-3 border-r-2 border-b-2 border-primary/60 rounded-br-sm" />
                                 <img
-                                  src={project.image}
+                                  src={optimizeImage(project.image)}
                                   alt={`${project.name} preview`}
                                   className="w-full h-auto max-h-[400px] object-contain rounded-md"
                                   loading="lazy"
+                                  onError={(e) => {
+                                    const target = e.currentTarget;
+                                    if (project.image && target.src !== project.image) {
+                                      target.src = project.image;
+                                    }
+                                  }}
                                 />
                               </div>
                             </div>
