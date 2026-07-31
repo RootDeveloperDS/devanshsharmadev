@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { Command, Hexagon, Github } from "lucide-react";
 import { ThemeToggle } from "./ThemeToggle";
 import { tabs, socials, type TabId } from "./data";
+import { sendTelegramNotification } from "@/lib/telegram";
 
 interface Props {
   active: TabId;
@@ -66,6 +67,7 @@ export function TopNav({ active, onChange, onOpenPalette }: Props) {
             href={socials.portfolioRepo}
             target="_blank"
             rel="noopener noreferrer"
+            onClick={() => sendTelegramNotification("Clicked Open Source Button (TopNav)", { repo: socials.portfolioRepo })}
             className="inline-flex items-center gap-1 rounded-full border border-primary/40 bg-primary/10 p-1.5 sm:px-2.5 sm:py-1 text-xs font-medium text-primary shadow-sm hover:bg-primary/20 hover:border-primary transition-all duration-200"
             title="Portfolio is 100% Open Source — View on GitHub"
           >

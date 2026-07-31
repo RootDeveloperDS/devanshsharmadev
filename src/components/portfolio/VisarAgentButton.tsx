@@ -41,7 +41,7 @@ export function VisarAgentButton() {
         alt="VISAR AI Agent"
         className="h-10 w-10 object-contain drop-shadow-sm group-hover:drop-shadow-md transition-all duration-300"
         loading="eager"
-        fetchPriority="high"
+        fetchpriority="high"
       />
       {/* Pulsing indicator dot */}
       <span className="absolute right-0 top-0 flex h-3.5 w-3.5">

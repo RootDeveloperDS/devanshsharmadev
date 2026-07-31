@@ -8,6 +8,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { socials } from "./data";
 import { useTheme } from "./ThemeProvider";
 import { toast } from "@/hooks/use-toast";
+import { sendTelegramNotification } from "@/lib/telegram";
 
 const bootLines = [
   "[ OK ] initializing comms link...",
@@ -57,6 +58,12 @@ function TerminalView() {
     }
     setErrorMsg("");
     setStatus("sending");
+
+    sendTelegramNotification("Submitted Terminal Contact Form", {
+      senderName: trimmedName,
+      messageContent: trimmedMsg,
+    });
+
     const subject = `Portfolio contact — ${trimmedName}`;
     const body = `${trimmedMsg}\n\n— ${trimmedName}`;
     const mailto = `mailto:${socials.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
@@ -262,6 +269,7 @@ export function TerminalTab() {
               href={href}
               target={href.startsWith("http") ? "_blank" : undefined}
               rel="noopener noreferrer"
+              onClick={() => sendTelegramNotification("Clicked Contact Channel (Terminal)", { channel: label, url: href })}
               className="bento-card group flex items-center gap-3 !p-3 hover:border-primary/60 sm:gap-4 sm:!p-4"
             >
               <span className="grid h-9 w-9 shrink-0 place-items-center rounded-lg bg-primary/10 text-primary sm:h-10 sm:w-10">

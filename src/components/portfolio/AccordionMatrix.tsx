@@ -3,6 +3,7 @@ import { useSearchParams } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { Github, ArrowUpRight, ChevronRight } from "lucide-react";
 import type { Project } from "./data";
+import { sendTelegramNotification } from "@/lib/telegram";
 
 /* ─────────────────────────────────────────────
    Filter categories rendered as terminal tabs
@@ -51,6 +52,12 @@ export function AccordionMatrix({ projects }: AccordionMatrixProps) {
       newParams.delete("project");
     } else {
       newParams.set("project", id);
+      const proj = projects.find((p) => p.id === id);
+      sendTelegramNotification("Expanded Project Accordion", {
+        projectId: id,
+        projectTitle: proj ? proj.title : id,
+        subtitle: proj ? proj.subtitle : "",
+      });
     }
     setSearchParams(newParams, { replace: true });
   };
@@ -223,6 +230,7 @@ export function AccordionMatrix({ projects }: AccordionMatrixProps) {
                                   href={project.github}
                                   target="_blank"
                                   rel="noopener noreferrer"
+                                  onClick={() => sendTelegramNotification("Clicked Project Repository", { project: project.title, repo: project.github })}
                                   className="inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-wider text-primary border border-primary/30 px-4 py-2 rounded hover:bg-primary hover:text-background transition-all duration-300"
                                 >
                                   <Github className="h-4 w-4" />
@@ -234,6 +242,7 @@ export function AccordionMatrix({ projects }: AccordionMatrixProps) {
                                   href={project.live}
                                   target="_blank"
                                   rel="noopener noreferrer"
+                                  onClick={() => sendTelegramNotification("Clicked Live Project Link", { project: project.title, url: project.live })}
                                   className="inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-wider text-primary border border-primary/30 px-4 py-2 rounded hover:bg-primary hover:text-background transition-all duration-300"
                                 >
                                   <ArrowUpRight className="h-4 w-4" />

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
 import { ThemeProvider } from "@/components/portfolio/ThemeProvider";
@@ -12,13 +12,21 @@ import { TerminalTab } from "@/components/portfolio/TerminalTab";
 import { Footer } from "@/components/portfolio/Footer";
 import type { TabId } from "@/components/portfolio/data";
 import { VisarAgentButton } from "@/components/portfolio/VisarAgentButton";
+import { sendTelegramNotification } from "@/lib/telegram";
 
 function PortfolioShell() {
   const [searchParams, setSearchParams] = useSearchParams();
   const active = (searchParams.get("tab") as TabId) || "overview";
   const [paletteOpen, setPaletteOpen] = useState(false);
 
+  useEffect(() => {
+    sendTelegramNotification("Entered Portfolio", { initialTab: active });
+  }, []);
+
   const handleNavigate = (id: TabId) => {
+    if (id !== active) {
+      sendTelegramNotification("Navigated Tab", { from: active, to: id });
+    }
     setSearchParams({ tab: id });
     window.scrollTo({ top: 0, behavior: "smooth" });
   };

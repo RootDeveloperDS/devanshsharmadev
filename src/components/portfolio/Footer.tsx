@@ -27,6 +27,7 @@ import {
   Eye
 } from "lucide-react";
 import { profile, socials, socialItems, tabs, type TabId } from "./data";
+import { sendTelegramNotification } from "@/lib/telegram";
 import { Button } from "@/components/ui/button";
 import { useTheme } from "./ThemeProvider";
 
@@ -123,6 +124,7 @@ export function Footer({ onNavigate }: FooterProps) {
                   href={socials.portfolioRepo}
                   target="_blank"
                   rel="noopener noreferrer"
+                  onClick={() => sendTelegramNotification("Clicked Star & View Repo (Footer Banner)", { repo: socials.portfolioRepo })}
                   className="inline-flex items-center justify-center gap-2"
                 >
                   <Github className="h-5 w-5" />
@@ -140,6 +142,7 @@ export function Footer({ onNavigate }: FooterProps) {
                   href={`${socials.portfolioRepo}/fork`}
                   target="_blank"
                   rel="noopener noreferrer"
+                  onClick={() => sendTelegramNotification("Clicked Fork Codebase (Footer Banner)", { repo: `${socials.portfolioRepo}/fork` })}
                   className="inline-flex items-center justify-center gap-2"
                 >
                   <GitFork className="h-4 w-4" />
@@ -235,6 +238,7 @@ export function Footer({ onNavigate }: FooterProps) {
                   href={profile.resumeUrl}
                   target="_blank"
                   rel="noopener noreferrer"
+                  onClick={() => sendTelegramNotification("Viewed Résumé (Footer Link)", { file: profile.resumeUrl })}
                   className="flex items-center gap-2 text-xs sm:text-sm text-muted-foreground hover:text-primary transition-colors"
                 >
                   <Eye className="h-3.5 w-3.5 text-primary" />
@@ -245,6 +249,7 @@ export function Footer({ onNavigate }: FooterProps) {
                 <a
                   href={profile.resumeUrl}
                   download
+                  onClick={() => sendTelegramNotification("Downloaded Résumé (Footer Link)", { file: profile.resumeUrl })}
                   className="flex items-center gap-2 text-xs sm:text-sm text-muted-foreground hover:text-primary transition-colors"
                 >
                   <FileDown className="h-3.5 w-3.5 text-primary" />
@@ -262,6 +267,7 @@ export function Footer({ onNavigate }: FooterProps) {
             <div className="space-y-2 font-mono text-xs">
               <a
                 href={`mailto:${socials.email}`}
+                onClick={() => sendTelegramNotification("Clicked Direct Email (Footer)", { email: socials.email })}
                 className="flex items-center justify-between gap-2 rounded-xl border border-border bg-secondary/30 p-3 hover:border-primary/50 hover:bg-secondary/60 transition-all text-foreground group"
               >
                 <div className="flex items-center gap-2.5 truncate">
@@ -275,6 +281,7 @@ export function Footer({ onNavigate }: FooterProps) {
                 href={socials.website}
                 target="_blank"
                 rel="noopener noreferrer"
+                onClick={() => sendTelegramNotification("Clicked External Website (Footer)", { url: socials.website })}
                 className="flex items-center justify-between gap-2 rounded-xl border border-border bg-secondary/30 p-3 hover:border-primary/50 hover:bg-secondary/60 transition-all text-foreground group"
               >
                 <div className="flex items-center gap-2.5 truncate">
@@ -330,6 +337,7 @@ export function Footer({ onNavigate }: FooterProps) {
                         href={item.href}
                         target="_blank"
                         rel="noopener noreferrer"
+                        onClick={() => sendTelegramNotification("Clicked Social Matrix Link", { name: item.name, category: cat, url: item.href })}
                         className={`group flex items-center justify-between gap-2 rounded-lg border px-3 py-2 text-xs transition-all duration-200 ${
                           item.isRepo
                             ? "border-primary/50 bg-primary/10 text-primary font-semibold hover:bg-primary/20 hover:border-primary"
@@ -374,6 +382,7 @@ export function Footer({ onNavigate }: FooterProps) {
               href={socials.portfolioRepo}
               target="_blank"
               rel="noopener noreferrer"
+              onClick={() => sendTelegramNotification("Clicked Open Source Portfolio Link (Footer Bottom)", { repo: socials.portfolioRepo })}
               className="text-primary hover:underline font-semibold"
             >
               Open Source Portfolio Codebase
