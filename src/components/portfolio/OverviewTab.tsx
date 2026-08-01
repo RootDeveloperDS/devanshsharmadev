@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { profile, socials, socialItems } from "./data";
 import { HeroAvatar } from "./HeroAvatar";
 import type { TabId } from "./data";
+import { sendTelegramNotification } from "@/lib/telegram";
 
 interface Props {
   onNavigate: (id: TabId) => void;
@@ -73,17 +74,31 @@ export function OverviewTab({ onNavigate }: Props) {
           >
             {/* Dominant Open Source Portfolio Button */}
             <Button asChild size="lg" className="rounded-full bg-primary text-primary-foreground font-semibold shadow-md shadow-primary/20 hover:scale-[1.02] transition-all">
-              <a href={socials.portfolioRepo} target="_blank" rel="noopener noreferrer">
+              <a
+                href={socials.portfolioRepo}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => sendTelegramNotification("Clicked Portfolio Repository Code", { url: socials.portfolioRepo })}
+              >
                 <Github className="mr-2 h-4 w-4" /> Open Source Code ↗
               </a>
             </Button>
             <Button asChild size="lg" variant="outline" className="rounded-full border-primary/40 text-foreground hover:bg-primary/10 hover:text-foreground">
-              <a href={profile.resumeUrl} target="_blank" rel="noopener noreferrer">
+              <a
+                href={profile.resumeUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => sendTelegramNotification("Viewed Résumé (Overview Tab)", { file: profile.resumeUrl })}
+              >
                 <Eye className="mr-2 h-4 w-4" /> View Résumé
               </a>
             </Button>
             <Button asChild size="lg" variant="outline" className="rounded-full border-primary/40 text-foreground hover:bg-primary/10 hover:text-foreground">
-              <a href={profile.resumeUrl} download>
+              <a
+                href={profile.resumeUrl}
+                download
+                onClick={() => sendTelegramNotification("Downloaded Résumé (Overview Tab)", { file: profile.resumeUrl })}
+              >
                 <Download className="mr-2 h-4 w-4" /> Download
               </a>
             </Button>
@@ -91,7 +106,10 @@ export function OverviewTab({ onNavigate }: Props) {
               size="lg"
               variant="outline"
               className="rounded-full border-primary/40 text-foreground hover:bg-primary/10 hover:text-foreground"
-              onClick={() => onNavigate("terminal")}
+              onClick={() => {
+                sendTelegramNotification("Opened Terminal Comms Button", { location: "Overview Hero" });
+                onNavigate("terminal");
+              }}
             >
               <Terminal className="mr-2 h-4 w-4" /> Terminal Comms
             </Button>
@@ -115,6 +133,7 @@ export function OverviewTab({ onNavigate }: Props) {
                   href={s.href}
                   target="_blank"
                   rel="noopener noreferrer"
+                  onClick={() => sendTelegramNotification("Clicked Social Link", { platform: s.name, href: s.href })}
                   className={`inline-flex items-center gap-1.5 rounded-lg border px-3 py-1.5 text-xs font-medium transition-all ${
                     s.isRepo
                       ? "border-primary/50 bg-primary/15 text-primary font-semibold hover:bg-primary/25"

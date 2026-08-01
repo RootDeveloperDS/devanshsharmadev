@@ -116,7 +116,7 @@ export function ProjectsTab() {
                     project.span === "lg" ? "max-h-[24rem]" : "max-h-[14rem]"
                   }`}
                   loading={idx < 2 ? "eager" : "lazy"}
-                  fetchPriority={idx < 2 ? "high" : "auto"}
+                  fetchpriority={idx < 2 ? "high" : "auto"}
                   onError={(e) => {
                     // Bulletproof Fallback: If jsDelivr fails, revert to raw GitHub URL instantly
                     const target = e.currentTarget;

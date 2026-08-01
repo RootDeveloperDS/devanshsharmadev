@@ -23,7 +23,8 @@ import {
   Twitter,
 } from "lucide-react";
 import { useTheme } from "./ThemeProvider";
-import { socials, socialItems, profile, tabs, type TabId } from "./data";
+import { socials, profile, socialItems, tabs, type TabId } from "./data";
+import { sendTelegramNotification } from "@/lib/telegram";
 import { toast } from "@/hooks/use-toast";
 
 interface Props {
@@ -112,6 +113,7 @@ export function CommandPalette({ onNavigate, open, onOpenChange }: Props) {
         <CommandGroup heading="Actions">
           <CommandItem
             onSelect={run(() => {
+              sendTelegramNotification("Viewed Résumé (Command Palette)", { file: profile.resumeUrl });
               window.open(profile.resumeUrl, "_blank");
             })}
           >
@@ -120,6 +122,7 @@ export function CommandPalette({ onNavigate, open, onOpenChange }: Props) {
           </CommandItem>
           <CommandItem
             onSelect={run(() => {
+              sendTelegramNotification("Downloaded Résumé (Command Palette)", { file: profile.resumeUrl });
               const a = document.createElement("a");
               a.href = profile.resumeUrl;
               a.download = "DevanshSharma-Resume.pdf";
@@ -129,7 +132,10 @@ export function CommandPalette({ onNavigate, open, onOpenChange }: Props) {
             <Download />
             <span>Download résumé</span>
           </CommandItem>
-          <CommandItem onSelect={run(() => onNavigate("terminal"))}>
+          <CommandItem onSelect={run(() => {
+            sendTelegramNotification("Initialized Terminal (Command Palette)");
+            onNavigate("terminal");
+          })}>
             <Terminal />
             <span>Initialize terminal</span>
           </CommandItem>
