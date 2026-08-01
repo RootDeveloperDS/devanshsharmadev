@@ -18,14 +18,13 @@ interface IpInfo {
 
 // Helper to safely get IP and rough location with strict timeout (1.5s max)
 async function fetchIpMetadata(): Promise<IpInfo | null> {
-  try {
-    const controller = new AbortController();
-    const timeoutId = setTimeout(() => controller.abort(), 1500);
+  const controller = new AbortController();
+  const timeoutId = setTimeout(() => controller.abort(), 1500);
 
+  try {
     const response = await fetch("https://ipapi.co/json/", {
       signal: controller.signal,
     });
-    clearTimeout(timeoutId);
 
     if (!response.ok) return null;
     const data = await response.json();
@@ -39,6 +38,8 @@ async function fetchIpMetadata(): Promise<IpInfo | null> {
   } catch {
     // Graceful silent fallback if adblocker blocks request or network times out
     return null;
+  } finally {
+    clearTimeout(timeoutId);
   }
 }
 
