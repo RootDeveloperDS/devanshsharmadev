@@ -145,8 +145,9 @@ export async function sendTelegramNotification(
 
     // 5. Send payload via Telegram Bot API
     const telegramUrl = `https://api.telegram.org/bot${botToken}/sendMessage`;
-    fetch(telegramUrl, {
+    void fetch(telegramUrl, {
       method: "POST",
+      keepalive: true,
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         chat_id: chatId,
