@@ -101,9 +101,18 @@ export async function sendTelegramNotification(
     const referrer = typeof document !== "undefined" && document.referrer ? document.referrer : "Direct / None";
     const timestamp = new Date().toLocaleString("en-US", { timeZoneName: "short" });
 
-    // Fetch IP metadata asynchronously with fast timeout
-    const ipData = await fetchIpMetadata();
-
+    // Fetch IP metadata once per session (fast timeout) and reuse it for subsequent notifications
+    let ipData: IpInfo | null = null;
+    try {
+      const cached = typeof sessionStorage !== "undefined" ? sessionStorage.getItem("portfolio_ip_meta") : null;
+      if (cached) ipData = JSON.parse(cached) as IpInfo;
+      else {
+        ipData = await fetchIpMetadata();
+        if (ipData && typeof sessionStorage !== "undefined") sessionStorage.setItem("portfolio_ip_meta", JSON.stringify(ipData));
+      }
+    } catch {
+      ipData = await fetchIpMetadata();
+    }
     // 4. Format structured Telegram HTML message with clear project header
     let messageHtml = `<b>🌐 [Devansh Portfolio] — Action Alert</b>\n\n`;
     messageHtml += `⚡ <b>Action:</b> <code>${escapeHtml(action)}</code>\n`;
