@@ -1,7 +1,7 @@
 <div align="center">
   <img src="https://cdn.jsdelivr.net/gh/RootDeveloperDS/CDN@main/images/devansh-portfolio/main-dashboard-dark-1.png" alt="Devansh Sharma Portfolio Preview" width="100%" style="border-radius: 12px; margin-bottom: 16px;">
 
-  # Devansh Sharma — Developer Portfolio (v12.2.0)
+  # Devansh Sharma — Developer Portfolio (v12.4.0)
 
   **Full Stack AI Architect & Creator of VISAR Edge**  
   *Modular Cyberpunk & Executive Portfolio Hub built with React, Vite, Framer Motion, and Tailwind CSS.*
