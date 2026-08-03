@@ -1,3 +1,0 @@
-## 2024-05-18 - Added consistent focus-visible rings to buttons
-**Learning:** Found that custom buttons in components like TopNav, ThemeToggle, and VisarAgentButton were missing explicit keyboard focus styles, which degrades keyboard accessibility. Using standard shadcn-like focus styles (`focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 ring-offset-background`) fixes this seamlessly.
-**Action:** When adding or auditing custom unstyled buttons, explicitly include `focus-visible` utility classes to ensure visual feedback during keyboard navigation.
