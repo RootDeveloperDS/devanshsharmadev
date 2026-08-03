@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { Suspense, lazy, useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
 import { ThemeProvider } from "@/components/portfolio/ThemeProvider";
@@ -6,13 +6,14 @@ import { AnimatedBackground } from "@/components/portfolio/AnimatedBackground";
 import { TopNav } from "@/components/portfolio/TopNav";
 import { CommandPalette } from "@/components/portfolio/CommandPalette";
 import { OverviewTab } from "@/components/portfolio/OverviewTab";
-import { ProjectsTab } from "@/components/portfolio/ProjectsTab";
-import { ExperienceTab } from "@/components/portfolio/ExperienceTab";
-import { TerminalTab } from "@/components/portfolio/TerminalTab";
 import { Footer } from "@/components/portfolio/Footer";
 import type { TabId } from "@/components/portfolio/data";
 import { VisarAgentButton } from "@/components/portfolio/VisarAgentButton";
 import { sendTelegramNotification } from "@/lib/telegram";
+
+const ProjectsTab = lazy(() => import("@/components/portfolio/ProjectsTab").then(m => ({ default: m.ProjectsTab })));
+const ExperienceTab = lazy(() => import("@/components/portfolio/ExperienceTab").then(m => ({ default: m.ExperienceTab })));
+const TerminalTab = lazy(() => import("@/components/portfolio/TerminalTab").then(m => ({ default: m.TerminalTab })));
 
 function PortfolioShell() {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -46,10 +47,12 @@ function PortfolioShell() {
             exit={{ opacity: 0, y: -8 }}
             transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
           >
-            {active === "overview" && <OverviewTab onNavigate={handleNavigate} />}
-            {active === "projects" && <ProjectsTab />}
-            {active === "experience" && <ExperienceTab />}
-            {active === "terminal" && <TerminalTab />}
+            <Suspense fallback={<div className="h-[50vh] flex items-center justify-center font-mono text-sm text-primary animate-pulse">loading payload...</div>}>
+              {active === "overview" && <OverviewTab onNavigate={handleNavigate} />}
+              {active === "projects" && <ProjectsTab />}
+              {active === "experience" && <ExperienceTab />}
+              {active === "terminal" && <TerminalTab />}
+            </Suspense>
           </motion.div>
         </AnimatePresence>
       </main>
