@@ -1,3 +1,0 @@
-## 2024-08-04 - [Rollup manualChunks & Non-Existent Dependencies]
-**Learning:** Adding dependencies to Rollup's `manualChunks` that are not actually installed (e.g., assuming `react-router-dom` because of typical TanStack routing setups, but they are different libraries) causes fatal build errors. Also, in TypeScript, uninitialized variables captured in callbacks require strict typing (like `number | undefined`) to compile successfully.
-**Action:** Always verify dependencies in `package.json` before splitting them in `vite.config.ts`. Ensure strict typing is met before requesting a code review by building and linting locally.
