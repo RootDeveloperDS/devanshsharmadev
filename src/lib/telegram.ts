@@ -16,6 +16,27 @@ interface IpInfo {
   org?: string;
 }
 
+// Queue for pending notifications that haven't been sent yet
+interface PendingNotification {
+  action: string;
+  details?: NotificationDetails;
+  timestamp: string;
+  pagePath: string;
+}
+
+const pendingQueue: PendingNotification[] = [];
+let ipFetchPromise: Promise<IpInfo | null> | null = null;
+let isFlushing = false;
+
+// Setup visibilitychange listener for guaranteed delivery on exit
+if (typeof window !== "undefined") {
+  document.addEventListener("visibilitychange", () => {
+    if (document.visibilityState === "hidden" && pendingQueue.length > 0) {
+      flushQueue(true);
+    }
+  });
+}
+
 // Helper to safely get IP and rough location with strict timeout (1.5s max)
 async function fetchIpMetadata(): Promise<IpInfo | null> {
   const controller = new AbortController();
@@ -43,6 +64,28 @@ async function fetchIpMetadata(): Promise<IpInfo | null> {
   }
 }
 
+function getCachedIpMetadata(): IpInfo | null {
+  try {
+    const cached = typeof sessionStorage !== "undefined" ? sessionStorage.getItem("portfolio_ip_meta") : null;
+    if (cached) return JSON.parse(cached) as IpInfo;
+  } catch {
+    // ignore
+  }
+  return null;
+}
+
+function triggerIpFetch() {
+  if (!ipFetchPromise) {
+    ipFetchPromise = fetchIpMetadata().then(data => {
+      if (data && typeof sessionStorage !== "undefined") {
+        sessionStorage.setItem("portfolio_ip_meta", JSON.stringify(data));
+      }
+      return data;
+    });
+  }
+  return ipFetchPromise;
+}
+
 // Parse readable Browser and OS from userAgent
 function getDeviceDetails(): string {
   if (typeof window === "undefined" || !navigator) return "Unknown Device";
@@ -65,6 +108,97 @@ function getDeviceDetails(): string {
   return `${browser} on ${os} (${isMobile})`;
 }
 
+// Utility function to sanitize text for Telegram HTML parse mode
+function escapeHtml(str: string): string {
+  return str
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;");
+}
+
+async function flushQueue(immediate = false) {
+  if (pendingQueue.length === 0 || isFlushing) return;
+
+  const isEnabled = import.meta.env.VITE_ENABLE_TELEGRAM_NOTIFY !== "false";
+  const botToken = import.meta.env.VITE_TELEGRAM_BOT_TOKEN;
+  const chatId = import.meta.env.VITE_TELEGRAM_USER_ID;
+
+  if (!isEnabled || !botToken || !chatId) {
+    pendingQueue.length = 0; // Clear queue if disabled
+    return;
+  }
+
+  isFlushing = true;
+
+  try {
+    let ipData = getCachedIpMetadata();
+
+    // If not immediate (user didn't close tab), we can wait for IP fetch
+    if (!ipData && !immediate) {
+      ipData = await triggerIpFetch();
+    }
+
+    // Process items in queue
+    while (pendingQueue.length > 0) {
+      const item = pendingQueue.shift();
+      if (!item) continue;
+
+      const device = getDeviceDetails();
+      const screenRes = typeof window !== "undefined" ? `${window.screen.width}x${window.screen.height}` : "Unknown";
+      const language = typeof navigator !== "undefined" ? navigator.language : "Unknown";
+      const referrer = typeof document !== "undefined" && document.referrer ? document.referrer : "Direct / None";
+
+      let messageHtml = `<b>🌐 [Devansh Portfolio] — Action Alert</b>\n\n`;
+      messageHtml += `⚡ <b>Action:</b> <code>${escapeHtml(item.action)}</code>\n`;
+
+      if (item.details && Object.keys(item.details).length > 0) {
+        messageHtml += `\n📋 <b>Details:</b>\n`;
+        for (const [key, val] of Object.entries(item.details)) {
+          if (val !== undefined && val !== null && val !== "") {
+            messageHtml += `  • <b>${escapeHtml(key)}:</b> <code>${escapeHtml(String(val))}</code>\n`;
+          }
+        }
+      }
+
+      messageHtml += `\n👤 <b>Visitor Metadata:</b>\n`;
+      messageHtml += `  • <b>Device:</b> ${escapeHtml(device)}\n`;
+      messageHtml += `  • <b>Screen:</b> ${escapeHtml(screenRes)}\n`;
+      messageHtml += `  • <b>Language:</b> ${escapeHtml(language)}\n`;
+      messageHtml += `  • <b>Page:</b> <code>${escapeHtml(item.pagePath)}</code>\n`;
+      messageHtml += `  • <b>Referrer:</b> <code>${escapeHtml(referrer)}</code>\n`;
+
+      if (ipData) {
+        const locStr = [ipData.city, ipData.region, ipData.country_name].filter(Boolean).join(", ");
+        messageHtml += `  • <b>IP:</b> <code>${escapeHtml(ipData.ip || "N/A")}</code> (${escapeHtml(locStr || "Unknown Location")})\n`;
+        if (ipData.org) {
+          messageHtml += `  • <b>ISP / Org:</b> ${escapeHtml(ipData.org)}\n`;
+        }
+      } else if (immediate) {
+        messageHtml += `  • <b>IP:</b> <i>Fetching... (Visitor closed page too quickly)</i>\n`;
+      }
+
+      messageHtml += `  • <b>Time:</b> ${escapeHtml(item.timestamp)}`;
+
+      const telegramUrl = `https://api.telegram.org/bot${botToken}/sendMessage`;
+
+      // Use fire-and-forget with keepalive
+      fetch(telegramUrl, {
+        method: "POST",
+        keepalive: true,
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          chat_id: chatId,
+          text: messageHtml,
+          parse_mode: "HTML",
+          disable_web_page_preview: true,
+        }),
+      }).catch(() => {});
+    }
+  } finally {
+    isFlushing = false;
+  }
+}
+
 /**
  * Global helper to send Telegram notification for user actions.
  * @param action Human readable action name (e.g. "Downloaded Resume", "Visited Overview Tab")
@@ -75,17 +209,7 @@ export async function sendTelegramNotification(
   details?: NotificationDetails
 ): Promise<void> {
   try {
-    // 1. Check environment toggle and credentials
-    const isEnabled = import.meta.env.VITE_ENABLE_TELEGRAM_NOTIFY !== "false";
-    const botToken = import.meta.env.VITE_TELEGRAM_BOT_TOKEN;
-    const chatId = import.meta.env.VITE_TELEGRAM_USER_ID;
-
-    if (!isEnabled || !botToken || !chatId) {
-      // Quiet return if feature disabled or missing environment keys
-      return;
-    }
-
-    // 2. Cooldown check per action to prevent user button spamming
+    // Cooldown check per action to prevent user button spamming
     const now = Date.now();
     const lastSent = actionCooldownMap.get(action) || 0;
     if (now - lastSent < COOLDOWN_MS) {
@@ -93,80 +217,25 @@ export async function sendTelegramNotification(
     }
     actionCooldownMap.set(action, now);
 
-    // 3. Gather legal, non-sensitive client metadata
-    const device = getDeviceDetails();
-    const screenRes = typeof window !== "undefined" ? `${window.screen.width}x${window.screen.height}` : "Unknown";
-    const language = typeof navigator !== "undefined" ? navigator.language : "Unknown";
-    const pagePath = typeof window !== "undefined" ? window.location.pathname + window.location.search : "/";
-    const referrer = typeof document !== "undefined" && document.referrer ? document.referrer : "Direct / None";
+    // Pre-trigger the IP fetch so it starts loading in the background immediately
+    if (!getCachedIpMetadata()) {
+      triggerIpFetch();
+    }
+
     const timestamp = new Date().toLocaleString("en-US", { timeZoneName: "short" });
+    const pagePath = typeof window !== "undefined" ? window.location.pathname + window.location.search : "/";
 
-    // Fetch IP metadata once per session (fast timeout) and reuse it for subsequent notifications
-    let ipData: IpInfo | null = null;
-    try {
-      const cached = typeof sessionStorage !== "undefined" ? sessionStorage.getItem("portfolio_ip_meta") : null;
-      if (cached) ipData = JSON.parse(cached) as IpInfo;
-      else {
-        ipData = await fetchIpMetadata();
-        if (ipData && typeof sessionStorage !== "undefined") sessionStorage.setItem("portfolio_ip_meta", JSON.stringify(ipData));
-      }
-    } catch {
-      ipData = await fetchIpMetadata();
-    }
-    // 4. Format structured Telegram HTML message with clear project header
-    let messageHtml = `<b>🌐 [Devansh Portfolio] — Action Alert</b>\n\n`;
-    messageHtml += `⚡ <b>Action:</b> <code>${escapeHtml(action)}</code>\n`;
-
-    if (details && Object.keys(details).length > 0) {
-      messageHtml += `\n📋 <b>Details:</b>\n`;
-      for (const [key, val] of Object.entries(details)) {
-        if (val !== undefined && val !== null && val !== "") {
-          messageHtml += `  • <b>${escapeHtml(key)}:</b> <code>${escapeHtml(String(val))}</code>\n`;
-        }
-      }
-    }
-
-    messageHtml += `\n👤 <b>Visitor Metadata:</b>\n`;
-    messageHtml += `  • <b>Device:</b> ${escapeHtml(device)}\n`;
-    messageHtml += `  • <b>Screen:</b> ${escapeHtml(screenRes)}\n`;
-    messageHtml += `  • <b>Language:</b> ${escapeHtml(language)}\n`;
-    messageHtml += `  • <b>Page:</b> <code>${escapeHtml(pagePath)}</code>\n`;
-    messageHtml += `  • <b>Referrer:</b> <code>${escapeHtml(referrer)}</code>\n`;
-
-    if (ipData) {
-      const locStr = [ipData.city, ipData.region, ipData.country_name].filter(Boolean).join(", ");
-      messageHtml += `  • <b>IP:</b> <code>${escapeHtml(ipData.ip || "N/A")}</code> (${escapeHtml(locStr || "Unknown Location")})\n`;
-      if (ipData.org) {
-        messageHtml += `  • <b>ISP / Org:</b> ${escapeHtml(ipData.org)}\n`;
-      }
-    }
-
-    messageHtml += `  • <b>Time:</b> ${escapeHtml(timestamp)}`;
-
-    // 5. Send payload via Telegram Bot API
-    const telegramUrl = `https://api.telegram.org/bot${botToken}/sendMessage`;
-    void fetch(telegramUrl, {
-      method: "POST",
-      keepalive: true,
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        chat_id: chatId,
-        text: messageHtml,
-        parse_mode: "HTML",
-        disable_web_page_preview: true,
-      }),
-    }).catch(() => {
-      // Fail silently without interrupting UI
+    // Add to pending queue
+    pendingQueue.push({
+      action,
+      details,
+      timestamp,
+      pagePath
     });
+
+    // Attempt to flush queue normally
+    flushQueue();
   } catch {
     // Fail silently on any unexpected error
   }
-}
-
-// Utility function to sanitize text for Telegram HTML parse mode
-function escapeHtml(str: string): string {
-  return str
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;");
 }
