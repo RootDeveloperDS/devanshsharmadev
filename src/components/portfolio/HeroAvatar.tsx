@@ -17,15 +17,23 @@ export function HeroAvatar() {
   useEffect(() => {
     const el = wrapRef.current;
     if (!el) return;
+    let rafId: number | undefined;
     const onMove = (e: MouseEvent) => {
-      const rect = el.getBoundingClientRect();
-      const cx = rect.left + rect.width / 2;
-      const cy = rect.top + rect.height / 2;
-      mx.set(((e.clientX - cx) / rect.width) * 100);
-      my.set(((e.clientY - cy) / rect.height) * 100);
+      // ⚡ Bolt: Debounce expensive getBoundingClientRect layout reads to animation frame
+      if (rafId) cancelAnimationFrame(rafId);
+      rafId = requestAnimationFrame(() => {
+        const rect = el.getBoundingClientRect();
+        const cx = rect.left + rect.width / 2;
+        const cy = rect.top + rect.height / 2;
+        mx.set(((e.clientX - cx) / rect.width) * 100);
+        my.set(((e.clientY - cy) / rect.height) * 100);
+      });
     };
-    window.addEventListener("mousemove", onMove);
-    return () => window.removeEventListener("mousemove", onMove);
+    window.addEventListener("mousemove", onMove, { passive: true });
+    return () => {
+      window.removeEventListener("mousemove", onMove);
+      if (rafId) cancelAnimationFrame(rafId);
+    };
   }, [mx, my]);
 
   const isVisar = theme === "visar";
