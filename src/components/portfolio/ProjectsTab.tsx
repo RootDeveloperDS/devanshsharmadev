@@ -163,6 +163,7 @@ export function ProjectsTab() {
                   href={project.github}
                   target="_blank"
                   rel="noopener noreferrer"
+                  aria-label={`View ${project.id === "jarvis" ? "Mark 1 → 21" : "GitHub"} repository for ${project.id === "visar-edge" ? "VISAR EDGE" : project.name}`}
                   className={`inline-flex items-center gap-2 font-medium text-primary hover:gap-3 transition-all ${project.span === "lg" ? "text-sm" : "text-xs"}`}
                 >
                   <Github className={project.span === "lg" ? "h-4 w-4" : "h-3.5 w-3.5"} /> {project.id === "jarvis" ? "Mark 1 → 21" : "GitHub"}
@@ -173,6 +174,7 @@ export function ProjectsTab() {
                   href={project.live}
                   target="_blank"
                   rel="noopener noreferrer"
+                  aria-label={`View live demo for ${project.id === "visar-edge" ? "VISAR EDGE" : project.name}`}
                   className={`inline-flex items-center gap-2 font-medium text-primary hover:gap-3 transition-all ${project.span === "lg" ? "text-sm" : "text-xs"}`}
                 >
                   <ArrowUpRight className={project.span === "lg" ? "h-4 w-4" : "h-3.5 w-3.5"} /> Live Demo

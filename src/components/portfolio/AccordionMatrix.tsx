@@ -55,8 +55,8 @@ export function AccordionMatrix({ projects }: AccordionMatrixProps) {
       const proj = projects.find((p) => p.id === id);
       sendTelegramNotification("Expanded Project Accordion", {
         projectId: id,
-        projectTitle: proj ? proj.title : id,
-        subtitle: proj ? proj.subtitle : "",
+        projectTitle: proj ? proj.name : id,
+        subtitle: proj ? proj.tagline : "",
       });
     }
     setSearchParams(newParams, { replace: true });
@@ -86,6 +86,7 @@ export function AccordionMatrix({ projects }: AccordionMatrixProps) {
               newParams.delete("project");
               setSearchParams(newParams, { replace: true });
             }}
+            aria-pressed={activeCategory === f.id}
             className={`font-mono text-[11px] uppercase tracking-widest px-3 py-1.5 rounded-sm border transition-all duration-200 ${
               activeCategory === f.id
                 ? "border-primary bg-primary/10 text-primary"
@@ -112,9 +113,11 @@ export function AccordionMatrix({ projects }: AccordionMatrixProps) {
               >
                 {/* Closed Row */}
                 <button
+                  id={`accordion-${project.id}`}
                   onClick={() => toggle(project.id)}
                   className="w-full text-left group"
                   aria-expanded={isOpen}
+                  aria-controls={`panel-${project.id}`}
                 >
                   <div
                     className={`flex items-center gap-3 px-4 py-3.5 transition-colors duration-150 ${
@@ -159,6 +162,9 @@ export function AccordionMatrix({ projects }: AccordionMatrixProps) {
                 <AnimatePresence initial={false}>
                   {isOpen && (
                     <motion.div
+                      id={`panel-${project.id}`}
+                      role="region"
+                      aria-labelledby={`accordion-${project.id}`}
                       key="content"
                       initial={{ height: 0, opacity: 0 }}
                       animate={{ height: "auto", opacity: 1 }}
@@ -230,7 +236,8 @@ export function AccordionMatrix({ projects }: AccordionMatrixProps) {
                                   href={project.github}
                                   target="_blank"
                                   rel="noopener noreferrer"
-                                  onClick={() => sendTelegramNotification("Clicked Project Repository", { project: project.title, repo: project.github })}
+                                  aria-label={`View repository for ${project.name}`}
+                                  onClick={() => sendTelegramNotification("Clicked Project Repository", { project: project.name, repo: project.github })}
                                   className="inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-wider text-primary border border-primary/30 px-4 py-2 rounded hover:bg-primary hover:text-background transition-all duration-300"
                                 >
                                   <Github className="h-4 w-4" />
@@ -242,7 +249,8 @@ export function AccordionMatrix({ projects }: AccordionMatrixProps) {
                                   href={project.live}
                                   target="_blank"
                                   rel="noopener noreferrer"
-                                  onClick={() => sendTelegramNotification("Clicked Live Project Link", { project: project.title, url: project.live })}
+                                  aria-label={`Execute live demo for ${project.name}`}
+                                  onClick={() => sendTelegramNotification("Clicked Live Project Link", { project: project.name, url: project.live })}
                                   className="inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-wider text-primary border border-primary/30 px-4 py-2 rounded hover:bg-primary hover:text-background transition-all duration-300"
                                 >
                                   <ArrowUpRight className="h-4 w-4" />
