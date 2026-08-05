@@ -76,7 +76,7 @@ export function ProjectsTab() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: idx * 0.05 }}
-            className={`bento-card group flex flex-col justify-between ${spanClass[project.span] || ""}`}
+            className={`bento-card group flex flex-col justify-between focus-within:ring-2 focus-within:ring-primary focus-within:ring-offset-2 ring-offset-background ${spanClass[project.span] || ""}`}
           >
             <div>
               <div className="mb-3 flex items-center justify-between gap-2">
