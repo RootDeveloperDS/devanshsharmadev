@@ -1,3 +1,0 @@
-## 2024-08-05 - Canvas API Optimization Learning
-**Learning:** In AnimatedBackground.tsx, creating radial gradients and running full-screen `fillRect` per frame caused excessive CPU/GPU load. Also, when I tried caching `getBoundingClientRect` inside `HeroAvatar.tsx` and adding a scroll event listener to update it, it caused a regression by introducing synchronous layout reads during scroll, leading to layout thrashing.
-**Action:** Use an off-screen canvas to pre-render static assets like gradients and use `drawImage` during requestAnimationFrame loops. Never introduce synchronous DOM layout reads (like `getBoundingClientRect`) in scroll event listeners as it causes layout thrashing.
