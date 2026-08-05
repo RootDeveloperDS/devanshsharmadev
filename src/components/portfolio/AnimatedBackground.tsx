@@ -23,6 +23,11 @@ export function AnimatedBackground() {
     let raf = 0;
     let particles: { x: number; y: number; vx: number; vy: number; r: number }[] = [];
 
+    // ⚡ Bolt: Pre-render cursor glow to offscreen canvas to avoid creating gradients every frame
+    const glowCanvas = document.createElement("canvas");
+    const glowCtx = glowCanvas.getContext("2d");
+    let glowSize = 0;
+
     const resize = () => {
       canvas.width = window.innerWidth * window.devicePixelRatio;
       canvas.height = window.innerHeight * window.devicePixelRatio;
@@ -36,6 +41,17 @@ export function AnimatedBackground() {
         vy: (Math.random() - 0.5) * 0.3,
         r: Math.random() * 1.5 + 0.4,
       }));
+
+      glowSize = 280 * window.devicePixelRatio;
+      glowCanvas.width = glowSize * 2;
+      glowCanvas.height = glowSize * 2;
+      if (glowCtx) {
+        const gradient = glowCtx.createRadialGradient(glowSize, glowSize, 0, glowSize, glowSize, glowSize);
+        gradient.addColorStop(0, "rgba(0, 247, 255, 0.18)");
+        gradient.addColorStop(1, "rgba(0, 247, 255, 0)");
+        glowCtx.fillStyle = gradient;
+        glowCtx.fillRect(0, 0, glowCanvas.width, glowCanvas.height);
+      }
     };
 
     const onMove = (e: MouseEvent) => {
@@ -49,11 +65,7 @@ export function AnimatedBackground() {
       // cursor glow
       const { x, y } = mouseRef.current;
       if (x > -1000) {
-        const gradient = ctx.createRadialGradient(x, y, 0, x, y, 280 * window.devicePixelRatio);
-        gradient.addColorStop(0, "rgba(0, 247, 255, 0.18)");
-        gradient.addColorStop(1, "rgba(0, 247, 255, 0)");
-        ctx.fillStyle = gradient;
-        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        ctx.drawImage(glowCanvas, x - glowSize, y - glowSize);
       }
 
       // particles
