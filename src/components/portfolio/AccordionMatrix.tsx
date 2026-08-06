@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { useSearchParams } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { Github, ArrowUpRight, ChevronRight } from "lucide-react";
@@ -41,10 +41,12 @@ export function AccordionMatrix({ projects }: AccordionMatrixProps) {
   const activeCategory = searchParams.get("category") || "all";
   const expandedId = searchParams.get("project") || null;
 
-  const filtered =
-    activeCategory === "all"
+  // ⚡ Bolt: Memoize filtered projects list to avoid re-evaluating on unrelated state/URL changes
+  const filtered = useMemo(() => {
+    return activeCategory === "all"
       ? projects
       : projects.filter((p) => p.categories.includes(activeCategory as any));
+  }, [projects, activeCategory]);
 
   const toggle = (id: string) => {
     const newParams = new URLSearchParams(searchParams);
