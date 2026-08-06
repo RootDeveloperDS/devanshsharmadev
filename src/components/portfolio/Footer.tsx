@@ -35,6 +35,23 @@ interface FooterProps {
   onNavigate: (id: TabId) => void;
 }
 
+// ⚡ Bolt: Cache derived social item groups outside render loop
+const categories = [
+  "Code & AI",
+  "Professional",
+  "Social & Chat",
+  "Writing & Dev",
+  "Bio & Portfolios"
+] as const;
+
+const groupedSocialItems = categories.reduce((acc, cat) => {
+  acc[cat] = socialItems.filter((i) => i.category === cat);
+  return acc;
+}, {} as Record<typeof categories[number], typeof socialItems>);
+
+// ⚡ Bolt: Prevent re-evaluating Date on every render
+const currentYear = new Date().getFullYear();
+
 // Icon mapper helper
 function renderSocialIcon(iconName: string, className: string = "h-4 w-4") {
   switch (iconName) {
@@ -60,22 +77,12 @@ function renderSocialIcon(iconName: string, className: string = "h-4 w-4") {
 }
 
 export function Footer({ onNavigate }: FooterProps) {
-  const currentYear = new Date().getFullYear();
   const { theme } = useTheme();
 
   const isLight = theme === "executive";
   const snakeSvgUrl = isLight
     ? "https://raw.githubusercontent.com/RootDeveloperDS/RootDeveloperDS/output/github-contribution-grid-snake.svg"
     : "https://raw.githubusercontent.com/RootDeveloperDS/RootDeveloperDS/output/github-contribution-grid-snake-dark.svg";
-
-  // Group social items by category
-  const categories = [
-    "Code & AI",
-    "Professional",
-    "Social & Chat",
-    "Writing & Dev",
-    "Bio & Portfolios"
-  ] as const;
 
   return (
     <footer className="relative border-t border-border/80 bg-background/80 backdrop-blur-xl pt-12 pb-8 overflow-hidden z-20">
@@ -323,8 +330,8 @@ export function Footer({ onNavigate }: FooterProps) {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {categories.map((cat) => {
-              const items = socialItems.filter((i) => i.category === cat);
-              if (items.length === 0) return null;
+              const items = groupedSocialItems[cat];
+              if (!items || items.length === 0) return null;
               return (
                 <div key={cat} className="space-y-2.5">
                   <div className="text-[11px] font-mono font-medium text-muted-foreground/80 uppercase tracking-wider">
@@ -337,6 +344,7 @@ export function Footer({ onNavigate }: FooterProps) {
                         href={item.href}
                         target="_blank"
                         rel="noopener noreferrer"
+                        aria-label={`Visit ${item.name}`}
                         onClick={() => sendTelegramNotification("Clicked Social Matrix Link", { name: item.name, category: cat, url: item.href })}
                         className={`group flex items-center justify-between gap-2 rounded-lg border px-3 py-2 text-xs transition-all duration-200 ${
                           item.isRepo

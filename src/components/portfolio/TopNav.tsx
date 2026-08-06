@@ -17,7 +17,7 @@ export function TopNav({ active, onChange, onOpenPalette }: Props) {
         {/* Brand */}
         <button
           onClick={() => onChange("overview")}
-          className="flex items-center gap-1.5 sm:gap-2 group shrink-0"
+          className="flex items-center gap-1.5 sm:gap-2 group shrink-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 ring-offset-background rounded-full p-1"
           aria-label="Devansh Sharma — home"
         >
           <span className="relative grid h-7 w-7 sm:h-8 sm:w-8 place-items-center">
@@ -37,7 +37,7 @@ export function TopNav({ active, onChange, onOpenPalette }: Props) {
               <button
                 key={t.id}
                 onClick={() => onChange(t.id)}
-                className="relative px-2 py-1 sm:px-3 sm:py-1.5 text-xs font-medium tracking-wide"
+                className="relative px-2 py-1 sm:px-3 sm:py-1.5 text-xs font-medium tracking-wide focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 ring-offset-background rounded-full"
                 aria-current={isActive ? "page" : undefined}
               >
                 {isActive && (
@@ -79,8 +79,8 @@ export function TopNav({ active, onChange, onOpenPalette }: Props) {
           {/* Command Palette Button */}
           <button
             onClick={onOpenPalette}
-            className="flex items-center justify-center h-7 w-7 sm:h-auto sm:w-auto sm:gap-2 rounded-full border border-border bg-secondary/40 sm:px-3 sm:py-1.5 text-xs text-muted-foreground transition-colors hover:text-foreground hover:border-primary/40"
-            aria-label="Open command palette"
+            className="flex items-center justify-center h-7 w-7 sm:h-auto sm:w-auto sm:gap-2 rounded-full border border-border bg-secondary/40 sm:px-3 sm:py-1.5 text-xs text-muted-foreground transition-colors hover:text-foreground hover:border-primary/40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 ring-offset-background"
+            aria-label="Open command palette (Press Cmd/Ctrl+K)"
           >
             <Command className="h-3.5 w-3.5" />
             <span className="hidden sm:inline font-mono text-[11px]">⌘K</span>

@@ -11,7 +11,7 @@ export function ThemeToggle() {
       onClick={toggleTheme}
       aria-label={`Switch to ${isVisar ? "Executive" : "VISAR"} mode`}
       title={`${isVisar ? "VISAR" : "EXECUTIVE"} MODE`}
-      className="relative inline-flex h-8 w-16 items-center rounded-full border border-border bg-secondary/50 backdrop-blur transition-colors hover:bg-secondary"
+      className="relative inline-flex h-8 w-16 items-center rounded-full border border-border bg-secondary/50 backdrop-blur transition-colors hover:bg-secondary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 ring-offset-background"
     >
       <motion.span
         layout
