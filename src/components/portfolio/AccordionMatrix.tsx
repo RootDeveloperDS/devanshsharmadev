@@ -41,10 +41,11 @@ export function AccordionMatrix({ projects }: AccordionMatrixProps) {
   const activeCategory = searchParams.get("category") || "all";
   const expandedId = searchParams.get("project") || null;
 
-  const filtered =
-    activeCategory === "all"
+  const filtered = useMemo(() => {
+    return activeCategory === "all"
       ? projects
       : projects.filter((p) => p.categories.includes(activeCategory as any));
+  }, [projects, activeCategory]);
 
   const toggle = (id: string) => {
     const newParams = new URLSearchParams(searchParams);
