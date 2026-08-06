@@ -337,6 +337,7 @@ export function Footer({ onNavigate }: FooterProps) {
                         href={item.href}
                         target="_blank"
                         rel="noopener noreferrer"
+                        aria-label={`Visit ${item.name}`}
                         onClick={() => sendTelegramNotification("Clicked Social Matrix Link", { name: item.name, category: cat, url: item.href })}
                         className={`group flex items-center justify-between gap-2 rounded-lg border px-3 py-2 text-xs transition-all duration-200 ${
                           item.isRepo
