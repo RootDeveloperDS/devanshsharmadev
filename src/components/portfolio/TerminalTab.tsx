@@ -269,6 +269,7 @@ export function TerminalTab() {
               href={href}
               target={href.startsWith("http") ? "_blank" : undefined}
               rel="noopener noreferrer"
+              aria-label={`Connect via ${label}`}
               onClick={() => sendTelegramNotification("Clicked Contact Channel (Terminal)", { channel: label, url: href })}
               className="bento-card group flex items-center gap-3 !p-3 hover:border-primary/60 sm:gap-4 sm:!p-4"
             >
