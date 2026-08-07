@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import { useTheme } from "./ThemeProvider";
 
 /**
@@ -7,7 +7,8 @@ import { useTheme } from "./ThemeProvider";
  * - Executive: silent (CSS handles the soft hero gradient)
  * Respects prefers-reduced-motion.
  */
-export function AnimatedBackground() {
+// ⚡ Bolt: Memoize the heavily animated background to prevent re-renders when outer shell state changes
+export const AnimatedBackground = React.memo(function AnimatedBackground() {
   const { theme } = useTheme();
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const mouseRef = useRef({ x: -9999, y: -9999 });
@@ -111,4 +112,4 @@ export function AnimatedBackground() {
       )}
     </div>
   );
-}
+});

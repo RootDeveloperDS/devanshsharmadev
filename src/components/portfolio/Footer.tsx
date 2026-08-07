@@ -28,6 +28,7 @@ import {
 } from "lucide-react";
 import { profile, socials, socialItems, tabs, type TabId } from "./data";
 import { sendTelegramNotification } from "@/lib/telegram";
+import React from "react";
 import { Button } from "@/components/ui/button";
 import { useTheme } from "./ThemeProvider";
 
@@ -76,7 +77,8 @@ function renderSocialIcon(iconName: string, className: string = "h-4 w-4") {
   }
 }
 
-export function Footer({ onNavigate }: FooterProps) {
+// ⚡ Bolt: Memoize Footer to prevent re-renders when outer shell state changes
+export const Footer = React.memo(function Footer({ onNavigate }: FooterProps) {
   const { theme } = useTheme();
 
   const isLight = theme === "executive";
@@ -407,4 +409,4 @@ export function Footer({ onNavigate }: FooterProps) {
       </div>
     </footer>
   );
-}
+});
