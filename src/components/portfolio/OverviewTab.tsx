@@ -10,9 +10,10 @@ interface Props {
   onNavigate: (id: TabId) => void;
 }
 
-export function OverviewTab({ onNavigate }: Props) {
-  const featuredSocials = socialItems.filter((s) => s.featured);
+// ⚡ Bolt: Cache filtered static array outside render scope to avoid repeated allocations
+const featuredSocials = socialItems.filter((s) => s.featured);
 
+export function OverviewTab({ onNavigate }: Props) {
   return (
     <section className="mx-auto max-w-6xl">
       {/* Status strip */}
