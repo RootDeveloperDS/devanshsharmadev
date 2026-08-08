@@ -134,7 +134,7 @@ export function OverviewTab({ onNavigate }: Props) {
                   target="_blank"
                   rel="noopener noreferrer"
                   onClick={() => sendTelegramNotification("Clicked Social Link", { platform: s.name, href: s.href })}
-                  className={`inline-flex items-center gap-1.5 rounded-lg border px-3 py-1.5 text-xs font-medium transition-all ${
+                  className={`inline-flex items-center gap-1.5 rounded-lg border px-3 py-1.5 text-xs font-medium transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 ring-offset-background ${
                     s.isRepo
                       ? "border-primary/50 bg-primary/15 text-primary font-semibold hover:bg-primary/25"
                       : "border-border/60 bg-secondary/30 text-foreground hover:border-primary/40 hover:bg-secondary/70 hover:text-primary"
