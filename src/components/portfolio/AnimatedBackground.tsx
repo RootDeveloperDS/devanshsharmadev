@@ -71,6 +71,10 @@ export function AnimatedBackground() {
       // particles
       ctx.fillStyle = "rgba(0, 247, 255, 0.6)";
       ctx.beginPath(); // ⚡ Bolt: Batch particle paths to minimize Canvas API overhead
+
+      // ⚡ Bolt: Cache devicePixelRatio to avoid reading it up to 80 times per frame
+      const dpr = window.devicePixelRatio;
+
       for (const p of particles) {
         if (!reduceMotion) {
           p.x += p.vx;
@@ -78,7 +82,7 @@ export function AnimatedBackground() {
           if (p.x < 0 || p.x > canvas.width) p.vx *= -1;
           if (p.y < 0 || p.y > canvas.height) p.vy *= -1;
         }
-        const pr = p.r * window.devicePixelRatio;
+        const pr = p.r * dpr;
         ctx.moveTo(p.x + pr, p.y);
         ctx.arc(p.x, p.y, pr, 0, Math.PI * 2);
       }
