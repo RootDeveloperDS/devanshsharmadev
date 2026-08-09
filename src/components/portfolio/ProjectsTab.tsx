@@ -108,11 +108,11 @@ export function ProjectsTab() {
 
             {/* Visual Payload OR Custom Mockups */}
             {project.image ? (
-              <div className="relative mt-6 flex-1 flex flex-col justify-center items-center">
+              <div className="relative mt-6 flex-1 flex flex-col justify-center items-center overflow-hidden">
                 <img 
                   src={optimizeImage(project.image)} 
                   alt={`${project.name} Interface`} 
-                  className={`max-w-full object-contain rounded-xl border border-primary/20 bg-black/40 p-1 shadow-[0_0_15px_rgba(var(--primary-rgb),0.1)] ${
+                  className={`max-w-full object-contain rounded-xl border border-primary/20 bg-black/40 p-1 shadow-[0_0_15px_rgba(var(--primary-rgb),0.1)] transition-transform duration-500 group-hover:scale-[1.03] ${
                     project.span === "lg" ? "max-h-[24rem]" : "max-h-[14rem]"
                   }`}
                   loading={idx < 2 ? "eager" : "lazy"}
@@ -164,7 +164,7 @@ export function ProjectsTab() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={`View ${project.id === "jarvis" ? "Mark 1 → 21" : "GitHub"} repository for ${project.id === "visar-edge" ? "VISAR EDGE" : project.name}`}
-                  className={`inline-flex items-center gap-2 font-medium text-primary hover:gap-3 transition-all ${project.span === "lg" ? "text-sm" : "text-xs"}`}
+                  className={`inline-flex items-center gap-2 font-medium text-primary hover:gap-3 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 ring-offset-background rounded-sm ${project.span === "lg" ? "text-sm" : "text-xs"}`}
                 >
                   <Github className={project.span === "lg" ? "h-4 w-4" : "h-3.5 w-3.5"} /> {project.id === "jarvis" ? "Mark 1 → 21" : "GitHub"}
                 </a>
@@ -175,7 +175,7 @@ export function ProjectsTab() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={`View live demo for ${project.id === "visar-edge" ? "VISAR EDGE" : project.name}`}
-                  className={`inline-flex items-center gap-2 font-medium text-primary hover:gap-3 transition-all ${project.span === "lg" ? "text-sm" : "text-xs"}`}
+                  className={`inline-flex items-center gap-2 font-medium text-primary hover:gap-3 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 ring-offset-background rounded-sm ${project.span === "lg" ? "text-sm" : "text-xs"}`}
                 >
                   <ArrowUpRight className={project.span === "lg" ? "h-4 w-4" : "h-3.5 w-3.5"} /> Live Demo
                 </a>

@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { memo, useEffect, useRef } from "react";
 import { useTheme } from "./ThemeProvider";
 
 /**
@@ -7,7 +7,7 @@ import { useTheme } from "./ThemeProvider";
  * - Executive: silent (CSS handles the soft hero gradient)
  * Respects prefers-reduced-motion.
  */
-export function AnimatedBackground() {
+export const AnimatedBackground = memo(function AnimatedBackground() {
   const { theme } = useTheme();
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const mouseRef = useRef({ x: -9999, y: -9999 });
@@ -71,6 +71,10 @@ export function AnimatedBackground() {
       // particles
       ctx.fillStyle = "rgba(0, 247, 255, 0.6)";
       ctx.beginPath(); // ⚡ Bolt: Batch particle paths to minimize Canvas API overhead
+
+      // ⚡ Bolt: Cache devicePixelRatio to avoid reading it up to 80 times per frame
+      const dpr = window.devicePixelRatio;
+
       for (const p of particles) {
         if (!reduceMotion) {
           p.x += p.vx;
@@ -78,7 +82,7 @@ export function AnimatedBackground() {
           if (p.x < 0 || p.x > canvas.width) p.vx *= -1;
           if (p.y < 0 || p.y > canvas.height) p.vy *= -1;
         }
-        const pr = p.r * window.devicePixelRatio;
+        const pr = p.r * dpr;
         ctx.moveTo(p.x + pr, p.y);
         ctx.arc(p.x, p.y, pr, 0, Math.PI * 2);
       }
@@ -89,8 +93,8 @@ export function AnimatedBackground() {
 
     resize();
     draw();
-    window.addEventListener("resize", resize);
-    window.addEventListener("mousemove", onMove);
+    window.addEventListener("resize", resize, { passive: true });
+    window.addEventListener("mousemove", onMove, { passive: true });
 
     return () => {
       cancelAnimationFrame(raf);
@@ -111,4 +115,4 @@ export function AnimatedBackground() {
       )}
     </div>
   );
-}
+});

@@ -17,20 +17,31 @@ export function HeroAvatar() {
   useEffect(() => {
     const el = wrapRef.current;
     if (!el) return;
+
+    let rect = el.getBoundingClientRect();
+    const updateRect = () => {
+      rect = el.getBoundingClientRect();
+    };
+
     let rafId: number | undefined;
     const onMove = (e: MouseEvent) => {
-      // ⚡ Bolt: Debounce expensive getBoundingClientRect layout reads to animation frame
+      // ⚡ Bolt: Cache getBoundingClientRect to avoid layout thrashing on every mouse move
       if (rafId) cancelAnimationFrame(rafId);
       rafId = requestAnimationFrame(() => {
-        const rect = el.getBoundingClientRect();
         const cx = rect.left + rect.width / 2;
         const cy = rect.top + rect.height / 2;
         mx.set(((e.clientX - cx) / rect.width) * 100);
         my.set(((e.clientY - cy) / rect.height) * 100);
       });
     };
+
+    window.addEventListener("resize", updateRect, { passive: true });
+    window.addEventListener("scroll", updateRect, { passive: true });
     window.addEventListener("mousemove", onMove, { passive: true });
+
     return () => {
+      window.removeEventListener("resize", updateRect);
+      window.removeEventListener("scroll", updateRect);
       window.removeEventListener("mousemove", onMove);
       if (rafId) cancelAnimationFrame(rafId);
     };

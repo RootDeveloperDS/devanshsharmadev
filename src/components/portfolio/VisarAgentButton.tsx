@@ -1,3 +1,4 @@
+import React from "react";
 import { motion } from "framer-motion";
 import { toast } from "sonner";
 
@@ -16,7 +17,8 @@ function optimizeImage(url: string | undefined) {
 const VISAR_LOGO_URL =
   "https://github.com/RootDeveloperDS/CDN/blob/main/logos/visar-edge-v1.png?raw=true";
 
-export function VisarAgentButton() {
+// ⚡ Bolt: Memoize VisarAgentButton to prevent re-renders when outer shell state changes
+export const VisarAgentButton = React.memo(function VisarAgentButton() {
   const optimizedUrl = optimizeImage(VISAR_LOGO_URL);
 
   const handleClick = () => {
@@ -50,4 +52,4 @@ export function VisarAgentButton() {
       </span>
     </motion.button>
   );
-}
+});

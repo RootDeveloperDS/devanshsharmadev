@@ -1,4 +1,4 @@
-import { Suspense, lazy, useEffect, useState } from "react";
+import { Suspense, lazy, useCallback, useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
 import { ThemeProvider } from "@/components/portfolio/ThemeProvider";
@@ -22,20 +22,27 @@ function PortfolioShell() {
 
   useEffect(() => {
     sendTelegramNotification("Entered Portfolio", { initialTab: active });
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const handleNavigate = (id: TabId) => {
+  // ⚡ Bolt: Memoize navigation handler so it has a stable reference across renders
+  const handleNavigate = useCallback((id: TabId) => {
     if (id !== active) {
       sendTelegramNotification("Navigated Tab", { from: active, to: id });
     }
     setSearchParams({ tab: id });
     window.scrollTo({ top: 0, behavior: "smooth" });
-  };
+  }, [active, setSearchParams]);
+
+  // ⚡ Bolt: Memoize palette toggle to prevent top navigation re-renders
+  const handleOpenPalette = useCallback(() => {
+    setPaletteOpen(true);
+  }, []);
 
   return (
     <div className="relative min-h-screen overflow-x-hidden">
       <AnimatedBackground />
-      <TopNav active={active} onChange={handleNavigate} onOpenPalette={() => setPaletteOpen(true)} />
+      <TopNav active={active} onChange={handleNavigate} onOpenPalette={handleOpenPalette} />
       <CommandPalette onNavigate={handleNavigate} open={paletteOpen} onOpenChange={setPaletteOpen} />
 
       <main className="px-4 pb-24 pt-28 sm:px-6 sm:pt-32">

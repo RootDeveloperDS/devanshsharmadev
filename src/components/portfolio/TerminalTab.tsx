@@ -220,19 +220,20 @@ function ExecutiveContactForm() {
   );
 }
 
+// ⚡ Bolt: Define channels array outside render scope to avoid recreation on re-renders
+const channels = [
+  { icon: FolderGit2, label: "Open Source Portfolio Repo", value: "RootDeveloperDS/devanshsharmadev", href: socials.portfolioRepo, featured: true },
+  { icon: Mail, label: "Email", value: socials.email, href: `mailto:${socials.email}`, copy: true },
+  { icon: Linkedin, label: "LinkedIn", value: "linkedin.com/in/devanshsharma987", href: socials.linkedin },
+  { icon: Github, label: "GitHub Profile", value: "RootDeveloperDS", href: socials.github },
+  { icon: Twitter, label: "X (Twitter)", value: "@devanshsha6563", href: socials.x },
+  { icon: Send, label: "Telegram Channel", value: "t.me/developerofroot", href: socials.telegram },
+  { icon: MessageSquare, label: "Personal Telegram", value: "t.me/RootDeveloperDS", href: socials.telegramPersonal },
+  { icon: Globe, label: "Business Website", value: "rootdeveloperds.odoo.com", href: socials.website },
+];
+
 export function TerminalTab() {
   const { theme } = useTheme();
-
-  const channels = [
-    { icon: FolderGit2, label: "Open Source Portfolio Repo", value: "RootDeveloperDS/devanshsharmadev", href: socials.portfolioRepo, featured: true },
-    { icon: Mail, label: "Email", value: socials.email, href: `mailto:${socials.email}`, copy: true },
-    { icon: Linkedin, label: "LinkedIn", value: "linkedin.com/in/devanshsharma987", href: socials.linkedin },
-    { icon: Github, label: "GitHub Profile", value: "RootDeveloperDS", href: socials.github },
-    { icon: Twitter, label: "X (Twitter)", value: "@devanshsha6563", href: socials.x },
-    { icon: Send, label: "Telegram Channel", value: "t.me/developerofroot", href: socials.telegram },
-    { icon: MessageSquare, label: "Personal Telegram", value: "t.me/RootDeveloperDS", href: socials.telegramPersonal },
-    { icon: Globe, label: "Business Website", value: "rootdeveloperds.odoo.com", href: socials.website },
-  ];
 
   return (
     <section className="mx-auto w-full max-w-6xl">

@@ -1,3 +1,4 @@
+import { memo } from "react";
 import { motion } from "framer-motion";
 import { Command, Hexagon, Github } from "lucide-react";
 import { ThemeToggle } from "./ThemeToggle";
@@ -10,7 +11,7 @@ interface Props {
   onOpenPalette: () => void;
 }
 
-export function TopNav({ active, onChange, onOpenPalette }: Props) {
+export const TopNav = memo(function TopNav({ active, onChange, onOpenPalette }: Props) {
   return (
     <header className="fixed inset-x-0 top-0 z-40 px-2 sm:px-4">
       <div className="mx-auto mt-2 sm:mt-3 flex max-w-6xl items-center justify-between gap-1 sm:gap-3 rounded-full glass px-2 py-1.5 sm:px-4 sm:py-2">
@@ -68,8 +69,9 @@ export function TopNav({ active, onChange, onOpenPalette }: Props) {
             target="_blank"
             rel="noopener noreferrer"
             onClick={() => sendTelegramNotification("Clicked Open Source Button (TopNav)", { repo: socials.portfolioRepo })}
-            className="inline-flex items-center gap-1 rounded-full border border-primary/40 bg-primary/10 p-1.5 sm:px-2.5 sm:py-1 text-xs font-medium text-primary shadow-sm hover:bg-primary/20 hover:border-primary transition-all duration-200"
+            className="inline-flex items-center gap-1 rounded-full border border-primary/40 bg-primary/10 p-1.5 sm:px-2.5 sm:py-1 text-xs font-medium text-primary shadow-sm hover:bg-primary/20 hover:border-primary transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 ring-offset-background"
             title="Portfolio is 100% Open Source — View on GitHub"
+            aria-label="View Portfolio Open Source Code on GitHub"
           >
             <Github className="h-3.5 w-3.5" />
             <span className="hidden md:inline font-mono font-semibold text-[11px]">Open Source</span>
@@ -91,4 +93,4 @@ export function TopNav({ active, onChange, onOpenPalette }: Props) {
       </div>
     </header>
   );
-}
+});
