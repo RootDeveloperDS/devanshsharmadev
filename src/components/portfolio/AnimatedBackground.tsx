@@ -89,8 +89,8 @@ export function AnimatedBackground() {
 
     resize();
     draw();
-    window.addEventListener("resize", resize);
-    window.addEventListener("mousemove", onMove);
+    window.addEventListener("resize", resize, { passive: true });
+    window.addEventListener("mousemove", onMove, { passive: true });
 
     return () => {
       cancelAnimationFrame(raf);
