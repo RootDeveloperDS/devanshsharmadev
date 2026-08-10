@@ -1,3 +1,4 @@
+import { memo } from "react";
 import { motion } from "framer-motion";
 import { ArrowUpRight, Github, Sparkles } from "lucide-react";
 import { projects } from "./data";
@@ -26,7 +27,7 @@ function optimizeImage(url: string | undefined) {
   return url;
 }
 
-export function ProjectsTab() {
+export const ProjectsTab = memo(function ProjectsTab() {
   return (
     <section className="mx-auto max-w-6xl">
       {/* ── Page Header ── */}
@@ -192,4 +193,4 @@ export function ProjectsTab() {
       <AccordionMatrix projects={archiveProjects} />
     </section>
   );
-}
+});
