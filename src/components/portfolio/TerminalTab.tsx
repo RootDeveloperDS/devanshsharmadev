@@ -272,9 +272,9 @@ export function TerminalTab() {
               rel="noopener noreferrer"
               aria-label={`Connect via ${label}`}
               onClick={() => sendTelegramNotification("Clicked Contact Channel (Terminal)", { channel: label, url: href })}
-              className="bento-card group flex items-center gap-3 !p-3 hover:border-primary/60 sm:gap-4 sm:!p-4"
+              className="bento-card group flex items-center gap-3 !p-3 hover:border-primary/60 sm:gap-4 sm:!p-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 ring-offset-background"
             >
-              <span className="grid h-9 w-9 shrink-0 place-items-center rounded-lg bg-primary/10 text-primary sm:h-10 sm:w-10">
+              <span className="grid h-9 w-9 shrink-0 place-items-center rounded-lg bg-primary/10 text-primary sm:h-10 sm:w-10 transition-transform duration-300 group-hover:scale-110">
                 <Icon className="h-4 w-4 sm:h-5 sm:w-5" />
               </span>
               <div className="min-w-0 flex-1">
@@ -291,7 +291,7 @@ export function TerminalTab() {
                     navigator.clipboard.writeText(value);
                     toast({ title: "Copied", description: value });
                   }}
-                  className="shrink-0 text-muted-foreground transition-colors hover:text-primary"
+                  className="shrink-0 text-muted-foreground transition-colors hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-sm"
                   aria-label="Copy email"
                 >
                   <Copy className="h-4 w-4" />

@@ -31,7 +31,7 @@ export const TopNav = memo(function TopNav({ active, onChange, onOpenPalette }: 
         </button>
 
         {/* Tabs Navigation */}
-        <nav className="flex items-center gap-0.5 sm:gap-1 rounded-full bg-secondary/40 p-0.5 sm:p-1 shrink-0">
+        <nav aria-label="Main Navigation" className="flex items-center gap-0.5 sm:gap-1 rounded-full bg-secondary/40 p-0.5 sm:p-1 shrink-0">
           {tabs.map((t) => {
             const isActive = active === t.id;
             return (
