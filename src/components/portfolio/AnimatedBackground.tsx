@@ -28,6 +28,8 @@ export const AnimatedBackground = memo(function AnimatedBackground() {
     const glowCtx = glowCanvas.getContext("2d");
     let glowSize = 0;
 
+    let isVisible = !document.hidden;
+
     const resize = () => {
       canvas.width = window.innerWidth * window.devicePixelRatio;
       canvas.height = window.innerHeight * window.devicePixelRatio;
@@ -60,6 +62,11 @@ export const AnimatedBackground = memo(function AnimatedBackground() {
     };
 
     const draw = () => {
+      if (!isVisible) {
+        raf = requestAnimationFrame(draw);
+        return;
+      }
+
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
       // cursor glow
@@ -91,15 +98,30 @@ export const AnimatedBackground = memo(function AnimatedBackground() {
       raf = requestAnimationFrame(draw);
     };
 
+    const onVisibilityChange = () => {
+      isVisible = !document.hidden;
+    };
+
     resize();
     draw();
-    window.addEventListener("resize", resize, { passive: true });
+
+    // ⚡ Bolt: Debounce resize to prevent layout thrashing and excessive array allocation
+    let resizeTimeout: ReturnType<typeof setTimeout> | null = null;
+    const debouncedResize = () => {
+      if (resizeTimeout) clearTimeout(resizeTimeout);
+      resizeTimeout = setTimeout(resize, 150);
+    };
+
+    window.addEventListener("resize", debouncedResize, { passive: true });
     window.addEventListener("mousemove", onMove, { passive: true });
+    document.addEventListener("visibilitychange", onVisibilityChange, { passive: true });
 
     return () => {
       cancelAnimationFrame(raf);
-      window.removeEventListener("resize", resize);
+      if (resizeTimeout) clearTimeout(resizeTimeout);
+      window.removeEventListener("resize", debouncedResize);
       window.removeEventListener("mousemove", onMove);
+      document.removeEventListener("visibilitychange", onVisibilityChange);
     };
   }, [theme]);
 

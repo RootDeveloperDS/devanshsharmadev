@@ -1,0 +1,3 @@
+## 2023-11-13 - [Canvas Animation Optimizations]
+**Learning:** [Canvas animations and continuous event listeners in React can easily consume excessive CPU cycles and memory. Frequent DOM layout triggers like `resize` without debouncing, and computing renders when a tab is inactive waste resources.]
+**Action:** [Use `document.hidden` combined with the `visibilitychange` event listener to pause `requestAnimationFrame` loops when a user is switched to another tab. Use a debounce or throttle mechanism for `resize` events to limit array reallocations and recalculations, especially for expensive loops.]
