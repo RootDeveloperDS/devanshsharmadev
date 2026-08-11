@@ -4,6 +4,7 @@ import { Command, Hexagon, Github } from "lucide-react";
 import { ThemeToggle } from "./ThemeToggle";
 import { tabs, socials, type TabId } from "./data";
 import { sendTelegramNotification } from "@/lib/telegram";
+import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 
 interface Props {
   active: TabId;
@@ -64,29 +65,42 @@ export const TopNav = memo(function TopNav({ active, onChange, onOpenPalette }: 
         {/* Right cluster */}
         <div className="flex items-center gap-1 sm:gap-2 shrink-0">
           {/* Dominant Open Source Repo Button */}
-          <a
-            href={socials.portfolioRepo}
-            target="_blank"
-            rel="noopener noreferrer"
-            onClick={() => sendTelegramNotification("Clicked Open Source Button (TopNav)", { repo: socials.portfolioRepo })}
-            className="inline-flex items-center gap-1 rounded-full border border-primary/40 bg-primary/10 p-1.5 sm:px-2.5 sm:py-1 text-xs font-medium text-primary shadow-sm hover:bg-primary/20 hover:border-primary transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 ring-offset-background"
-            title="Portfolio is 100% Open Source — View on GitHub"
-            aria-label="View Portfolio Open Source Code on GitHub"
-          >
-            <Github className="h-3.5 w-3.5" />
-            <span className="hidden md:inline font-mono font-semibold text-[11px]">Open Source</span>
-            <span className="hidden sm:inline md:hidden font-mono text-[10px] font-bold">Code</span>
-          </a>
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <a
+                href={socials.portfolioRepo}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => sendTelegramNotification("Clicked Open Source Button (TopNav)", { repo: socials.portfolioRepo })}
+                className="inline-flex items-center gap-1 rounded-full border border-primary/40 bg-primary/10 p-1.5 sm:px-2.5 sm:py-1 text-xs font-medium text-primary shadow-sm hover:bg-primary/20 hover:border-primary transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 ring-offset-background"
+                aria-label="View Portfolio Open Source Code on GitHub"
+              >
+                <Github className="h-3.5 w-3.5" />
+                <span className="hidden md:inline font-mono font-semibold text-[11px]">Open Source</span>
+                <span className="hidden sm:inline md:hidden font-mono text-[10px] font-bold">Code</span>
+              </a>
+            </TooltipTrigger>
+            <TooltipContent>
+              <p>Portfolio is 100% Open Source — View on GitHub</p>
+            </TooltipContent>
+          </Tooltip>
 
           {/* Command Palette Button */}
-          <button
-            onClick={onOpenPalette}
-            className="flex items-center justify-center h-7 w-7 sm:h-auto sm:w-auto sm:gap-2 rounded-full border border-border bg-secondary/40 sm:px-3 sm:py-1.5 text-xs text-muted-foreground transition-colors hover:text-foreground hover:border-primary/40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 ring-offset-background"
-            aria-label="Open command palette (Press Cmd/Ctrl+K)"
-          >
-            <Command className="h-3.5 w-3.5" />
-            <span className="hidden sm:inline font-mono text-[11px]">⌘K</span>
-          </button>
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <button
+                onClick={onOpenPalette}
+                className="flex items-center justify-center h-7 w-7 sm:h-auto sm:w-auto sm:gap-2 rounded-full border border-border bg-secondary/40 sm:px-3 sm:py-1.5 text-xs text-muted-foreground transition-colors hover:text-foreground hover:border-primary/40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 ring-offset-background"
+                aria-label="Open command palette (Press Cmd/Ctrl+K)"
+              >
+                <Command className="h-3.5 w-3.5" />
+                <span className="hidden sm:inline font-mono text-[11px]">⌘K</span>
+              </button>
+            </TooltipTrigger>
+            <TooltipContent>
+              <p>Open command palette (Cmd/Ctrl+K)</p>
+            </TooltipContent>
+          </Tooltip>
 
           <ThemeToggle />
         </div>

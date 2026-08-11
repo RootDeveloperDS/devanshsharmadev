@@ -1,3 +1,3 @@
-## 2023-10-27 - A11y & Focus Enhancements
-**Learning:** Adding `focus-visible` classes to interactive elements like custom buttons or links significantly improves keyboard accessibility without degrading the mouse/touch experience. Simple hover transitions (like a subtle scale) boost the premium feel.
-**Action:** Always verify custom interactive components have clear focus rings (`focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 ring-offset-background`). Ensure semantic tags like `<nav>` have `aria-label`s for screen readers.
+## 2024-08-11 - Custom Tooltips & Interaction Feedback
+**Learning:** Native `title` attributes are inconsistent across browsers and disrupt custom UI design languages. Furthermore, adding simple active states to universally used components drastically improves subjective tactile feedback.
+**Action:** Replace `title` tooltips with Shadcn/Radix-UI `Tooltip` components where possible. Ensure global buttons have an `active:` interaction state using existing tailwind scaling.
