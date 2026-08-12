@@ -1,0 +1,3 @@
+## 2023-10-27 - Render Optimizations in Framer Motion Heavy Views
+**Learning:** Heavy animated components like `CommandPalette` and `OverviewTab` (containing 3D avatars and continuous background animations) are extremely susceptible to CPU spikes when parent states change, especially during route transitions or overlay toggles.
+**Action:** Always wrap heavy layout-level React components in `React.memo` if they do not strictly require re-renders from their parent. Ensure passing props (like navigation handlers) are also memoized with `useCallback` in the parent (which was already done in `Index.tsx`).
