@@ -1,4 +1,5 @@
 import { memo } from "react";
+import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Command, Hexagon, Github } from "lucide-react";
 import { ThemeToggle } from "./ThemeToggle";
@@ -16,8 +17,12 @@ export const TopNav = memo(function TopNav({ active, onChange, onOpenPalette }: 
     <header className="fixed inset-x-0 top-0 z-40 px-2 sm:px-4">
       <div className="mx-auto mt-2 sm:mt-3 flex max-w-6xl items-center justify-between gap-1 sm:gap-3 rounded-full glass px-2 py-1.5 sm:px-4 sm:py-2">
         {/* Brand */}
-        <button
-          onClick={() => onChange("overview")}
+        <Link
+          to="/"
+          onClick={(e) => {
+            e.preventDefault();
+            onChange("overview");
+          }}
           className="flex items-center gap-1.5 sm:gap-2 group shrink-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 ring-offset-background rounded-full p-1"
           aria-label="Devansh Sharma — home"
         >
@@ -28,16 +33,21 @@ export const TopNav = memo(function TopNav({ active, onChange, onOpenPalette }: 
           <span className="hidden font-display text-xs sm:text-sm font-semibold tracking-widest text-foreground sm:inline">
             DEVANSH<span className="text-primary">.</span>SHARMA
           </span>
-        </button>
+        </Link>
 
         {/* Tabs Navigation */}
         <nav aria-label="Main Navigation" className="flex items-center gap-0.5 sm:gap-1 rounded-full bg-secondary/40 p-0.5 sm:p-1 shrink-0">
           {tabs.map((t) => {
             const isActive = active === t.id;
+            const routePath = t.id === "overview" ? "/" : `/${t.id}`;
             return (
-              <button
+              <Link
                 key={t.id}
-                onClick={() => onChange(t.id)}
+                to={routePath}
+                onClick={(e) => {
+                  e.preventDefault();
+                  onChange(t.id);
+                }}
                 className="relative px-2 py-1 sm:px-3 sm:py-1.5 text-xs font-medium tracking-wide focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 ring-offset-background rounded-full"
                 aria-current={isActive ? "page" : undefined}
               >
@@ -56,7 +66,7 @@ export const TopNav = memo(function TopNav({ active, onChange, onOpenPalette }: 
                   <span className="hidden sm:inline">{t.label}</span>
                   <span className="sm:hidden font-mono text-[11px] px-0.5">{t.mono}</span>
                 </span>
-              </button>
+              </Link>
             );
           })}
         </nav>

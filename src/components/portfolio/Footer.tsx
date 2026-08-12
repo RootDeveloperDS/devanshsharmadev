@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import {
   Github,
@@ -185,8 +186,12 @@ export const Footer = React.memo(function Footer({ onNavigate }: FooterProps) {
 
           {/* BRAND COLUMN (4 cols) */}
           <div className="md:col-span-5 space-y-4">
-            <button
-              onClick={() => onNavigate("overview")}
+            <Link
+              to="/"
+              onClick={(e) => {
+                e.preventDefault();
+                onNavigate("overview");
+              }}
               className="flex items-center gap-2.5 group text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 ring-offset-background rounded-lg"
               aria-label="Devansh Sharma Home"
             >
@@ -202,7 +207,7 @@ export const Footer = React.memo(function Footer({ onNavigate }: FooterProps) {
                   Full Stack AI Architect
                 </span>
               </div>
-            </button>
+            </Link>
 
             <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">
               {profile.subheadline}
@@ -229,19 +234,26 @@ export const Footer = React.memo(function Footer({ onNavigate }: FooterProps) {
               // Navigation
             </h4>
             <ul className="space-y-2 text-sm font-medium">
-              {tabs.map((t) => (
-                <li key={t.id}>
-                  <button
-                    onClick={() => onNavigate(t.id)}
-                    className="flex items-center gap-2 text-muted-foreground hover:text-primary transition-colors text-xs sm:text-sm group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-sm"
-                  >
-                    <span className="font-mono text-[10px] text-primary/60 group-hover:text-primary">
-                      {t.mono}
-                    </span>
-                    <span>{t.label}</span>
-                  </button>
-                </li>
-              ))}
+              {tabs.map((t) => {
+                const routePath = t.id === "overview" ? "/" : `/${t.id}`;
+                return (
+                  <li key={t.id}>
+                    <Link
+                      to={routePath}
+                      onClick={(e) => {
+                        e.preventDefault();
+                        onNavigate(t.id);
+                      }}
+                      className="flex items-center gap-2 text-muted-foreground hover:text-primary transition-colors text-xs sm:text-sm group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-sm"
+                    >
+                      <span className="font-mono text-[10px] text-primary/60 group-hover:text-primary">
+                        {t.mono}
+                      </span>
+                      <span>{t.label}</span>
+                    </Link>
+                  </li>
+                );
+              })}
               <li className="pt-1">
                 <a
                   href={profile.resumeUrl}
@@ -300,8 +312,12 @@ export const Footer = React.memo(function Footer({ onNavigate }: FooterProps) {
                 <ArrowUpRight className="h-3.5 w-3.5 text-muted-foreground group-hover:text-primary transition-colors shrink-0" />
               </a>
 
-              <button
-                onClick={() => onNavigate("terminal")}
+              <Link
+                to="/terminal"
+                onClick={(e) => {
+                  e.preventDefault();
+                  onNavigate("terminal");
+                }}
                 className="w-full flex items-center justify-between gap-2 rounded-xl border border-primary/30 bg-primary/10 p-3 hover:bg-primary/20 transition-all text-primary font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 ring-offset-background"
               >
                 <div className="flex items-center gap-2.5">
@@ -309,7 +325,7 @@ export const Footer = React.memo(function Footer({ onNavigate }: FooterProps) {
                   <span className="text-xs">Open Terminal Comms</span>
                 </div>
                 <span className="text-[10px] uppercase font-mono tracking-wider bg-primary/20 px-2 py-0.5 rounded">Interactive</span>
-              </button>
+              </Link>
             </div>
           </div>
         </div>

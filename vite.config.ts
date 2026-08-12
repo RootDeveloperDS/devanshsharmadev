@@ -17,7 +17,7 @@ export default defineConfig(({ mode }) => ({
     react(),
     Sitemap({
       hostname: "https://devanshsharma.vercel.app",
-      dynamicRoutes: ["/", "/about", "/projects", "/contact"],
+      dynamicRoutes: ["/overview", "/projects", "/experience", "/terminal"],
     }),
   ],
   resolve: {
