@@ -1,0 +1,3 @@
+## 2024-08-14 - Lazy route chunk prefetching and DOM read avoidance
+**Learning:** Eagerly reading DOM layout (`getBoundingClientRect`) bound to high-frequency events (`scroll`) causes layout thrashing and negatively impacts scroll performance. Also, React `lazy()` chunks can be manually prefetched on `mouseenter` to hide the network latency of loading the module.
+**Action:** When creating high-performance interactive elements in Framer Motion, compute `getBoundingClientRect` inside `requestAnimationFrame` right before it's needed during mouse movement rather than keeping it constantly synced via `scroll` events. Prefetch lazy chunks on hover for tab-based navigation.

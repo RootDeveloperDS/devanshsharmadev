@@ -48,6 +48,12 @@ export const TopNav = memo(function TopNav({ active, onChange, onOpenPalette }: 
                   e.preventDefault();
                   onChange(t.id);
                 }}
+                onMouseEnter={() => {
+                  // ⚡ Bolt: Prefetch lazy-loaded chunks on hover to reduce perceived navigation latency
+                  if (t.id === "projects") import("@/components/portfolio/ProjectsTab");
+                  else if (t.id === "experience") import("@/components/portfolio/ExperienceTab");
+                  else if (t.id === "terminal") import("@/components/portfolio/TerminalTab");
+                }}
                 className="relative px-2 py-1 sm:px-3 sm:py-1.5 text-xs font-medium tracking-wide focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 ring-offset-background rounded-full"
                 aria-current={isActive ? "page" : undefined}
               >
