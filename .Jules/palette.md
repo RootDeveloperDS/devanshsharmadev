@@ -1,3 +1,6 @@
 ## 2023-10-27 - A11y & Focus Enhancements
 **Learning:** Adding `focus-visible` classes to interactive elements like custom buttons or links significantly improves keyboard accessibility without degrading the mouse/touch experience. Simple hover transitions (like a subtle scale) boost the premium feel.
 **Action:** Always verify custom interactive components have clear focus rings (`focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 ring-offset-background`). Ensure semantic tags like `<nav>` have `aria-label`s for screen readers.
+## 2023-10-24 - Accessibility and Context Tooltips
+**Learning:** Hardcoded ARIA labels inside mapped components (e.g. `aria-label="Copy email"` for all channels) lead to significant accessibility issues and poor screen reader context. Navigation items using CSS to hide text on mobile (`hidden sm:inline`) provide a poor experience without tooltips and ARIA attributes.
+**Action:** When implementing interaction buttons inside mapping loops, always dynamically compute `aria-label` and `title` attributes using the data point variables. For elements truncating or hiding text on mobile devices, explicitly add `title` and `aria-label` attributes to ensure clarity and improve accessibility.

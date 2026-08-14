@@ -292,7 +292,8 @@ export function TerminalTab() {
                     toast({ title: "Copied", description: value });
                   }}
                   className="shrink-0 text-muted-foreground transition-colors hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-sm"
-                  aria-label="Copy email"
+                  aria-label={`Copy ${label}`}
+                  title={`Copy ${label}`}
                 >
                   <Copy className="h-4 w-4" />
                 </button>

@@ -50,6 +50,8 @@ export const TopNav = memo(function TopNav({ active, onChange, onOpenPalette }: 
                 }}
                 className="relative px-2 py-1 sm:px-3 sm:py-1.5 text-xs font-medium tracking-wide focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 ring-offset-background rounded-full"
                 aria-current={isActive ? "page" : undefined}
+                aria-label={t.label}
+                title={t.label}
               >
                 {isActive && (
                   <motion.span
@@ -93,6 +95,7 @@ export const TopNav = memo(function TopNav({ active, onChange, onOpenPalette }: 
             onClick={onOpenPalette}
             className="flex items-center justify-center h-7 w-7 sm:h-auto sm:w-auto sm:gap-2 rounded-full border border-border bg-secondary/40 sm:px-3 sm:py-1.5 text-xs text-muted-foreground transition-colors hover:text-foreground hover:border-primary/40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 ring-offset-background"
             aria-label="Open command palette (Press Cmd/Ctrl+K)"
+            title="Open command palette (Press Cmd/Ctrl+K)"
           >
             <Command className="h-3.5 w-3.5" />
             <span className="hidden sm:inline font-mono text-[11px]">⌘K</span>
