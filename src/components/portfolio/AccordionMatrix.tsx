@@ -283,9 +283,19 @@ export function AccordionMatrix({ projects }: AccordionMatrixProps) {
             <p className="font-mono text-sm text-primary mb-2 uppercase tracking-wider">
               [ NO SYSTEMS DETECTED ]
             </p>
-            <p className="text-xs text-muted-foreground max-w-[250px] mx-auto">
+            <p className="text-xs text-muted-foreground max-w-[250px] mx-auto mb-6">
               The selected filter parameters returned no active records in the current matrix.
             </p>
+            <button
+              onClick={() => {
+                const newParams = new URLSearchParams(searchParams);
+                newParams.set("category", "all");
+                setSearchParams(newParams);
+              }}
+              className="inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-wider text-primary border border-primary/30 bg-primary/5 px-4 py-2 rounded hover:bg-primary/20 transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+            >
+              Clear Filters
+            </button>
           </motion.div>
         )}
       </div>

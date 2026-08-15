@@ -1,3 +1,4 @@
+import { memo } from "react";
 import { motion } from "framer-motion";
 import { Download, Terminal, Eye, Github, FolderGit2, ArrowUpRight, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -13,7 +14,7 @@ interface Props {
 // ⚡ Bolt: Cache filtered static array outside render scope to avoid repeated allocations
 const featuredSocials = socialItems.filter((s) => s.featured);
 
-export function OverviewTab({ onNavigate }: Props) {
+export const OverviewTab = memo(function OverviewTab({ onNavigate }: Props) {
   return (
     <section className="mx-auto max-w-6xl">
       {/* Status strip */}
@@ -186,4 +187,4 @@ export function OverviewTab({ onNavigate }: Props) {
       </motion.div>
     </section>
   );
-}
+});

@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
-import { Copy, Github, Linkedin, Mail, Send, Twitter, FolderGit2, Globe, MessageSquare } from "lucide-react";
+import { Copy, Check, Github, Linkedin, Mail, Send, Twitter, FolderGit2, Globe, MessageSquare } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -232,6 +232,53 @@ const channels = [
   { icon: Globe, label: "Business Website", value: "rootdeveloperds.odoo.com", href: socials.website },
 ];
 
+function ChannelItem({ icon: Icon, label, value, href, copy }: typeof channels[0]) {
+  const [copied, setCopied] = useState(false);
+
+  const handleCopy = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    navigator.clipboard.writeText(value);
+    setCopied(true);
+    toast({ title: "Copied to clipboard", description: value });
+    setTimeout(() => setCopied(false), 2000);
+  };
+
+  return (
+    <a
+      href={href}
+      target={href.startsWith("http") ? "_blank" : undefined}
+      rel="noopener noreferrer"
+      aria-label={`Connect via ${label}`}
+      onClick={() => sendTelegramNotification("Clicked Contact Channel (Terminal)", { channel: label, url: href })}
+      className="bento-card group flex items-center gap-3 !p-3 hover:border-primary/60 sm:gap-4 sm:!p-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 ring-offset-background"
+    >
+      <span className="grid h-9 w-9 shrink-0 place-items-center rounded-lg bg-primary/10 text-primary sm:h-10 sm:w-10 transition-transform duration-300 group-hover:scale-110">
+        <Icon className="h-4 w-4 sm:h-5 sm:w-5" />
+      </span>
+      <div className="min-w-0 flex-1">
+        <div className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground">
+          {label}
+        </div>
+        <div className="truncate text-sm font-medium text-foreground">{value}</div>
+      </div>
+      {copy && (
+        <button
+          type="button"
+          onClick={handleCopy}
+          className={`shrink-0 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-sm p-1 ${
+            copied ? "text-primary font-semibold" : "text-muted-foreground hover:text-primary"
+          }`}
+          aria-label={`Copy ${label}`}
+          title={`Copy ${label}`}
+        >
+          {copied ? <Check className="h-4 w-4 text-emerald-400" /> : <Copy className="h-4 w-4" />}
+        </button>
+      )}
+    </a>
+  );
+}
+
 export function TerminalTab() {
   const { theme } = useTheme();
 
@@ -264,40 +311,8 @@ export function TerminalTab() {
 
         {/* Channels list */}
         <aside className="space-y-3">
-          {channels.map(({ icon: Icon, label, value, href, copy }) => (
-            <a
-              key={label}
-              href={href}
-              target={href.startsWith("http") ? "_blank" : undefined}
-              rel="noopener noreferrer"
-              aria-label={`Connect via ${label}`}
-              onClick={() => sendTelegramNotification("Clicked Contact Channel (Terminal)", { channel: label, url: href })}
-              className="bento-card group flex items-center gap-3 !p-3 hover:border-primary/60 sm:gap-4 sm:!p-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 ring-offset-background"
-            >
-              <span className="grid h-9 w-9 shrink-0 place-items-center rounded-lg bg-primary/10 text-primary sm:h-10 sm:w-10 transition-transform duration-300 group-hover:scale-110">
-                <Icon className="h-4 w-4 sm:h-5 sm:w-5" />
-              </span>
-              <div className="min-w-0 flex-1">
-                <div className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground">
-                  {label}
-                </div>
-                <div className="truncate text-sm font-medium text-foreground">{value}</div>
-              </div>
-              {copy && (
-                <button
-                  type="button"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    navigator.clipboard.writeText(value);
-                    toast({ title: "Copied", description: value });
-                  }}
-                  className="shrink-0 text-muted-foreground transition-colors hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-sm"
-                  aria-label="Copy email"
-                >
-                  <Copy className="h-4 w-4" />
-                </button>
-              )}
-            </a>
+          {channels.map((channel) => (
+            <ChannelItem key={channel.label} {...channel} />
           ))}
         </aside>
       </div>

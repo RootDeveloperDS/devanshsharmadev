@@ -91,15 +91,33 @@ export const AnimatedBackground = memo(function AnimatedBackground() {
       raf = requestAnimationFrame(draw);
     };
 
+    let resizeTimeout: ReturnType<typeof setTimeout> | undefined;
+    const handleResize = () => {
+      clearTimeout(resizeTimeout);
+      resizeTimeout = setTimeout(resize, 100);
+    };
+
+    const handleVisibilityChange = () => {
+      if (document.hidden) {
+        cancelAnimationFrame(raf);
+      } else {
+        cancelAnimationFrame(raf);
+        raf = requestAnimationFrame(draw);
+      }
+    };
+
     resize();
     draw();
-    window.addEventListener("resize", resize, { passive: true });
+    window.addEventListener("resize", handleResize, { passive: true });
     window.addEventListener("mousemove", onMove, { passive: true });
+    document.addEventListener("visibilitychange", handleVisibilityChange);
 
     return () => {
       cancelAnimationFrame(raf);
-      window.removeEventListener("resize", resize);
+      clearTimeout(resizeTimeout);
+      window.removeEventListener("resize", handleResize);
       window.removeEventListener("mousemove", onMove);
+      document.removeEventListener("visibilitychange", handleVisibilityChange);
     };
   }, [theme]);
 
