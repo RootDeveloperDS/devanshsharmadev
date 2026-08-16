@@ -1,4 +1,4 @@
-import { useEffect, memo } from "react";
+import { memo } from "react";
 import {
   Command as Cmdk,
   CommandDialog,
@@ -36,17 +36,6 @@ interface Props {
 export const CommandPalette = memo(function CommandPalette({ onNavigate, open, onOpenChange }: Props) {
   const setOpen = onOpenChange;
   const { theme, toggleTheme } = useTheme();
-
-  useEffect(() => {
-    const onKey = (e: KeyboardEvent) => {
-      if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "k") {
-        e.preventDefault();
-        setOpen(!open);
-      }
-    };
-    window.addEventListener("keydown", onKey);
-    return () => window.removeEventListener("keydown", onKey);
-  }, [open, setOpen]);
 
   const run = (fn: () => void) => () => {
     fn();
