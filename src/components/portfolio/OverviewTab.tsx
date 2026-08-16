@@ -75,7 +75,7 @@ export const OverviewTab = memo(function OverviewTab({ onNavigate }: Props) {
             className="mt-8 flex flex-wrap gap-3"
           >
             {/* Dominant Open Source Portfolio Button */}
-            <Button asChild size="lg" className="rounded-full bg-primary text-primary-foreground font-semibold shadow-md shadow-primary/20 hover:scale-[1.02] transition-all">
+            <Button asChild size="lg" className="rounded-full bg-primary text-primary-foreground font-semibold shadow-md shadow-primary/20 hover:scale-[1.02] transition-all focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 ring-offset-background">
               <a
                 href={socials.portfolioRepo}
                 target="_blank"
@@ -85,7 +85,7 @@ export const OverviewTab = memo(function OverviewTab({ onNavigate }: Props) {
                 <Github className="mr-2 h-4 w-4" /> Open Source Code ↗
               </a>
             </Button>
-            <Button asChild size="lg" variant="outline" className="rounded-full border-primary/40 text-foreground hover:bg-primary/10 hover:text-foreground">
+            <Button asChild size="lg" variant="outline" className="rounded-full border-primary/40 text-foreground hover:bg-primary/10 hover:text-foreground focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 ring-offset-background">
               <a
                 href={profile.resumeUrl}
                 target="_blank"
@@ -95,7 +95,7 @@ export const OverviewTab = memo(function OverviewTab({ onNavigate }: Props) {
                 <Eye className="mr-2 h-4 w-4" /> View Résumé
               </a>
             </Button>
-            <Button asChild size="lg" variant="outline" className="rounded-full border-primary/40 text-foreground hover:bg-primary/10 hover:text-foreground">
+            <Button asChild size="lg" variant="outline" className="rounded-full border-primary/40 text-foreground hover:bg-primary/10 hover:text-foreground focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 ring-offset-background">
               <a
                 href={profile.resumeUrl}
                 download
@@ -107,7 +107,7 @@ export const OverviewTab = memo(function OverviewTab({ onNavigate }: Props) {
             <Button
               size="lg"
               variant="outline"
-              className="rounded-full border-primary/40 text-foreground hover:bg-primary/10 hover:text-foreground"
+              className="rounded-full border-primary/40 text-foreground hover:bg-primary/10 hover:text-foreground focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 ring-offset-background"
               onClick={() => {
                 sendTelegramNotification("Opened Terminal Comms Button", { location: "Overview Hero" });
                 onNavigate("terminal");
