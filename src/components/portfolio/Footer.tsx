@@ -289,7 +289,7 @@ export const Footer = React.memo(function Footer({ onNavigate }: FooterProps) {
               <a
                 href={`mailto:${socials.email}`}
                 onClick={() => sendTelegramNotification("Clicked Direct Email (Footer)", { email: socials.email })}
-                className="flex items-center justify-between gap-2 rounded-xl border border-border bg-secondary/30 p-3 hover:border-primary/50 hover:bg-secondary/60 transition-all text-foreground group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 ring-offset-background"
+                className="flex items-center justify-between gap-2 rounded-xl border border-border bg-secondary/30 p-3 hover:border-primary/50 hover:bg-secondary/60 transition-all duration-200 active:scale-[0.98] text-foreground group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 ring-offset-background"
               >
                 <div className="flex items-center gap-2.5 truncate">
                   <Mail className="h-4 w-4 text-primary shrink-0" />
@@ -303,7 +303,7 @@ export const Footer = React.memo(function Footer({ onNavigate }: FooterProps) {
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={() => sendTelegramNotification("Clicked External Website (Footer)", { url: socials.website })}
-                className="flex items-center justify-between gap-2 rounded-xl border border-border bg-secondary/30 p-3 hover:border-primary/50 hover:bg-secondary/60 transition-all text-foreground group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 ring-offset-background"
+                className="flex items-center justify-between gap-2 rounded-xl border border-border bg-secondary/30 p-3 hover:border-primary/50 hover:bg-secondary/60 transition-all duration-200 active:scale-[0.98] text-foreground group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 ring-offset-background"
               >
                 <div className="flex items-center gap-2.5 truncate">
                   <Globe className="h-4 w-4 text-primary shrink-0" />
@@ -318,7 +318,7 @@ export const Footer = React.memo(function Footer({ onNavigate }: FooterProps) {
                   e.preventDefault();
                   onNavigate("terminal");
                 }}
-                className="w-full flex items-center justify-between gap-2 rounded-xl border border-primary/30 bg-primary/10 p-3 hover:bg-primary/20 transition-all text-primary font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 ring-offset-background"
+                className="w-full flex items-center justify-between gap-2 rounded-xl border border-primary/30 bg-primary/10 p-3 hover:bg-primary/20 transition-all duration-200 active:scale-[0.98] text-primary font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 ring-offset-background"
               >
                 <div className="flex items-center gap-2.5">
                   <Terminal className="h-4 w-4 shrink-0" />
@@ -364,7 +364,7 @@ export const Footer = React.memo(function Footer({ onNavigate }: FooterProps) {
                         rel="noopener noreferrer"
                         aria-label={`Visit ${item.name}`}
                         onClick={() => sendTelegramNotification("Clicked Social Matrix Link", { name: item.name, category: cat, url: item.href })}
-                        className={`group flex items-center justify-between gap-2 rounded-lg border px-3 py-2 text-xs transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 ring-offset-background ${
+                        className={`group flex items-center justify-between gap-2 rounded-lg border px-3 py-2 text-xs transition-all duration-200 active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 ring-offset-background ${
                           item.isRepo
                             ? "border-primary/50 bg-primary/10 text-primary font-semibold hover:bg-primary/20 hover:border-primary"
                             : item.featured
