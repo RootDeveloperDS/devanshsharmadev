@@ -251,7 +251,7 @@ function ChannelItem({ icon: Icon, label, value, href, copy }: typeof channels[0
       rel="noopener noreferrer"
       aria-label={`Connect via ${label}`}
       onClick={() => sendTelegramNotification("Clicked Contact Channel (Terminal)", { channel: label, url: href })}
-      className="bento-card group flex items-center gap-3 !p-3 hover:border-primary/60 sm:gap-4 sm:!p-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 ring-offset-background"
+      className="bento-card group flex items-center gap-3 !p-3 hover:border-primary/60 sm:gap-4 sm:!p-4 transition-all duration-200 active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 ring-offset-background"
     >
       <span className="grid h-9 w-9 shrink-0 place-items-center rounded-lg bg-primary/10 text-primary sm:h-10 sm:w-10 transition-transform duration-300 group-hover:scale-110">
         <Icon className="h-4 w-4 sm:h-5 sm:w-5" />
@@ -266,7 +266,7 @@ function ChannelItem({ icon: Icon, label, value, href, copy }: typeof channels[0
         <button
           type="button"
           onClick={handleCopy}
-          className={`shrink-0 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-sm p-1 ${
+          className={`shrink-0 transition-all duration-200 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-sm p-1 ${
             copied ? "text-primary font-semibold" : "text-muted-foreground hover:text-primary"
           }`}
           aria-label={`Copy ${label}`}

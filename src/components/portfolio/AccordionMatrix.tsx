@@ -88,7 +88,7 @@ export function AccordionMatrix({ projects }: AccordionMatrixProps) {
               setSearchParams(newParams, { replace: true });
             }}
             aria-pressed={activeCategory === f.id}
-            className={`font-mono text-[11px] uppercase tracking-widest px-3 py-1.5 rounded-sm border transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary ${
+            className={`font-mono text-[11px] uppercase tracking-widest px-3 py-1.5 rounded-sm border transition-all duration-200 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary ${
               activeCategory === f.id
                 ? "border-primary bg-primary/10 text-primary"
                 : "border-border text-muted-foreground hover:border-primary/40 hover:text-primary/70"
@@ -116,7 +116,7 @@ export function AccordionMatrix({ projects }: AccordionMatrixProps) {
                 <button
                   id={`accordion-${project.id}`}
                   onClick={() => toggle(project.id)}
-                  className="w-full text-left group focus-visible:outline-none focus-visible:bg-primary/5 focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-inset"
+                  className="w-full text-left group transition-all duration-200 active:scale-[0.99] focus-visible:outline-none focus-visible:bg-primary/5 focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-inset"
                   aria-expanded={isOpen}
                   aria-controls={`panel-${project.id}`}
                 >
@@ -292,7 +292,8 @@ export function AccordionMatrix({ projects }: AccordionMatrixProps) {
                 newParams.set("category", "all");
                 setSearchParams(newParams);
               }}
-              className="inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-wider text-primary border border-primary/30 bg-primary/5 px-4 py-2 rounded hover:bg-primary/20 transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+              aria-label="Clear filters to show all active records"
+              className="inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-wider text-primary border border-primary/30 bg-primary/5 px-4 py-2 rounded hover:bg-primary/20 hover:border-primary/60 active:scale-95 transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background"
             >
               Clear Filters
             </button>
