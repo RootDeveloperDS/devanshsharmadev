@@ -74,7 +74,7 @@ function PortfolioShell() {
       <SEO tab={active} />
 
       <AnimatedBackground />
-      <TopNav active={active} onChange={handleNavigate} onOpenPalette={handleOpenPalette} />
+      <TopNav active={active} onChange={handleNavigate} onOpenPalette={handleOpenPalette} paletteOpen={paletteOpen} />
       <CommandPalette onNavigate={handleNavigate} open={paletteOpen} onOpenChange={setPaletteOpen} />
 
       <main className="px-4 pb-24 pt-28 sm:px-6 sm:pt-32">
