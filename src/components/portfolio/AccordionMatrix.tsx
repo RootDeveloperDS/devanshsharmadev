@@ -88,7 +88,7 @@ export function AccordionMatrix({ projects }: AccordionMatrixProps) {
               setSearchParams(newParams, { replace: true });
             }}
             aria-pressed={activeCategory === f.id}
-            className={`font-mono text-[11px] uppercase tracking-widest px-3 py-1.5 rounded-sm border transition-all duration-200 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary ${
+            className={`font-mono text-[11px] uppercase tracking-widest px-3 py-1.5 rounded-sm border transition-all duration-200 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 ring-offset-background ${
               activeCategory === f.id
                 ? "border-primary bg-primary/10 text-primary"
                 : "border-border text-muted-foreground hover:border-primary/40 hover:text-primary/70"
@@ -128,6 +128,7 @@ export function AccordionMatrix({ projects }: AccordionMatrixProps) {
                     {/* Toggle indicator */}
                     <motion.span
                       animate={{ rotate: isOpen ? 90 : 0 }}
+                      whileHover={{ x: 4 }}
                       transition={{ duration: 0.2 }}
                       className="shrink-0 text-primary"
                     >
