@@ -4,7 +4,6 @@ import { AnimatePresence, motion } from "framer-motion";
 import { ThemeProvider } from "@/components/portfolio/ThemeProvider";
 import { AnimatedBackground } from "@/components/portfolio/AnimatedBackground";
 import { TopNav } from "@/components/portfolio/TopNav";
-import { CommandPalette } from "@/components/portfolio/CommandPalette";
 import { OverviewTab } from "@/components/portfolio/OverviewTab";
 import { Footer } from "@/components/portfolio/Footer";
 import type { TabId } from "@/components/portfolio/data";
@@ -12,6 +11,7 @@ import { VisarAgentButton } from "@/components/portfolio/VisarAgentButton";
 import { SEO } from "@/components/portfolio/SEO";
 import { sendTelegramNotification } from "@/lib/telegram";
 
+const CommandPalette = lazy(() => import("@/components/portfolio/CommandPalette").then(m => ({ default: m.CommandPalette })));
 const ProjectsTab = lazy(() => import("@/components/portfolio/ProjectsTab").then(m => ({ default: m.ProjectsTab })));
 const ExperienceTab = lazy(() => import("@/components/portfolio/ExperienceTab").then(m => ({ default: m.ExperienceTab })));
 const TerminalTab = lazy(() => import("@/components/portfolio/TerminalTab").then(m => ({ default: m.TerminalTab })));
@@ -29,6 +29,7 @@ function PortfolioShell() {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const [paletteOpen, setPaletteOpen] = useState(false);
+  const [hasOpenedPalette, setHasOpenedPalette] = useState(false);
 
   // Derive active tab from current URL path
   const active: TabId = getTabFromPath(location.pathname);
@@ -66,6 +67,21 @@ function PortfolioShell() {
 
   const handleOpenPalette = useCallback(() => {
     setPaletteOpen(true);
+    setHasOpenedPalette(true);
+  }, []);
+
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "k") {
+        e.preventDefault();
+        setPaletteOpen((prev) => {
+          if (!prev) setHasOpenedPalette(true);
+          return !prev;
+        });
+      }
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
   }, []);
 
   return (
@@ -75,7 +91,11 @@ function PortfolioShell() {
 
       <AnimatedBackground />
       <TopNav active={active} onChange={handleNavigate} onOpenPalette={handleOpenPalette} />
-      <CommandPalette onNavigate={handleNavigate} open={paletteOpen} onOpenChange={setPaletteOpen} />
+      {hasOpenedPalette && (
+        <Suspense fallback={null}>
+          <CommandPalette onNavigate={handleNavigate} open={paletteOpen} onOpenChange={setPaletteOpen} />
+        </Suspense>
+      )}
 
       <main className="px-4 pb-24 pt-28 sm:px-6 sm:pt-32">
         <AnimatePresence mode="wait">
