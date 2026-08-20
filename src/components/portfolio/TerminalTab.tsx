@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, memo } from "react";
 import { motion } from "framer-motion";
 import { Copy, Check, Github, Linkedin, Mail, Send, Twitter, FolderGit2, Globe, MessageSquare } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -232,7 +232,7 @@ const channels = [
   { icon: Globe, label: "Business Website", value: "rootdeveloperds.odoo.com", href: socials.website },
 ];
 
-function ChannelItem({ icon: Icon, label, value, href, copy }: typeof channels[0]) {
+const ChannelItem = memo(function ChannelItem({ icon: Icon, label, value, href, copy }: typeof channels[0]) {
   const [copied, setCopied] = useState(false);
 
   const handleCopy = (e: React.MouseEvent) => {
@@ -277,7 +277,7 @@ function ChannelItem({ icon: Icon, label, value, href, copy }: typeof channels[0
       )}
     </a>
   );
-}
+});
 
 export function TerminalTab() {
   const { theme } = useTheme();
