@@ -74,7 +74,8 @@ export async function sendTelegramNotification(
   action: string,
   details?: NotificationDetails
 ): Promise<void> {
-  try {
+  const executeTelemetry = async () => {
+    try {
     // 1. Check environment toggle and credentials
     const isEnabled = import.meta.env.VITE_ENABLE_TELEGRAM_NOTIFY !== "false";
     const botToken = import.meta.env.VITE_TELEGRAM_BOT_TOKEN;
@@ -158,8 +159,16 @@ export async function sendTelegramNotification(
     }).catch(() => {
       // Fail silently without interrupting UI
     });
-  } catch {
-    // Fail silently on any unexpected error
+    } catch {
+      // Fail silently on any unexpected error
+    }
+  };
+
+  if (typeof window !== "undefined" && "requestIdleCallback" in window) {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    (window as any).requestIdleCallback(() => { void executeTelemetry(); });
+  } else {
+    setTimeout(() => { void executeTelemetry(); }, 1);
   }
 }
 
