@@ -288,6 +288,7 @@ export const Footer = React.memo(function Footer({ onNavigate }: FooterProps) {
             <div className="space-y-2 font-mono text-xs">
               <a
                 href={`mailto:${socials.email}`}
+                aria-label={`Send an email to ${socials.email}`}
                 onClick={() => sendTelegramNotification("Clicked Direct Email (Footer)", { email: socials.email })}
                 className="flex items-center justify-between gap-2 rounded-xl border border-border bg-secondary/30 p-3 hover:border-primary/50 hover:bg-secondary/60 transition-all duration-200 active:scale-[0.98] text-foreground group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 ring-offset-background"
               >
@@ -295,13 +296,14 @@ export const Footer = React.memo(function Footer({ onNavigate }: FooterProps) {
                   <Mail className="h-4 w-4 text-primary shrink-0" />
                   <span className="truncate text-xs">{socials.email}</span>
                 </div>
-                <ArrowUpRight className="h-3.5 w-3.5 text-muted-foreground group-hover:text-primary transition-colors shrink-0" />
+                <ArrowUpRight className="h-3.5 w-3.5 text-muted-foreground group-hover:text-primary group-hover:-translate-y-0.5 group-hover:translate-x-0.5 transition-all shrink-0" />
               </a>
 
               <a
                 href={socials.website}
                 target="_blank"
                 rel="noopener noreferrer"
+                aria-label="Visit business website"
                 onClick={() => sendTelegramNotification("Clicked External Website (Footer)", { url: socials.website })}
                 className="flex items-center justify-between gap-2 rounded-xl border border-border bg-secondary/30 p-3 hover:border-primary/50 hover:bg-secondary/60 transition-all duration-200 active:scale-[0.98] text-foreground group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 ring-offset-background"
               >
@@ -309,7 +311,7 @@ export const Footer = React.memo(function Footer({ onNavigate }: FooterProps) {
                   <Globe className="h-4 w-4 text-primary shrink-0" />
                   <span className="truncate text-xs">rootdeveloperds.odoo.com</span>
                 </div>
-                <ArrowUpRight className="h-3.5 w-3.5 text-muted-foreground group-hover:text-primary transition-colors shrink-0" />
+                <ArrowUpRight className="h-3.5 w-3.5 text-muted-foreground group-hover:text-primary group-hover:-translate-y-0.5 group-hover:translate-x-0.5 transition-all shrink-0" />
               </a>
 
               <Link
