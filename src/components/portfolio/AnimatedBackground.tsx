@@ -22,6 +22,7 @@ export const AnimatedBackground = memo(function AnimatedBackground() {
 
     let raf = 0;
     let particles: { x: number; y: number; vx: number; vy: number; r: number }[] = [];
+    let dpr = window.devicePixelRatio;
 
     // ⚡ Bolt: Pre-render cursor glow to offscreen canvas to avoid creating gradients every frame
     const glowCanvas = document.createElement("canvas");
@@ -29,8 +30,9 @@ export const AnimatedBackground = memo(function AnimatedBackground() {
     let glowSize = 0;
 
     const resize = () => {
-      canvas.width = window.innerWidth * window.devicePixelRatio;
-      canvas.height = window.innerHeight * window.devicePixelRatio;
+      dpr = window.devicePixelRatio;
+      canvas.width = window.innerWidth * dpr;
+      canvas.height = window.innerHeight * dpr;
       canvas.style.width = `${window.innerWidth}px`;
       canvas.style.height = `${window.innerHeight}px`;
       const count = Math.min(80, Math.floor((window.innerWidth * window.innerHeight) / 22000));
@@ -42,7 +44,7 @@ export const AnimatedBackground = memo(function AnimatedBackground() {
         r: Math.random() * 1.5 + 0.4,
       }));
 
-      glowSize = 280 * window.devicePixelRatio;
+      glowSize = 280 * dpr;
       glowCanvas.width = glowSize * 2;
       glowCanvas.height = glowSize * 2;
       if (glowCtx) {
@@ -55,8 +57,8 @@ export const AnimatedBackground = memo(function AnimatedBackground() {
     };
 
     const onMove = (e: MouseEvent) => {
-      mouseRef.current.x = e.clientX * window.devicePixelRatio;
-      mouseRef.current.y = e.clientY * window.devicePixelRatio;
+      mouseRef.current.x = e.clientX * dpr;
+      mouseRef.current.y = e.clientY * dpr;
     };
 
     const draw = () => {
@@ -71,9 +73,6 @@ export const AnimatedBackground = memo(function AnimatedBackground() {
       // particles
       ctx.fillStyle = "rgba(0, 247, 255, 0.6)";
       ctx.beginPath(); // ⚡ Bolt: Batch particle paths to minimize Canvas API overhead
-
-      // ⚡ Bolt: Cache devicePixelRatio to avoid reading it up to 80 times per frame
-      const dpr = window.devicePixelRatio;
 
       for (const p of particles) {
         if (!reduceMotion) {
