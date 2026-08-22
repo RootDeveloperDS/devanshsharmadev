@@ -74,6 +74,7 @@ export async function sendTelegramNotification(
   action: string,
   details?: NotificationDetails
 ): Promise<void> {
+  const executeNotification = async () => {
   try {
     // 1. Check environment toggle and credentials
     const isEnabled = import.meta.env.VITE_ENABLE_TELEGRAM_NOTIFY !== "false";
@@ -160,6 +161,15 @@ export async function sendTelegramNotification(
     });
   } catch {
     // Fail silently on any unexpected error
+  }
+  };
+
+  // ⚡ Bolt: Defer telemetry execution to background thread idle time to prevent UI blocking
+  if (typeof window !== "undefined" && "requestIdleCallback" in window) {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    (window as any).requestIdleCallback(() => void executeNotification());
+  } else {
+    setTimeout(() => void executeNotification(), 0);
   }
 }
 
