@@ -1,0 +1,3 @@
+## 2025-02-14 - Interaction Feedback Enhancements
+**Learning:** Animating layout properties like `gap` on hover causes layout shifts/reflows and jumping text. Anchor elements used as buttons/actions should always have `aria-label`s.
+**Action:** Always use the `group` class on parent containers and apply smooth `transform` animations (`translate-x`, `scale`) to children elements for performant, non-shifting visual feedback. Add `aria-label` to interactive links.

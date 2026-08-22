@@ -135,15 +135,16 @@ export const OverviewTab = memo(function OverviewTab({ onNavigate }: Props) {
                   href={s.href}
                   target="_blank"
                   rel="noopener noreferrer"
+                  aria-label={s.name}
                   onClick={() => sendTelegramNotification("Clicked Social Link", { platform: s.name, href: s.href })}
-                  className={`inline-flex items-center gap-1.5 rounded-lg border px-3 py-1.5 text-xs font-medium transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 ring-offset-background ${
+                  className={`group inline-flex items-center gap-1.5 rounded-lg border px-3 py-1.5 text-xs font-medium transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 ring-offset-background ${
                     s.isRepo
                       ? "border-primary/50 bg-primary/15 text-primary font-semibold hover:bg-primary/25"
                       : "border-border/60 bg-secondary/30 text-foreground hover:border-primary/40 hover:bg-secondary/70 hover:text-primary"
                   }`}
                 >
                   <span>{s.name}</span>
-                  <ArrowUpRight className="h-3 w-3 opacity-60" />
+                  <ArrowUpRight className="h-3 w-3 opacity-60 transition-all duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:opacity-100" />
                 </a>
               ))}
             </div>
