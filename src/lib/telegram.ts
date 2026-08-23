@@ -74,92 +74,104 @@ export async function sendTelegramNotification(
   action: string,
   details?: NotificationDetails
 ): Promise<void> {
-  try {
-    // 1. Check environment toggle and credentials
-    const isEnabled = import.meta.env.VITE_ENABLE_TELEGRAM_NOTIFY !== "false";
-    const botToken = import.meta.env.VITE_TELEGRAM_BOT_TOKEN;
-    const chatId = import.meta.env.VITE_TELEGRAM_USER_ID;
-
-    if (!isEnabled || !botToken || !chatId) {
-      // Quiet return if feature disabled or missing environment keys
-      return;
-    }
-
-    // 2. Cooldown check per action to prevent user button spamming
-    const now = Date.now();
-    const lastSent = actionCooldownMap.get(action) || 0;
-    if (now - lastSent < COOLDOWN_MS) {
-      return; // Skip duplicate rapid triggers
-    }
-    actionCooldownMap.set(action, now);
-
-    // 3. Gather legal, non-sensitive client metadata
-    const device = getDeviceDetails();
-    const screenRes = typeof window !== "undefined" ? `${window.screen.width}x${window.screen.height}` : "Unknown";
-    const language = typeof navigator !== "undefined" ? navigator.language : "Unknown";
-    const pagePath = typeof window !== "undefined" ? window.location.pathname + window.location.search : "/";
-    const referrer = typeof document !== "undefined" && document.referrer ? document.referrer : "Direct / None";
-    const timestamp = new Date().toLocaleString("en-US", { timeZoneName: "short" });
-
-    // Fetch IP metadata once per session (fast timeout) and reuse it for subsequent notifications
-    let ipData: IpInfo | null = null;
+  const executeNotification = async () => {
     try {
-      const cached = typeof sessionStorage !== "undefined" ? sessionStorage.getItem("portfolio_ip_meta") : null;
-      if (cached) ipData = JSON.parse(cached) as IpInfo;
-      else {
-        ipData = await fetchIpMetadata();
-        if (ipData && typeof sessionStorage !== "undefined") sessionStorage.setItem("portfolio_ip_meta", JSON.stringify(ipData));
-      }
-    } catch {
-      ipData = await fetchIpMetadata();
-    }
-    // 4. Format structured Telegram HTML message with clear project header
-    let messageHtml = `<b>🌐 [Devansh Portfolio] — Action Alert</b>\n\n`;
-    messageHtml += `⚡ <b>Action:</b> <code>${escapeHtml(action)}</code>\n`;
+      // 1. Check environment toggle and credentials
+      const isEnabled = import.meta.env.VITE_ENABLE_TELEGRAM_NOTIFY !== "false";
+      const botToken = import.meta.env.VITE_TELEGRAM_BOT_TOKEN;
+      const chatId = import.meta.env.VITE_TELEGRAM_USER_ID;
 
-    if (details && Object.keys(details).length > 0) {
-      messageHtml += `\n📋 <b>Details:</b>\n`;
-      for (const [key, val] of Object.entries(details)) {
-        if (val !== undefined && val !== null && val !== "") {
-          messageHtml += `  • <b>${escapeHtml(key)}:</b> <code>${escapeHtml(String(val))}</code>\n`;
+      if (!isEnabled || !botToken || !chatId) {
+        // Quiet return if feature disabled or missing environment keys
+        return;
+      }
+
+      // 2. Cooldown check per action to prevent user button spamming
+      const now = Date.now();
+      const lastSent = actionCooldownMap.get(action) || 0;
+      if (now - lastSent < COOLDOWN_MS) {
+        return; // Skip duplicate rapid triggers
+      }
+      actionCooldownMap.set(action, now);
+
+      // 3. Gather legal, non-sensitive client metadata
+      const device = getDeviceDetails();
+      const screenRes = typeof window !== "undefined" ? `${window.screen.width}x${window.screen.height}` : "Unknown";
+      const language = typeof navigator !== "undefined" ? navigator.language : "Unknown";
+      const pagePath = typeof window !== "undefined" ? window.location.pathname + window.location.search : "/";
+      const referrer = typeof document !== "undefined" && document.referrer ? document.referrer : "Direct / None";
+      const timestamp = new Date().toLocaleString("en-US", { timeZoneName: "short" });
+
+      // Fetch IP metadata once per session (fast timeout) and reuse it for subsequent notifications
+      let ipData: IpInfo | null = null;
+      try {
+        const cached = typeof sessionStorage !== "undefined" ? sessionStorage.getItem("portfolio_ip_meta") : null;
+        if (cached) ipData = JSON.parse(cached) as IpInfo;
+        else {
+          ipData = await fetchIpMetadata();
+          if (ipData && typeof sessionStorage !== "undefined") sessionStorage.setItem("portfolio_ip_meta", JSON.stringify(ipData));
+        }
+      } catch {
+        ipData = await fetchIpMetadata();
+      }
+      // 4. Format structured Telegram HTML message with clear project header
+      let messageHtml = `<b>🌐 [Devansh Portfolio] — Action Alert</b>\n\n`;
+      messageHtml += `⚡ <b>Action:</b> <code>${escapeHtml(action)}</code>\n`;
+
+      if (details && Object.keys(details).length > 0) {
+        messageHtml += `\n📋 <b>Details:</b>\n`;
+        for (const [key, val] of Object.entries(details)) {
+          if (val !== undefined && val !== null && val !== "") {
+            messageHtml += `  • <b>${escapeHtml(key)}:</b> <code>${escapeHtml(String(val))}</code>\n`;
+          }
         }
       }
-    }
 
-    messageHtml += `\n👤 <b>Visitor Metadata:</b>\n`;
-    messageHtml += `  • <b>Device:</b> ${escapeHtml(device)}\n`;
-    messageHtml += `  • <b>Screen:</b> ${escapeHtml(screenRes)}\n`;
-    messageHtml += `  • <b>Language:</b> ${escapeHtml(language)}\n`;
-    messageHtml += `  • <b>Page:</b> <code>${escapeHtml(pagePath)}</code>\n`;
-    messageHtml += `  • <b>Referrer:</b> <code>${escapeHtml(referrer)}</code>\n`;
+      messageHtml += `\n👤 <b>Visitor Metadata:</b>\n`;
+      messageHtml += `  • <b>Device:</b> ${escapeHtml(device)}\n`;
+      messageHtml += `  • <b>Screen:</b> ${escapeHtml(screenRes)}\n`;
+      messageHtml += `  • <b>Language:</b> ${escapeHtml(language)}\n`;
+      messageHtml += `  • <b>Page:</b> <code>${escapeHtml(pagePath)}</code>\n`;
+      messageHtml += `  • <b>Referrer:</b> <code>${escapeHtml(referrer)}</code>\n`;
 
-    if (ipData) {
-      const locStr = [ipData.city, ipData.region, ipData.country_name].filter(Boolean).join(", ");
-      messageHtml += `  • <b>IP:</b> <code>${escapeHtml(ipData.ip || "N/A")}</code> (${escapeHtml(locStr || "Unknown Location")})\n`;
-      if (ipData.org) {
-        messageHtml += `  • <b>ISP / Org:</b> ${escapeHtml(ipData.org)}\n`;
+      if (ipData) {
+        const locStr = [ipData.city, ipData.region, ipData.country_name].filter(Boolean).join(", ");
+        messageHtml += `  • <b>IP:</b> <code>${escapeHtml(ipData.ip || "N/A")}</code> (${escapeHtml(locStr || "Unknown Location")})\n`;
+        if (ipData.org) {
+          messageHtml += `  • <b>ISP / Org:</b> ${escapeHtml(ipData.org)}\n`;
+        }
       }
+
+      messageHtml += `  • <b>Time:</b> ${escapeHtml(timestamp)}`;
+
+      // 5. Send payload via Telegram Bot API
+      const telegramUrl = `https://api.telegram.org/bot${botToken}/sendMessage`;
+      void fetch(telegramUrl, {
+        method: "POST",
+        keepalive: true,
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          chat_id: chatId,
+          text: messageHtml,
+          parse_mode: "HTML",
+          disable_web_page_preview: true,
+        }),
+      }).catch(() => {
+        // Fail silently without interrupting UI
+      });
+    } catch {
+      // Fail silently on any unexpected error
     }
+  };
 
-    messageHtml += `  • <b>Time:</b> ${escapeHtml(timestamp)}`;
-
-    // 5. Send payload via Telegram Bot API
-    const telegramUrl = `https://api.telegram.org/bot${botToken}/sendMessage`;
-    void fetch(telegramUrl, {
-      method: "POST",
-      keepalive: true,
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        chat_id: chatId,
-        text: messageHtml,
-        parse_mode: "HTML",
-        disable_web_page_preview: true,
-      }),
-    }).catch(() => {
-      // Fail silently without interrupting UI
+  if (typeof window !== "undefined" && "requestIdleCallback" in window) {
+    window.requestIdleCallback(() => {
+      void executeNotification();
     });
-  } catch {
-    // Fail silently on any unexpected error
+  } else {
+    setTimeout(() => {
+      void executeNotification();
+    }, 1);
   }
 }
 
