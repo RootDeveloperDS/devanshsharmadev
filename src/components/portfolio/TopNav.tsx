@@ -88,7 +88,7 @@ export const TopNav = memo(function TopNav({ active, onChange, onOpenPalette }: 
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={() => sendTelegramNotification("Clicked Open Source Button (TopNav)", { repo: socials.portfolioRepo })}
-                className="inline-flex items-center gap-1 rounded-full border border-primary/40 bg-primary/10 p-1.5 sm:px-2.5 sm:py-1 text-xs font-medium text-primary shadow-sm hover:bg-primary/20 hover:border-primary transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 ring-offset-background"
+                className="inline-flex items-center gap-1 rounded-full border border-primary/40 bg-primary/10 p-1.5 sm:px-2.5 sm:py-1 text-xs font-medium text-primary shadow-sm hover:bg-primary/20 hover:border-primary transition-all duration-200 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 ring-offset-background"
                 aria-label="View Portfolio Open Source Code on GitHub"
               >
                 <Github className="h-3.5 w-3.5" />
@@ -106,7 +106,7 @@ export const TopNav = memo(function TopNav({ active, onChange, onOpenPalette }: 
             <TooltipTrigger asChild>
               <button
                 onClick={onOpenPalette}
-                className="flex items-center justify-center h-7 w-7 sm:h-auto sm:w-auto sm:gap-2 rounded-full border border-border bg-secondary/40 sm:px-3 sm:py-1.5 text-xs text-muted-foreground transition-colors hover:text-foreground hover:border-primary/40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 ring-offset-background"
+                className="flex items-center justify-center h-7 w-7 sm:h-auto sm:w-auto sm:gap-2 rounded-full border border-border bg-secondary/40 sm:px-3 sm:py-1.5 text-xs text-muted-foreground transition-all duration-200 hover:text-foreground hover:border-primary/40 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 ring-offset-background"
                 aria-label="Open command palette (Press Cmd/Ctrl+K)"
               >
                 <Command className="h-3.5 w-3.5" />
