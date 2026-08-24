@@ -120,7 +120,7 @@ function TerminalView() {
                 placeholder="your_name (required)"
                 aria-label="Your name"
                 required
-                className="mt-2 w-full rounded-md border border-border bg-background/50 px-3 py-2 text-foreground placeholder:text-muted-foreground/50 outline-none focus:border-primary"
+                className="mt-2 w-full rounded-md border border-border bg-background/50 px-3 py-2 text-foreground placeholder:text-muted-foreground/50 outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all"
               />
             </div>
             <div>
@@ -136,7 +136,7 @@ function TerminalView() {
                 rows={4}
                 aria-label="Your message"
                 required
-                className="mt-2 w-full resize-none rounded-md border border-border bg-background/50 p-3 text-foreground placeholder:text-muted-foreground/50 outline-none focus:border-primary"
+                className="mt-2 w-full resize-none rounded-md border border-border bg-background/50 p-3 text-foreground placeholder:text-muted-foreground/50 outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all"
               />
             </div>
 
@@ -202,16 +202,16 @@ function ExecutiveContactForm() {
       <div className="grid gap-4 sm:grid-cols-2">
         <div>
           <Label htmlFor="name">Name</Label>
-          <Input id="name" name="name" placeholder="Your name" className="mt-1.5" required />
+          <Input id="name" name="name" placeholder="Your name" className="mt-1.5 focus:border-primary focus:ring-1 focus:ring-primary transition-all" required />
         </div>
         <div>
           <Label htmlFor="email">Email</Label>
-          <Input id="email" name="email" type="email" placeholder="you@company.com" className="mt-1.5" />
+          <Input id="email" name="email" type="email" placeholder="you@company.com" className="mt-1.5 focus:border-primary focus:ring-1 focus:ring-primary transition-all" />
         </div>
       </div>
       <div>
         <Label htmlFor="message">Message</Label>
-        <Textarea id="message" name="message" placeholder="What are you building?" rows={6} className="mt-1.5" required />
+        <Textarea id="message" name="message" placeholder="What are you building?" rows={6} className="mt-1.5 focus:border-primary focus:ring-1 focus:ring-primary transition-all" required />
       </div>
       <Button type="submit" size="lg" className="rounded-md">
         <Send /> Send message
