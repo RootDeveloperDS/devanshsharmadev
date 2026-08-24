@@ -1,0 +1,5 @@
+## 2024-12-05 - VISAR Bolt: Optimize HeroAvatar and Defer Telemetry Network Requests
+
+**Learning:** Purely visual components with no props (like `HeroAvatar`) can cause unnecessary re-renders when parent components update state or context (e.g. `PortfolioShell` handling route changes). Wrapping these in `React.memo` stops this propagation. Additionally, telemetry tracking that executes network calls (like `sendTelegramNotification`) blocks the main thread during critical path operations like page rendering and route navigation, causing jank.
+
+**Action:** Wrap `HeroAvatar` in `React.memo`. When tracking analytics/telemetry, synchronously grab needed client context, then defer network-heavy API actions using `window.requestIdleCallback` (with a `setTimeout` fallback). This moves them off the main execution thread, prioritizing fluid UI transitions.
