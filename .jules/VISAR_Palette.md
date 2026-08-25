@@ -1,0 +1,3 @@
+## 2024-03-22 - Focus visibility and ARIA labels
+**Learning:** Adding redundant `aria-label` attributes to elements that already have descriptive textual content can interfere with screen readers' ability to read the actual text. In addition, verifying UI elements that depend on a Theme context (like the terminal) requires toggling the state to make them visible during Playwright automation.
+**Action:** In the future, only add `aria-label` to elements without visible text (like icon-only buttons). For UI verification, always check for required state before attempting to interact with elements.

@@ -81,6 +81,7 @@ export const OverviewTab = memo(function OverviewTab({ onNavigate }: Props) {
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={() => sendTelegramNotification("Clicked Portfolio Repository Code", { url: socials.portfolioRepo })}
+                aria-label="View Open Source Code on GitHub"
               >
                 <Github className="mr-2 h-4 w-4" /> Open Source Code ↗
               </a>
@@ -91,6 +92,7 @@ export const OverviewTab = memo(function OverviewTab({ onNavigate }: Props) {
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={() => sendTelegramNotification("Viewed Résumé (Overview Tab)", { file: profile.resumeUrl })}
+                aria-label="View Résumé"
               >
                 <Eye className="mr-2 h-4 w-4" /> View Résumé
               </a>
@@ -100,6 +102,7 @@ export const OverviewTab = memo(function OverviewTab({ onNavigate }: Props) {
                 href={profile.resumeUrl}
                 download
                 onClick={() => sendTelegramNotification("Downloaded Résumé (Overview Tab)", { file: profile.resumeUrl })}
+                aria-label="Download Résumé"
               >
                 <Download className="mr-2 h-4 w-4" /> Download
               </a>
@@ -135,6 +138,7 @@ export const OverviewTab = memo(function OverviewTab({ onNavigate }: Props) {
                   href={s.href}
                   target="_blank"
                   rel="noopener noreferrer"
+                  aria-label={`Visit my ${s.name}`}
                   onClick={() => sendTelegramNotification("Clicked Social Link", { platform: s.name, href: s.href })}
                   className={`inline-flex items-center gap-1.5 rounded-lg border px-3 py-1.5 text-xs font-medium transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 ring-offset-background ${
                     s.isRepo
