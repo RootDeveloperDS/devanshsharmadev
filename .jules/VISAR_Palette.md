@@ -1,0 +1,3 @@
+## 2025-02-27 - Smooth Hover Transitions and Form Accessibility Focus
+**Learning:** Avoid using `hover:gap-*` to animate space, as it triggers layout reflows and jumping text. Standardizing on `group-hover` transforms for children elements maintains the premium feel without layout shifts. Furthermore, Shadcn input elements often drop focus rings in custom designs; applying `focus-visible:ring-primary` ensures consistent keyboard navigation visibility.
+**Action:** Use `group` on parent and `group-hover:scale` or `group-hover:translate` on interactive children for future button/link hover states. Always explicitly add focus rings to raw inputs.
