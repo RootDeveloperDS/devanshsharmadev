@@ -74,6 +74,7 @@ export async function sendTelegramNotification(
   action: string,
   details?: NotificationDetails
 ): Promise<void> {
+  const executeNotification = async () => {
   try {
     // 1. Check environment toggle and credentials
     const isEnabled = import.meta.env.VITE_ENABLE_TELEGRAM_NOTIFY !== "false";
@@ -161,6 +162,19 @@ export async function sendTelegramNotification(
   } catch {
     // Fail silently on any unexpected error
   }
+  };
+
+  if ("requestIdleCallback" in window) {
+    window.requestIdleCallback(() => {
+      void executeNotification();
+    });
+  } else {
+    setTimeout(() => {
+      void executeNotification();
+    }, 1);
+  }
+
+  return Promise.resolve();
 }
 
 // Utility function to sanitize text for Telegram HTML parse mode
