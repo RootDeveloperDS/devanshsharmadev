@@ -52,7 +52,7 @@ export const ExperienceTab = memo(function ExperienceTab() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: 0.1 + i * 0.08 }}
-                  className="bento-card !p-4 text-sm leading-relaxed text-muted-foreground"
+                  className="bento-card !p-4 text-sm leading-relaxed text-muted-foreground transition-colors duration-300 hover:border-primary/40 hover:bg-primary/5"
                 >
                   <span className="mr-2 font-mono text-[10px] text-primary">
                     {String(i + 1).padStart(2, "0")}
