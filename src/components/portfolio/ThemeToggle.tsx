@@ -13,7 +13,7 @@ export function ThemeToggle() {
         <button
           onClick={toggleTheme}
           aria-label={`Switch to ${isVisar ? "Executive" : "VISAR"} mode`}
-          className="relative inline-flex h-8 w-16 items-center rounded-full border border-border bg-secondary/50 backdrop-blur transition-all active:scale-95 hover:bg-secondary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 ring-offset-background"
+          className="group relative inline-flex h-8 w-16 items-center rounded-full border border-border bg-secondary/50 backdrop-blur transition-all active:scale-95 hover:bg-secondary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 ring-offset-background"
         >
           <motion.span
             layout
@@ -22,7 +22,11 @@ export function ThemeToggle() {
               isVisar ? "left-1" : "left-9"
             }`}
           >
-            {isVisar ? <Cpu className="h-3.5 w-3.5" /> : <Sun className="h-3.5 w-3.5" />}
+            {isVisar ? (
+              <Cpu className="h-3.5 w-3.5 transition-transform duration-300 group-hover:rotate-12" />
+            ) : (
+              <Sun className="h-3.5 w-3.5 transition-transform duration-300 group-hover:rotate-12" />
+            )}
           </motion.span>
           <span className="sr-only">Toggle theme</span>
         </button>
