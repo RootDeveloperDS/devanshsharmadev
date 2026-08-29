@@ -1,0 +1,3 @@
+## 2024-05-18 - Component Memoization and Telemetry Deferral
+**Learning:** Purely visual, prop-less components like HeroAvatar and TerminalTab re-render unnecessarily when parent contexts (like theme) change, causing performance drops during animations or navigation. Similarly, synchronous telemetry blocks the main thread, leading to jitter.
+**Action:** Wrap static visual components in React.memo by default to avoid prop-less re-renders. Always wrap non-critical telemetry execution in `requestIdleCallback` (fallback to `setTimeout`) to prevent main thread blocking, improving UI responsiveness.
