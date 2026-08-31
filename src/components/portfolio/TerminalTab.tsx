@@ -245,23 +245,25 @@ function ChannelItem({ icon: Icon, label, value, href, copy }: typeof channels[0
   };
 
   return (
-    <a
-      href={href}
-      target={href.startsWith("http") ? "_blank" : undefined}
-      rel="noopener noreferrer"
-      aria-label={`Connect via ${label}`}
-      onClick={() => sendTelegramNotification("Clicked Contact Channel (Terminal)", { channel: label, url: href })}
-      className="bento-card group flex items-center gap-3 !p-3 hover:border-primary/60 sm:gap-4 sm:!p-4 transition-all duration-200 active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 ring-offset-background"
-    >
-      <span className="grid h-9 w-9 shrink-0 place-items-center rounded-lg bg-primary/10 text-primary sm:h-10 sm:w-10 transition-transform duration-300 group-hover:scale-110">
-        <Icon className="h-4 w-4 sm:h-5 sm:w-5" />
-      </span>
-      <div className="min-w-0 flex-1">
-        <div className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground">
-          {label}
+    <div className="bento-card group flex items-center gap-3 !p-3 hover:border-primary/60 sm:gap-4 sm:!p-4 transition-all duration-200">
+      <a
+        href={href}
+        target={href.startsWith("http") ? "_blank" : undefined}
+        rel="noopener noreferrer"
+        aria-label={`Connect via ${label}`}
+        onClick={() => sendTelegramNotification("Clicked Contact Channel (Terminal)", { channel: label, url: href })}
+        className="flex min-w-0 flex-1 items-center gap-3 sm:gap-4 transition-all duration-200 active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 ring-offset-background rounded-sm"
+      >
+        <span className="grid h-9 w-9 shrink-0 place-items-center rounded-lg bg-primary/10 text-primary sm:h-10 sm:w-10 transition-transform duration-300 group-hover:scale-110">
+          <Icon className="h-4 w-4 sm:h-5 sm:w-5" />
+        </span>
+        <div className="min-w-0 flex-1">
+          <div className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground">
+            {label}
+          </div>
+          <div className="truncate text-sm font-medium text-foreground group-hover:text-primary transition-colors">{value}</div>
         </div>
-        <div className="truncate text-sm font-medium text-foreground">{value}</div>
-      </div>
+      </a>
       {copy && (
         <button
           type="button"
@@ -275,7 +277,7 @@ function ChannelItem({ icon: Icon, label, value, href, copy }: typeof channels[0
           {copied ? <Check className="h-4 w-4 text-emerald-400" /> : <Copy className="h-4 w-4" />}
         </button>
       )}
-    </a>
+    </div>
   );
 }
 
