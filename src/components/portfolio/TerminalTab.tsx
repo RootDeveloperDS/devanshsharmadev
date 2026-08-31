@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useState, useRef, useEffect, memo } from "react";
 import { motion } from "framer-motion";
 import { Copy, Check, Github, Linkedin, Mail, Send, Twitter, FolderGit2, Globe, MessageSquare } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -179,7 +179,7 @@ function TerminalView() {
   );
 }
 
-function ExecutiveContactForm() {
+const ExecutiveContactForm = memo(function ExecutiveContactForm() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     const form = e.currentTarget as HTMLFormElement;
@@ -218,7 +218,7 @@ function ExecutiveContactForm() {
       </Button>
     </form>
   );
-}
+});
 
 // ⚡ Bolt: Define channels array outside render scope to avoid recreation on re-renders
 const channels = [
@@ -279,7 +279,7 @@ function ChannelItem({ icon: Icon, label, value, href, copy }: typeof channels[0
   );
 }
 
-export function TerminalTab() {
+export const TerminalTab = memo(function TerminalTab() {
   const { theme } = useTheme();
 
   return (
@@ -318,4 +318,4 @@ export function TerminalTab() {
       </div>
     </section>
   );
-}
+});
