@@ -1,4 +1,4 @@
-import { Suspense, lazy, useCallback, useEffect, useState } from "react";
+import { Suspense, lazy, useCallback, useEffect, useMemo, useState } from "react";
 import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
 import { ThemeProvider } from "@/components/portfolio/ThemeProvider";
@@ -31,7 +31,7 @@ function PortfolioShell() {
   const [paletteOpen, setPaletteOpen] = useState(false);
 
   // Derive active tab from current URL path
-  const active: TabId = getTabFromPath(location.pathname);
+  const active: TabId = useMemo(() => getTabFromPath(location.pathname), [location.pathname]);
 
   // Auto-redirect legacy query parameter links (?tab=projects) to clean routes (/projects)
   const legacyTab = searchParams.get("tab") as TabId | null;
