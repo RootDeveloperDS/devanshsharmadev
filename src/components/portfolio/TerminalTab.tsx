@@ -120,7 +120,7 @@ function TerminalView() {
                 placeholder="your_name (required)"
                 aria-label="Your name"
                 required
-                className="mt-2 w-full rounded-md border border-border bg-background/50 px-3 py-2 text-foreground placeholder:text-muted-foreground/50 outline-none focus:border-primary"
+                className="mt-2 w-full rounded-md border border-border bg-background/50 px-3 py-2 text-foreground placeholder:text-muted-foreground/50 outline-none transition-all focus:border-primary focus:ring-2 focus:ring-primary/50"
               />
             </div>
             <div>
@@ -136,7 +136,7 @@ function TerminalView() {
                 rows={4}
                 aria-label="Your message"
                 required
-                className="mt-2 w-full resize-none rounded-md border border-border bg-background/50 p-3 text-foreground placeholder:text-muted-foreground/50 outline-none focus:border-primary"
+                className="mt-2 w-full resize-none rounded-md border border-border bg-background/50 p-3 text-foreground placeholder:text-muted-foreground/50 outline-none transition-all focus:border-primary focus:ring-2 focus:ring-primary/50"
               />
             </div>
 
