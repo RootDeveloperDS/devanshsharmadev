@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, memo } from "react";
 import { motion } from "framer-motion";
 import { Copy, Check, Github, Linkedin, Mail, Send, Twitter, FolderGit2, Globe, MessageSquare } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -19,7 +19,7 @@ const bootLines = [
 
 type TxStatus = "idle" | "sending" | "sent" | "failed";
 
-function TerminalView() {
+const TerminalView = memo(function TerminalView() {
   const [shown, setShown] = useState<string[]>([]);
   const [name, setName] = useState("");
   const [msg, setMsg] = useState("");
@@ -177,9 +177,9 @@ function TerminalView() {
       </div>
     </div>
   );
-}
+});
 
-function ExecutiveContactForm() {
+const ExecutiveContactForm = memo(function ExecutiveContactForm() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     const form = e.currentTarget as HTMLFormElement;
@@ -218,7 +218,7 @@ function ExecutiveContactForm() {
       </Button>
     </form>
   );
-}
+});
 
 // ⚡ Bolt: Define channels array outside render scope to avoid recreation on re-renders
 const channels = [
@@ -232,7 +232,7 @@ const channels = [
   { icon: Globe, label: "Business Website", value: "rootdeveloperds.odoo.com", href: socials.website },
 ];
 
-function ChannelItem({ icon: Icon, label, value, href, copy }: typeof channels[0]) {
+const ChannelItem = memo(function ChannelItem({ icon: Icon, label, value, href, copy }: typeof channels[0]) {
   const [copied, setCopied] = useState(false);
 
   const handleCopy = (e: React.MouseEvent) => {
@@ -277,9 +277,9 @@ function ChannelItem({ icon: Icon, label, value, href, copy }: typeof channels[0
       )}
     </a>
   );
-}
+});
 
-export function TerminalTab() {
+export const TerminalTab = memo(function TerminalTab() {
   const { theme } = useTheme();
 
   return (
@@ -318,4 +318,4 @@ export function TerminalTab() {
       </div>
     </section>
   );
-}
+});
