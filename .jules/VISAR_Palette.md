@@ -1,0 +1,3 @@
+## 2024-09-02 - Premium Navigation and Floating Action Feedback
+**Learning:** Adding `Tooltip` components around visually abstract floating action buttons (like the VISAR Agent logo) vastly improves accessibility and user comprehension before they interact. Furthermore, utilizing active scaling (`active:scale-95`) alongside smooth transitions on prominent navigation elements enhances the premium tactile feel of a high-end application.
+**Action:** When evaluating applications for UX improvements, prioritize discovering abstract interactive icons and appending helpful tooltips. Consistently ensure primary navigation links and command buttons provide tactile click feedback.
