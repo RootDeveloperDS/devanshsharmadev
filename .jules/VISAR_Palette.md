@@ -1,0 +1,3 @@
+## 2024-05-24 - Enhance Interaction Feedback and Accessibility
+**Learning:** Adding subtle `active:scale-95` to interactive elements provides premium tactile feedback without complex animations, and explicit focus rings (`focus:ring-2 focus:ring-primary focus:ring-offset-2`) greatly improve accessibility and interaction clarity for custom inputs/textareas (e.g. in TerminalTab).
+**Action:** Consistently apply `active:scale-95` alongside `transition-all` on custom interactive buttons/links, and ensure all custom form elements clearly manifest focus states using Tailwind's ring utilities to maintain both a premium feel and high accessibility standards.
