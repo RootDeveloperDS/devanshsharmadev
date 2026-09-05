@@ -118,6 +118,7 @@ export const ProjectsTab = memo(function ProjectsTab() {
                   }`}
                   loading={idx < 2 ? "eager" : "lazy"}
                   fetchpriority={idx < 2 ? "high" : "auto"}
+                  decoding="async"
                   onError={(e) => {
                     // Bulletproof Fallback: If jsDelivr fails, revert to raw GitHub URL instantly
                     const target = e.currentTarget;
