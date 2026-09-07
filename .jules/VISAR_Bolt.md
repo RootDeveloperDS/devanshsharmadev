@@ -1,0 +1,3 @@
+## 2024-02-23 - Image Decoding & Component Memoization
+**Learning:** `React.memo` effectively limits re-renders of static visual components (e.g. `HeroAvatar`), while adding `decoding="async"` to `<img>` tags offloads image decoding from the main thread, enhancing UI responsiveness, especially when dealing with high-priority or lazy-loaded visual assets across the application.
+**Action:** Always verify if visual components without props (or stable props) can benefit from `React.memo`, and enforce `decoding="async"` for image assets to prevent main-thread blocking during initial render and subsequent scrolling.
