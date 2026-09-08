@@ -75,7 +75,7 @@ export const OverviewTab = memo(function OverviewTab({ onNavigate }: Props) {
             className="mt-8 flex flex-wrap gap-3"
           >
             {/* Dominant Open Source Portfolio Button */}
-            <Button asChild size="lg" className="rounded-full bg-primary text-primary-foreground font-semibold shadow-md shadow-primary/20 hover:scale-[1.02] transition-all focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 ring-offset-background">
+            <Button asChild size="lg" className="rounded-full bg-primary text-primary-foreground font-semibold shadow-md shadow-primary/20 hover:scale-[1.02] transition-all active:scale-95 focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 ring-offset-background">
               <a
                 href={socials.portfolioRepo}
                 target="_blank"
@@ -85,7 +85,7 @@ export const OverviewTab = memo(function OverviewTab({ onNavigate }: Props) {
                 <Github className="mr-2 h-4 w-4" /> Open Source Code ↗
               </a>
             </Button>
-            <Button asChild size="lg" variant="outline" className="rounded-full border-primary/40 text-foreground hover:bg-primary/10 hover:text-foreground focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 ring-offset-background">
+            <Button asChild size="lg" variant="outline" className="rounded-full border-primary/40 text-foreground transition-all active:scale-95 hover:bg-primary/10 hover:text-foreground focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 ring-offset-background">
               <a
                 href={profile.resumeUrl}
                 target="_blank"
@@ -95,7 +95,7 @@ export const OverviewTab = memo(function OverviewTab({ onNavigate }: Props) {
                 <Eye className="mr-2 h-4 w-4" /> View Résumé
               </a>
             </Button>
-            <Button asChild size="lg" variant="outline" className="rounded-full border-primary/40 text-foreground hover:bg-primary/10 hover:text-foreground focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 ring-offset-background">
+            <Button asChild size="lg" variant="outline" className="rounded-full border-primary/40 text-foreground transition-all active:scale-95 hover:bg-primary/10 hover:text-foreground focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 ring-offset-background">
               <a
                 href={profile.resumeUrl}
                 download
@@ -107,7 +107,7 @@ export const OverviewTab = memo(function OverviewTab({ onNavigate }: Props) {
             <Button
               size="lg"
               variant="outline"
-              className="rounded-full border-primary/40 text-foreground hover:bg-primary/10 hover:text-foreground focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 ring-offset-background"
+              className="rounded-full border-primary/40 text-foreground transition-all active:scale-95 hover:bg-primary/10 hover:text-foreground focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 ring-offset-background"
               onClick={() => {
                 sendTelegramNotification("Opened Terminal Comms Button", { location: "Overview Hero" });
                 onNavigate("terminal");
@@ -136,7 +136,7 @@ export const OverviewTab = memo(function OverviewTab({ onNavigate }: Props) {
                   target="_blank"
                   rel="noopener noreferrer"
                   onClick={() => sendTelegramNotification("Clicked Social Link", { platform: s.name, href: s.href })}
-                  className={`inline-flex items-center gap-1.5 rounded-lg border px-3 py-1.5 text-xs font-medium transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 ring-offset-background ${
+                  className={`inline-flex items-center gap-1.5 rounded-lg border px-3 py-1.5 text-xs font-medium transition-all active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 ring-offset-background ${
                     s.isRepo
                       ? "border-primary/50 bg-primary/15 text-primary font-semibold hover:bg-primary/25"
                       : "border-border/60 bg-secondary/30 text-foreground hover:border-primary/40 hover:bg-secondary/70 hover:text-primary"
