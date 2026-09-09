@@ -120,7 +120,7 @@ function TerminalView() {
                 placeholder="your_name (required)"
                 aria-label="Your name"
                 required
-                className="mt-2 w-full rounded-md border border-border bg-background/50 px-3 py-2 text-foreground placeholder:text-muted-foreground/50 outline-none focus:border-primary"
+                className="mt-2 w-full rounded-md border border-border bg-background/50 px-3 py-2 text-foreground placeholder:text-muted-foreground/50 outline-none focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
               />
             </div>
             <div>
@@ -136,7 +136,7 @@ function TerminalView() {
                 rows={4}
                 aria-label="Your message"
                 required
-                className="mt-2 w-full resize-none rounded-md border border-border bg-background/50 p-3 text-foreground placeholder:text-muted-foreground/50 outline-none focus:border-primary"
+                className="mt-2 w-full resize-none rounded-md border border-border bg-background/50 p-3 text-foreground placeholder:text-muted-foreground/50 outline-none focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
               />
             </div>
 
@@ -154,7 +154,7 @@ function TerminalView() {
             <Button
               onClick={handleSend}
               disabled={status === "sending"}
-              className="w-full rounded-md sm:w-auto"
+              className="w-full rounded-md sm:w-auto active:scale-95 transition-all"
             >
               <Send /> {status === "sending" ? "Transmitting..." : "Transmit"}
             </Button>
@@ -213,7 +213,7 @@ function ExecutiveContactForm() {
         <Label htmlFor="message">Message</Label>
         <Textarea id="message" name="message" placeholder="What are you building?" rows={6} className="mt-1.5" required />
       </div>
-      <Button type="submit" size="lg" className="rounded-md">
+      <Button type="submit" size="lg" className="rounded-md active:scale-95 transition-all">
         <Send /> Send message
       </Button>
     </form>
