@@ -113,6 +113,7 @@ export const ProjectsTab = memo(function ProjectsTab() {
                 <img 
                   src={optimizeImage(project.image)} 
                   alt={`${project.name} Interface`} 
+                  decoding="async"
                   className={`max-w-full object-contain rounded-xl border border-primary/20 bg-black/40 p-1 shadow-[0_0_15px_rgba(var(--primary-rgb),0.1)] transition-transform duration-500 group-hover:scale-[1.03] ${
                     project.span === "lg" ? "max-h-[24rem]" : "max-h-[14rem]"
                   }`}
