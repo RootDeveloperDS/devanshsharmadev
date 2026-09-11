@@ -105,7 +105,7 @@ export const ExperienceTab = memo(function ExperienceTab() {
                     {ring.items.map((item, i) => (
                       <span
                         key={`${item}-${i}`}
-                        className="rounded-md border border-primary/20 bg-background/50 px-3 py-1.5 font-mono text-[11px] uppercase tracking-wider text-foreground/80 backdrop-blur transition-all hover:border-primary hover:text-primary hover:bg-primary/10 hover:shadow-[0_0_15px_rgba(var(--primary-rgb),0.2)] cursor-default"
+                        className="rounded-md border border-primary/20 bg-background/50 px-3 py-1.5 font-mono text-[11px] uppercase tracking-wider text-foreground/80 backdrop-blur transition-all hover:-translate-y-0.5 active:scale-95 hover:border-primary hover:text-primary hover:bg-primary/10 hover:shadow-[0_0_15px_rgba(var(--primary-rgb),0.2)] cursor-default"
                       >
                         {item}
                       </span>
