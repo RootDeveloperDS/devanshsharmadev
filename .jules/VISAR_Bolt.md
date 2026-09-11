@@ -1,0 +1,3 @@
+## 2025-02-27 - Optimizing Image Decoding and Rendering with React.memo
+**Learning:** Adding `decoding="async"` to `<img>` elements prevents image decoding from blocking the main UI thread, resulting in a more responsive application layout especially on slower devices. Using `React.memo` effectively on complex or purely visual components, like `TerminalTab` and `HeroAvatar`, optimizes rendering by preventing unnecessary re-renders driven by their parent wrapper context.
+**Action:** Always include `decoding="async"` with `loading="lazy"` on image heavy pages. Evaluate and proactively apply `React.memo` for static or visually intensive child components to offload unnecessary computational load during parent state changes.
