@@ -1,0 +1,3 @@
+## 2025-03-01 - Avoid Layout Property Animations & Apply Tactile Feedback
+**Learning:** Animating layout properties like `gap` on hover causes unintended layout reflows and jumping text. Additionally, buttons should provide tactile interaction feedback using `active:scale-95` to enhance the premium feel without excessive animations.
+**Action:** Use Tailwind's `group` class on parent containers and apply smooth `transform` animations (e.g., `group-hover:translate-x-1`) to child elements for stable hover effects. Consistently apply `active:scale-95` and `transition-all` on actionable items (buttons, links) for premium interaction feedback.
