@@ -52,12 +52,14 @@ export const ExperienceTab = memo(function ExperienceTab() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: 0.1 + i * 0.08 }}
-                  className="bento-card !p-4 text-sm leading-relaxed text-muted-foreground"
+                  className="bento-card !p-4 text-sm leading-relaxed text-muted-foreground group hover:border-primary/50 transition-colors cursor-default flex items-start"
                 >
-                  <span className="mr-2 font-mono text-[10px] text-primary">
+                  <span className="inline-block mr-2 mt-[2px] font-mono text-[10px] text-primary transition-transform duration-300 group-hover:translate-x-1 shrink-0">
                     {String(i + 1).padStart(2, "0")}
                   </span>
-                  {b}
+                  <span className="inline-block transition-transform duration-300 group-hover:translate-x-1">
+                    {b}
+                  </span>
                 </motion.li>
               ))}
             </ul>
@@ -105,7 +107,7 @@ export const ExperienceTab = memo(function ExperienceTab() {
                     {ring.items.map((item, i) => (
                       <span
                         key={`${item}-${i}`}
-                        className="rounded-md border border-primary/20 bg-background/50 px-3 py-1.5 font-mono text-[11px] uppercase tracking-wider text-foreground/80 backdrop-blur transition-all hover:border-primary hover:text-primary hover:bg-primary/10 hover:shadow-[0_0_15px_rgba(var(--primary-rgb),0.2)] cursor-default"
+                        className="rounded-md border border-primary/20 bg-background/50 px-3 py-1.5 font-mono text-[11px] uppercase tracking-wider text-foreground/80 backdrop-blur transition-all hover:border-primary hover:text-primary hover:bg-primary/10 hover:shadow-[0_0_15px_hsl(var(--primary)/0.2)] cursor-default"
                       >
                         {item}
                       </span>
@@ -124,7 +126,7 @@ export const ExperienceTab = memo(function ExperienceTab() {
                 {techStack.concepts.map((c) => (
                   <span
                     key={c}
-                    className="rounded-md bg-primary/10 border border-primary/20 px-3 py-1.5 font-mono text-[11px] text-primary"
+                    className="rounded-md bg-primary/10 border border-primary/20 px-3 py-1.5 font-mono text-[11px] text-primary transition-all hover:bg-primary/20 hover:border-primary/40 hover:shadow-[0_0_15px_hsl(var(--primary)/0.15)] cursor-default"
                   >
                     {c}
                   </span>
