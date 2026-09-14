@@ -1,0 +1,3 @@
+## 2024-09-14 - Main Thread Rendering and Image Decoding Optimizations
+**Learning:** Moving synchronous, blocking telemetry actions (like user agent parsing or sessionStorage access) off the main thread ensures seamless page rendering and routing transitions. Similarly, leveraging native `decoding="async"` on heavy visual payloads unblocks the layout engine during complex Framer Motion animations.
+**Action:** Always wrap non-critical side effects in `requestIdleCallback` or equivalent API and aggressively utilize `decoding="async"` combined with lazy loading and high priority fetch configurations for all application assets.
