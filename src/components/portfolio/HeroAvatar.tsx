@@ -120,6 +120,7 @@ export function HeroAvatar() {
             onError={(e) => ((e.currentTarget as HTMLImageElement).style.display = "none")}
             className="h-full w-full rounded-2xl object-cover"
             loading="eager"
+            decoding="async"
           />
           <div className="absolute inset-0 -z-10 grid place-items-center">
             <span className="font-display text-5xl font-black text-gradient sm:text-6xl">
