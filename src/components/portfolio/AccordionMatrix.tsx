@@ -181,7 +181,7 @@ export function AccordionMatrix({ projects }: AccordionMatrixProps) {
                           {/* Left: Uncropped Image Pane */}
                           {project.image && (
                             <div className="lg:w-[55%] shrink-0">
-                              <div className="relative rounded-lg border border-primary/20 bg-black/40 p-1.5 shadow-[0_0_20px_rgba(var(--primary-rgb),0.08)]">
+                              <div className="relative rounded-lg border border-primary/20 bg-black/40 p-1.5 shadow-[0_0_20px_hsl(var(--primary)/0.08)]">
                                 {/* Sci-Fi Corner Accents */}
                                 <div className="absolute -left-px -top-px h-3 w-3 border-l-2 border-t-2 border-primary/60 rounded-tl-sm" />
                                 <div className="absolute -right-px -top-px h-3 w-3 border-r-2 border-t-2 border-primary/60 rounded-tr-sm" />
