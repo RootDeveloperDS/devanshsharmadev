@@ -43,6 +43,7 @@ export const VisarAgentButton = React.memo(function VisarAgentButton() {
         alt="VISAR AI Agent"
         className="h-10 w-10 object-contain drop-shadow-sm group-hover:drop-shadow-md transition-all duration-300"
         loading="eager"
+        decoding="async"
         fetchpriority="high"
       />
       {/* Pulsing indicator dot */}
