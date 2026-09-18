@@ -1,0 +1,3 @@
+## 2024-05-15 - Optimize Image Decoding and Memoize Visual Component
+**Learning:** `<img>` decoding defaults to `sync`, which can block the main thread and interrupt complex layout shifts and Framer Motion animations. Visual components like `HeroAvatar` that rely only on internal state and context should be memoized to prevent re-renders when parent components update.
+**Action:** Always add `decoding="async"` to `<img>` tags (especially those rendering below the fold or alongside animations) to offload decoding to background threads. Wrap purely visual, prop-less components in `React.memo` to save main thread cycles.
