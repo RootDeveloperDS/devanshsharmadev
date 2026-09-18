@@ -10,7 +10,7 @@ export const profile = {
   about:
     "Cognitive Systems Engineer focused on applied AI and intelligent architectures. Strong capability in integrating LLMs, vision cores, and voice engines into high-performance, user-facing products with a strict focus on modularity, zero-idle telemetry, and production-level deployments.",
   philosophy: "If it can think, it can evolve.",
-  resumeUrl: "/ResumePerfect.pdf",
+  resumeUrl: "/My Resume Latest 3.pdf",
   profileImage: "/profile.png",
   status: {
     state: "ONLINE",
