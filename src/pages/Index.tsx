@@ -45,7 +45,12 @@ function PortfolioShell() {
   }, [legacyTab, location.pathname, navigate]);
 
   useEffect(() => {
-    sendTelegramNotification("Entered Portfolio", { initialTab: active, pathname: location.pathname });
+    const notify = () => sendTelegramNotification("Entered Portfolio", { initialTab: active, pathname: location.pathname });
+    if ("requestIdleCallback" in window) {
+      window.requestIdleCallback(notify);
+    } else {
+      setTimeout(notify, 1);
+    }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
