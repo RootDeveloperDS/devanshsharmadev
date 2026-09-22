@@ -119,6 +119,7 @@ export function HeroAvatar() {
             alt="Devansh Sharma - Applied AI Systems Developer Profile Picture"
             onError={(e) => ((e.currentTarget as HTMLImageElement).style.display = "none")}
             className="h-full w-full rounded-2xl object-cover"
+            decoding="async"
             loading="eager"
           />
           <div className="absolute inset-0 -z-10 grid place-items-center">

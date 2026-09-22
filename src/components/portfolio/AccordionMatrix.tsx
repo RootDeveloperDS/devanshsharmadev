@@ -191,6 +191,7 @@ export function AccordionMatrix({ projects }: AccordionMatrixProps) {
                                   src={optimizeImage(project.image)}
                                   alt={`${project.name} preview`}
                                   className="w-full h-auto max-h-[400px] object-contain rounded-md"
+                                  decoding="async"
                                   loading="lazy"
                                   onError={(e) => {
                                     const target = e.currentTarget;
