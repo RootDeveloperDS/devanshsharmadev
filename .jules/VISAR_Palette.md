@@ -1,0 +1,3 @@
+## 2024-09-24 - Improve Form Inputs and Buttons UX
+**Learning:** Proper visual feedback and tactile interaction are essential for creating a premium feel and accessible design. Static elements that lack hover/focus states or rely on instantaneous CSS changes feel jarring.
+**Action:** Implemented the `group` class, `active:scale-95` on buttons, and `transition-all duration-200` combined with `focus-visible:ring-primary` on UI elements (buttons, inputs, textareas) and `focus:ring-primary` on non-ui terminal inputs to ensure that every interactive element provides clear, smooth, and accessible feedback without abruptly changing layouts.
