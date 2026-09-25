@@ -1,0 +1,3 @@
+## 2024-03-20 - Image Loading & Component Rendering Optimizations
+**Learning:** Adding `decoding="async"` to `<img>` tags is a highly effective way to unblock the main thread during render, particularly for applications like this with complex Framer Motion animations. Additionally, for components nested in highly dynamic layouts (e.g., ThemeToggle, HeroAvatar), failing to wrap purely visual or presentational components in `React.memo` causes unnecessary re-renders when outer shell state (like scroll or mouse coordinates) changes.
+**Action:** Always wrap visual-only, prop-less components in `React.memo` (like `HeroAvatar` and `ThemeToggle`). Aggressively apply `decoding="async"` to images to ensure smooth animations.
