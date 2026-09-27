@@ -1,0 +1,3 @@
+## 2024-05-24 - Layout Reflows and Tactile Interaction Feedback
+**Learning:** Using `hover:gap-*` properties on parent containers to push elements apart on hover triggers costly layout reflows and can cause sudden jittery UI changes on slower devices.
+**Action:** Replace `hover:gap-*` layout modifications with `group-hover:translate-*` on the child elements (e.g. icons). This shifts the elements visually using GPU-accelerated transforms without disrupting the layout. Additionally, always provide clear, tactile feedback for interactive elements by applying `active:scale-95` and `transition-all`.
