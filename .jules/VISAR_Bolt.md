@@ -1,0 +1,3 @@
+## 2025-02-22 - Optimize Component Renders and Image Decoding
+**Learning:** Purely visual UI components (like `HeroAvatar` and `ThemeToggle`) nested within contexts or layouts can unnecessarily re-render on unrelated state changes, consuming CPU cycles. Additionally, eager image decoding blocks the main thread, leading to potential stuttering, especially during complex Framer Motion animation lifecycles.
+**Action:** Applied `React.memo` to purely visual components to skip unnecessary rendering phases. Aggressively implemented `decoding="async"` across all `<img>` tags (lazy and eager alike) to offload the decoding process from the main thread, resulting in a significantly smoother visual output and better runtime responsiveness.
