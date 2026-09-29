@@ -1,0 +1,3 @@
+## 2024-03-12 - Improved Interaction Feedback and Glow Effects
+**Learning:** Layout-shifting animations on hover (like animating `gap` or margins) create a jittery, unpolished feel as adjacent elements are forced to reflow. Furthermore, using non-existent CSS color variables for dynamic themes silently breaks visual effects like glowing shadows, degrading the premium experience.
+**Action:** When implementing interaction feedback, always prefer composite-only properties like `transform` (e.g., `group-hover:translate-x-1` and `active:scale-95`) over layout properties. Ensure dynamic shadows in Tailwind use proper HSL color functions wrapping the existing theme variables (e.g., `hsl(var(--primary)/0.15)`) instead of raw `rgba` with incorrect suffix assumptions.
