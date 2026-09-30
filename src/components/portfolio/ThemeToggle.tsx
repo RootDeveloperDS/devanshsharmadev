@@ -1,9 +1,11 @@
+import React from "react";
 import { motion } from "framer-motion";
 import { Cpu, Sun } from "lucide-react";
 import { useTheme } from "./ThemeProvider";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 
-export function ThemeToggle() {
+// ⚡ Bolt: Wrap ThemeToggle in React.memo to prevent unnecessary re-renders
+export const ThemeToggle = React.memo(function ThemeToggle() {
   const { theme, toggleTheme } = useTheme();
   const isVisar = theme === "visar";
 
@@ -34,4 +36,4 @@ export function ThemeToggle() {
       </TooltipContent>
     </Tooltip>
   );
-}
+});

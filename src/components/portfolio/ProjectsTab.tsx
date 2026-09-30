@@ -110,6 +110,7 @@ export const ProjectsTab = memo(function ProjectsTab() {
             {/* Visual Payload OR Custom Mockups */}
             {project.image ? (
               <div className="relative mt-6 flex-1 flex flex-col justify-center items-center overflow-hidden">
+                {/* ⚡ Bolt: Offload image decoding from the main thread using decoding="async" to unblock Framer Motion animations */}
                 <img 
                   src={optimizeImage(project.image)} 
                   alt={`${project.name} Interface`} 
@@ -118,6 +119,7 @@ export const ProjectsTab = memo(function ProjectsTab() {
                   }`}
                   loading={idx < 2 ? "eager" : "lazy"}
                   fetchpriority={idx < 2 ? "high" : "auto"}
+                  decoding="async"
                   onError={(e) => {
                     // Bulletproof Fallback: If jsDelivr fails, revert to raw GitHub URL instantly
                     const target = e.currentTarget;

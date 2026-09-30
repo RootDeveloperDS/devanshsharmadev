@@ -187,11 +187,13 @@ export function AccordionMatrix({ projects }: AccordionMatrixProps) {
                                 <div className="absolute -right-px -top-px h-3 w-3 border-r-2 border-t-2 border-primary/60 rounded-tr-sm" />
                                 <div className="absolute -left-px -bottom-px h-3 w-3 border-l-2 border-b-2 border-primary/60 rounded-bl-sm" />
                                 <div className="absolute -right-px -bottom-px h-3 w-3 border-r-2 border-b-2 border-primary/60 rounded-br-sm" />
+                                {/* ⚡ Bolt: Offload image decoding from the main thread using decoding="async" to unblock Framer Motion animations */}
                                 <img
                                   src={optimizeImage(project.image)}
                                   alt={`${project.name} preview`}
                                   className="w-full h-auto max-h-[400px] object-contain rounded-md"
                                   loading="lazy"
+                                  decoding="async"
                                   onError={(e) => {
                                     const target = e.currentTarget;
                                     if (project.image && target.src !== project.image) {
