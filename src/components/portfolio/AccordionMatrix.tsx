@@ -1,4 +1,4 @@
-import { useState, useMemo } from "react";
+import { useState, useMemo, memo } from "react";
 import { useSearchParams } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { Github, ArrowUpRight, ChevronRight, Database } from "lucide-react";
@@ -36,7 +36,7 @@ interface AccordionMatrixProps {
   projects: Project[];
 }
 
-export function AccordionMatrix({ projects }: AccordionMatrixProps) {
+export const AccordionMatrix = memo(function AccordionMatrix({ projects }: AccordionMatrixProps) {
   const [searchParams, setSearchParams] = useSearchParams();
   const activeCategory = searchParams.get("category") || "all";
   const expandedId = searchParams.get("project") || null;
@@ -302,4 +302,4 @@ export function AccordionMatrix({ projects }: AccordionMatrixProps) {
       </div>
     </div>
   );
-}
+});
