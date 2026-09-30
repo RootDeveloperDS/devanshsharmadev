@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, memo } from "react";
 import {
   Command as Cmdk,
   CommandDialog,
@@ -33,7 +33,7 @@ interface Props {
   onOpenChange: (open: boolean) => void;
 }
 
-export function CommandPalette({ onNavigate, open, onOpenChange }: Props) {
+export const CommandPalette = memo(function CommandPalette({ onNavigate, open, onOpenChange }: Props) {
   const setOpen = onOpenChange;
   const { theme, toggleTheme } = useTheme();
 
@@ -145,4 +145,4 @@ export function CommandPalette({ onNavigate, open, onOpenChange }: Props) {
       <Cmdk className="hidden" />
     </CommandDialog>
   );
-}
+});

@@ -1,3 +1,5 @@
+import React from "react";
+import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import {
   Github,
@@ -35,6 +37,23 @@ interface FooterProps {
   onNavigate: (id: TabId) => void;
 }
 
+// ⚡ Bolt: Cache derived social item groups outside render loop
+const categories = [
+  "Code & AI",
+  "Professional",
+  "Social & Chat",
+  "Writing & Dev",
+  "Bio & Portfolios"
+] as const;
+
+const groupedSocialItems = categories.reduce((acc, cat) => {
+  acc[cat] = socialItems.filter((i) => i.category === cat);
+  return acc;
+}, {} as Record<typeof categories[number], typeof socialItems>);
+
+// ⚡ Bolt: Prevent re-evaluating Date on every render
+const currentYear = new Date().getFullYear();
+
 // Icon mapper helper
 function renderSocialIcon(iconName: string, className: string = "h-4 w-4") {
   switch (iconName) {
@@ -59,23 +78,14 @@ function renderSocialIcon(iconName: string, className: string = "h-4 w-4") {
   }
 }
 
-export function Footer({ onNavigate }: FooterProps) {
-  const currentYear = new Date().getFullYear();
+// ⚡ Bolt: Memoize Footer to prevent re-renders when outer shell state changes
+export const Footer = React.memo(function Footer({ onNavigate }: FooterProps) {
   const { theme } = useTheme();
 
   const isLight = theme === "executive";
   const snakeSvgUrl = isLight
     ? "https://raw.githubusercontent.com/RootDeveloperDS/RootDeveloperDS/output/github-contribution-grid-snake.svg"
     : "https://raw.githubusercontent.com/RootDeveloperDS/RootDeveloperDS/output/github-contribution-grid-snake-dark.svg";
-
-  // Group social items by category
-  const categories = [
-    "Code & AI",
-    "Professional",
-    "Social & Chat",
-    "Writing & Dev",
-    "Bio & Portfolios"
-  ] as const;
 
   return (
     <footer className="relative border-t border-border/80 bg-background/80 backdrop-blur-xl pt-12 pb-8 overflow-hidden z-20">
@@ -176,9 +186,13 @@ export function Footer({ onNavigate }: FooterProps) {
 
           {/* BRAND COLUMN (4 cols) */}
           <div className="md:col-span-5 space-y-4">
-            <button
-              onClick={() => onNavigate("overview")}
-              className="flex items-center gap-2.5 group text-left"
+            <Link
+              to="/"
+              onClick={(e) => {
+                e.preventDefault();
+                onNavigate("overview");
+              }}
+              className="flex items-center gap-2.5 group text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 ring-offset-background rounded-lg"
               aria-label="Devansh Sharma Home"
             >
               <span className="relative grid h-9 w-9 place-items-center">
@@ -193,7 +207,7 @@ export function Footer({ onNavigate }: FooterProps) {
                   Full Stack AI Architect
                 </span>
               </div>
-            </button>
+            </Link>
 
             <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">
               {profile.subheadline}
@@ -220,26 +234,33 @@ export function Footer({ onNavigate }: FooterProps) {
               // Navigation
             </h4>
             <ul className="space-y-2 text-sm font-medium">
-              {tabs.map((t) => (
-                <li key={t.id}>
-                  <button
-                    onClick={() => onNavigate(t.id)}
-                    className="flex items-center gap-2 text-muted-foreground hover:text-primary transition-colors text-xs sm:text-sm group"
-                  >
-                    <span className="font-mono text-[10px] text-primary/60 group-hover:text-primary">
-                      {t.mono}
-                    </span>
-                    <span>{t.label}</span>
-                  </button>
-                </li>
-              ))}
+              {tabs.map((t) => {
+                const routePath = t.id === "overview" ? "/" : `/${t.id}`;
+                return (
+                  <li key={t.id}>
+                    <Link
+                      to={routePath}
+                      onClick={(e) => {
+                        e.preventDefault();
+                        onNavigate(t.id);
+                      }}
+                      className="flex items-center gap-2 text-muted-foreground hover:text-primary transition-colors text-xs sm:text-sm group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-sm"
+                    >
+                      <span className="font-mono text-[10px] text-primary/60 group-hover:text-primary">
+                        {t.mono}
+                      </span>
+                      <span>{t.label}</span>
+                    </Link>
+                  </li>
+                );
+              })}
               <li className="pt-1">
                 <a
                   href={profile.resumeUrl}
                   target="_blank"
                   rel="noopener noreferrer"
                   onClick={() => sendTelegramNotification("Viewed Résumé (Footer Link)", { file: profile.resumeUrl })}
-                  className="flex items-center gap-2 text-xs sm:text-sm text-muted-foreground hover:text-primary transition-colors"
+                  className="flex items-center gap-2 text-xs sm:text-sm text-muted-foreground hover:text-primary transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-sm"
                 >
                   <Eye className="h-3.5 w-3.5 text-primary" />
                   <span>View Résumé</span>
@@ -250,7 +271,7 @@ export function Footer({ onNavigate }: FooterProps) {
                   href={profile.resumeUrl}
                   download
                   onClick={() => sendTelegramNotification("Downloaded Résumé (Footer Link)", { file: profile.resumeUrl })}
-                  className="flex items-center gap-2 text-xs sm:text-sm text-muted-foreground hover:text-primary transition-colors"
+                  className="flex items-center gap-2 text-xs sm:text-sm text-muted-foreground hover:text-primary transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-sm"
                 >
                   <FileDown className="h-3.5 w-3.5 text-primary" />
                   <span>Download Résumé</span>
@@ -268,7 +289,7 @@ export function Footer({ onNavigate }: FooterProps) {
               <a
                 href={`mailto:${socials.email}`}
                 onClick={() => sendTelegramNotification("Clicked Direct Email (Footer)", { email: socials.email })}
-                className="flex items-center justify-between gap-2 rounded-xl border border-border bg-secondary/30 p-3 hover:border-primary/50 hover:bg-secondary/60 transition-all text-foreground group"
+                className="flex items-center justify-between gap-2 rounded-xl border border-border bg-secondary/30 p-3 hover:border-primary/50 hover:bg-secondary/60 transition-all duration-200 active:scale-[0.98] text-foreground group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 ring-offset-background"
               >
                 <div className="flex items-center gap-2.5 truncate">
                   <Mail className="h-4 w-4 text-primary shrink-0" />
@@ -282,7 +303,7 @@ export function Footer({ onNavigate }: FooterProps) {
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={() => sendTelegramNotification("Clicked External Website (Footer)", { url: socials.website })}
-                className="flex items-center justify-between gap-2 rounded-xl border border-border bg-secondary/30 p-3 hover:border-primary/50 hover:bg-secondary/60 transition-all text-foreground group"
+                className="flex items-center justify-between gap-2 rounded-xl border border-border bg-secondary/30 p-3 hover:border-primary/50 hover:bg-secondary/60 transition-all duration-200 active:scale-[0.98] text-foreground group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 ring-offset-background"
               >
                 <div className="flex items-center gap-2.5 truncate">
                   <Globe className="h-4 w-4 text-primary shrink-0" />
@@ -291,16 +312,20 @@ export function Footer({ onNavigate }: FooterProps) {
                 <ArrowUpRight className="h-3.5 w-3.5 text-muted-foreground group-hover:text-primary transition-colors shrink-0" />
               </a>
 
-              <button
-                onClick={() => onNavigate("terminal")}
-                className="w-full flex items-center justify-between gap-2 rounded-xl border border-primary/30 bg-primary/10 p-3 hover:bg-primary/20 transition-all text-primary font-medium"
+              <Link
+                to="/terminal"
+                onClick={(e) => {
+                  e.preventDefault();
+                  onNavigate("terminal");
+                }}
+                className="w-full flex items-center justify-between gap-2 rounded-xl border border-primary/30 bg-primary/10 p-3 hover:bg-primary/20 transition-all duration-200 active:scale-[0.98] text-primary font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 ring-offset-background"
               >
                 <div className="flex items-center gap-2.5">
                   <Terminal className="h-4 w-4 shrink-0" />
                   <span className="text-xs">Open Terminal Comms</span>
                 </div>
                 <span className="text-[10px] uppercase font-mono tracking-wider bg-primary/20 px-2 py-0.5 rounded">Interactive</span>
-              </button>
+              </Link>
             </div>
           </div>
         </div>
@@ -323,8 +348,8 @@ export function Footer({ onNavigate }: FooterProps) {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {categories.map((cat) => {
-              const items = socialItems.filter((i) => i.category === cat);
-              if (items.length === 0) return null;
+              const items = groupedSocialItems[cat];
+              if (!items || items.length === 0) return null;
               return (
                 <div key={cat} className="space-y-2.5">
                   <div className="text-[11px] font-mono font-medium text-muted-foreground/80 uppercase tracking-wider">
@@ -337,8 +362,9 @@ export function Footer({ onNavigate }: FooterProps) {
                         href={item.href}
                         target="_blank"
                         rel="noopener noreferrer"
+                        aria-label={`Visit ${item.name}`}
                         onClick={() => sendTelegramNotification("Clicked Social Matrix Link", { name: item.name, category: cat, url: item.href })}
-                        className={`group flex items-center justify-between gap-2 rounded-lg border px-3 py-2 text-xs transition-all duration-200 ${
+                        className={`group flex items-center justify-between gap-2 rounded-lg border px-3 py-2 text-xs transition-all duration-200 active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 ring-offset-background ${
                           item.isRepo
                             ? "border-primary/50 bg-primary/10 text-primary font-semibold hover:bg-primary/20 hover:border-primary"
                             : item.featured
@@ -383,7 +409,7 @@ export function Footer({ onNavigate }: FooterProps) {
               target="_blank"
               rel="noopener noreferrer"
               onClick={() => sendTelegramNotification("Clicked Open Source Portfolio Link (Footer Bottom)", { repo: socials.portfolioRepo })}
-              className="text-primary hover:underline font-semibold"
+              className="text-primary hover:underline font-semibold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-sm"
             >
               Open Source Portfolio Codebase
             </a>
@@ -399,4 +425,4 @@ export function Footer({ onNavigate }: FooterProps) {
       </div>
     </footer>
   );
-}
+});

@@ -1,7 +1,7 @@
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { useSearchParams } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import { Github, ArrowUpRight, ChevronRight } from "lucide-react";
+import { Github, ArrowUpRight, ChevronRight, Database } from "lucide-react";
 import type { Project } from "./data";
 import { sendTelegramNotification } from "@/lib/telegram";
 
@@ -41,10 +41,11 @@ export function AccordionMatrix({ projects }: AccordionMatrixProps) {
   const activeCategory = searchParams.get("category") || "all";
   const expandedId = searchParams.get("project") || null;
 
-  const filtered =
-    activeCategory === "all"
+  const filtered = useMemo(() => {
+    return activeCategory === "all"
       ? projects
       : projects.filter((p) => p.categories.includes(activeCategory as any));
+  }, [projects, activeCategory]);
 
   const toggle = (id: string) => {
     const newParams = new URLSearchParams(searchParams);
@@ -55,8 +56,8 @@ export function AccordionMatrix({ projects }: AccordionMatrixProps) {
       const proj = projects.find((p) => p.id === id);
       sendTelegramNotification("Expanded Project Accordion", {
         projectId: id,
-        projectTitle: proj ? proj.title : id,
-        subtitle: proj ? proj.subtitle : "",
+        projectTitle: proj ? proj.name : id,
+        subtitle: proj ? proj.tagline : "",
       });
     }
     setSearchParams(newParams, { replace: true });
@@ -86,7 +87,8 @@ export function AccordionMatrix({ projects }: AccordionMatrixProps) {
               newParams.delete("project");
               setSearchParams(newParams, { replace: true });
             }}
-            className={`font-mono text-[11px] uppercase tracking-widest px-3 py-1.5 rounded-sm border transition-all duration-200 ${
+            aria-pressed={activeCategory === f.id}
+            className={`font-mono text-[11px] uppercase tracking-widest px-3 py-1.5 rounded-sm border transition-all duration-200 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary ${
               activeCategory === f.id
                 ? "border-primary bg-primary/10 text-primary"
                 : "border-border text-muted-foreground hover:border-primary/40 hover:text-primary/70"
@@ -112,9 +114,11 @@ export function AccordionMatrix({ projects }: AccordionMatrixProps) {
               >
                 {/* Closed Row */}
                 <button
+                  id={`accordion-${project.id}`}
                   onClick={() => toggle(project.id)}
-                  className="w-full text-left group"
+                  className="w-full text-left group transition-all duration-200 active:scale-[0.99] focus-visible:outline-none focus-visible:bg-primary/5 focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-inset"
                   aria-expanded={isOpen}
+                  aria-controls={`panel-${project.id}`}
                 >
                   <div
                     className={`flex items-center gap-3 px-4 py-3.5 transition-colors duration-150 ${
@@ -159,6 +163,9 @@ export function AccordionMatrix({ projects }: AccordionMatrixProps) {
                 <AnimatePresence initial={false}>
                   {isOpen && (
                     <motion.div
+                      id={`panel-${project.id}`}
+                      role="region"
+                      aria-labelledby={`accordion-${project.id}`}
                       key="content"
                       initial={{ height: 0, opacity: 0 }}
                       animate={{ height: "auto", opacity: 1 }}
@@ -230,8 +237,9 @@ export function AccordionMatrix({ projects }: AccordionMatrixProps) {
                                   href={project.github}
                                   target="_blank"
                                   rel="noopener noreferrer"
-                                  onClick={() => sendTelegramNotification("Clicked Project Repository", { project: project.title, repo: project.github })}
-                                  className="inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-wider text-primary border border-primary/30 px-4 py-2 rounded hover:bg-primary hover:text-background transition-all duration-300"
+                                  aria-label={`View repository for ${project.name}`}
+                                  onClick={() => sendTelegramNotification("Clicked Project Repository", { project: project.name, repo: project.github })}
+                                  className="inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-wider text-primary border border-primary/30 px-4 py-2 rounded hover:bg-primary hover:text-background transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background"
                                 >
                                   <Github className="h-4 w-4" />
                                   Repository
@@ -242,8 +250,9 @@ export function AccordionMatrix({ projects }: AccordionMatrixProps) {
                                   href={project.live}
                                   target="_blank"
                                   rel="noopener noreferrer"
-                                  onClick={() => sendTelegramNotification("Clicked Live Project Link", { project: project.title, url: project.live })}
-                                  className="inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-wider text-primary border border-primary/30 px-4 py-2 rounded hover:bg-primary hover:text-background transition-all duration-300"
+                                  aria-label={`Execute live demo for ${project.name}`}
+                                  onClick={() => sendTelegramNotification("Clicked Live Project Link", { project: project.name, url: project.live })}
+                                  className="inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-wider text-primary border border-primary/30 px-4 py-2 rounded hover:bg-primary hover:text-background transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background"
                                 >
                                   <ArrowUpRight className="h-4 w-4" />
                                   Execute
@@ -263,9 +272,32 @@ export function AccordionMatrix({ projects }: AccordionMatrixProps) {
         </AnimatePresence>
 
         {filtered.length === 0 && (
-          <div className="px-6 py-10 text-center font-mono text-xs text-muted-foreground/50 uppercase tracking-widest">
-            // no systems in this category
-          </div>
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            className="flex flex-col items-center justify-center py-16 px-6 text-center border-t border-border"
+          >
+            <div className="mb-4 rounded-full bg-primary/10 p-3 border border-primary/20">
+              <Database className="h-6 w-6 text-primary/70" />
+            </div>
+            <p className="font-mono text-sm text-primary mb-2 uppercase tracking-wider">
+              [ NO SYSTEMS DETECTED ]
+            </p>
+            <p className="text-xs text-muted-foreground max-w-[250px] mx-auto mb-6">
+              The selected filter parameters returned no active records in the current matrix.
+            </p>
+            <button
+              onClick={() => {
+                const newParams = new URLSearchParams(searchParams);
+                newParams.set("category", "all");
+                setSearchParams(newParams);
+              }}
+              aria-label="Clear filters to show all active records"
+              className="inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-wider text-primary border border-primary/30 bg-primary/5 px-4 py-2 rounded hover:bg-primary/20 hover:border-primary/60 active:scale-95 transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+            >
+              Clear Filters
+            </button>
+          </motion.div>
         )}
       </div>
     </div>

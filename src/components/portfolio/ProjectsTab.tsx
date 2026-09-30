@@ -1,3 +1,4 @@
+import { memo } from "react";
 import { motion } from "framer-motion";
 import { ArrowUpRight, Github, Sparkles } from "lucide-react";
 import { projects } from "./data";
@@ -26,7 +27,7 @@ function optimizeImage(url: string | undefined) {
   return url;
 }
 
-export function ProjectsTab() {
+export const ProjectsTab = memo(function ProjectsTab() {
   return (
     <section className="mx-auto max-w-6xl">
       {/* ── Page Header ── */}
@@ -76,7 +77,7 @@ export function ProjectsTab() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: idx * 0.05 }}
-            className={`bento-card group flex flex-col justify-between ${spanClass[project.span] || ""}`}
+            className={`bento-card group flex flex-col justify-between focus-within:ring-2 focus-within:ring-primary focus-within:ring-offset-2 ring-offset-background ${spanClass[project.span] || ""}`}
           >
             <div>
               <div className="mb-3 flex items-center justify-between gap-2">
@@ -108,11 +109,11 @@ export function ProjectsTab() {
 
             {/* Visual Payload OR Custom Mockups */}
             {project.image ? (
-              <div className="relative mt-6 flex-1 flex flex-col justify-center items-center">
+              <div className="relative mt-6 flex-1 flex flex-col justify-center items-center overflow-hidden">
                 <img 
                   src={optimizeImage(project.image)} 
                   alt={`${project.name} Interface`} 
-                  className={`max-w-full object-contain rounded-xl border border-primary/20 bg-black/40 p-1 shadow-[0_0_15px_rgba(var(--primary-rgb),0.1)] ${
+                  className={`max-w-full object-contain rounded-xl border border-primary/20 bg-black/40 p-1 shadow-[0_0_15px_rgba(var(--primary-rgb),0.1)] transition-transform duration-500 group-hover:scale-[1.03] ${
                     project.span === "lg" ? "max-h-[24rem]" : "max-h-[14rem]"
                   }`}
                   loading={idx < 2 ? "eager" : "lazy"}
@@ -163,7 +164,8 @@ export function ProjectsTab() {
                   href={project.github}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className={`inline-flex items-center gap-2 font-medium text-primary hover:gap-3 transition-all ${project.span === "lg" ? "text-sm" : "text-xs"}`}
+                  aria-label={`View ${project.id === "jarvis" ? "Mark 1 → 21" : "GitHub"} repository for ${project.id === "visar-edge" ? "VISAR EDGE" : project.name}`}
+                  className={`inline-flex items-center gap-2 font-medium text-primary hover:gap-3 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 ring-offset-background rounded-sm ${project.span === "lg" ? "text-sm" : "text-xs"}`}
                 >
                   <Github className={project.span === "lg" ? "h-4 w-4" : "h-3.5 w-3.5"} /> {project.id === "jarvis" ? "Mark 1 → 21" : "GitHub"}
                 </a>
@@ -173,7 +175,8 @@ export function ProjectsTab() {
                   href={project.live}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className={`inline-flex items-center gap-2 font-medium text-primary hover:gap-3 transition-all ${project.span === "lg" ? "text-sm" : "text-xs"}`}
+                  aria-label={`View live demo for ${project.id === "visar-edge" ? "VISAR EDGE" : project.name}`}
+                  className={`inline-flex items-center gap-2 font-medium text-primary hover:gap-3 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 ring-offset-background rounded-sm ${project.span === "lg" ? "text-sm" : "text-xs"}`}
                 >
                   <ArrowUpRight className={project.span === "lg" ? "h-4 w-4" : "h-3.5 w-3.5"} /> Live Demo
                 </a>
@@ -190,4 +193,4 @@ export function ProjectsTab() {
       <AccordionMatrix projects={archiveProjects} />
     </section>
   );
-}
+});

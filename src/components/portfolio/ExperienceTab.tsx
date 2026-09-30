@@ -1,3 +1,4 @@
+import { memo } from "react";
 import { motion } from "framer-motion";
 import { Cpu } from "lucide-react";
 import { experience, techStack } from "./data";
@@ -8,7 +9,7 @@ const ringConfig = [
   { items: techStack.ai, radius: 185, duration: 60, label: "AI / ML" },
 ];
 
-export function ExperienceTab() {
+export const ExperienceTab = memo(function ExperienceTab() {
   return (
     <section className="mx-auto max-w-6xl">
       <motion.div
@@ -135,4 +136,4 @@ export function ExperienceTab() {
       </div>
     </section>
   );
-}
+});
