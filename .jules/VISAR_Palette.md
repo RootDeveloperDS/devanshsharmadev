@@ -1,0 +1,3 @@
+## 2024-09-30 - Improve interactive tactile feedback across main links and navigation
+**Learning:** Found that key navigation elements and project cards lacked tactile interaction feedback, relying only on color changes on hover, and sometimes causing layout shifts with `hover:gap-3`.
+**Action:** Replaced layout-reflowing properties like `gap` with composite-layer transforms via `group-hover:translate` and `group-hover:scale`. Added `active:scale-95` to key touchpoints (Command Palette, TopNav links, Project Links, and Open Source button) to simulate physical tactile clicks without relying on complex custom animations.
