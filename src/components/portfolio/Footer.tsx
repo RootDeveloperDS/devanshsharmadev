@@ -169,11 +169,13 @@ export const Footer = React.memo(function Footer({ onNavigate }: FooterProps) {
               <span>github.com/RootDeveloperDS</span>
             </div>
             <div className="overflow-x-auto rounded-lg border border-border/60 bg-background/50 p-2 backdrop-blur-sm">
+              {/* ⚡ Bolt: Offload image decoding from the main thread using decoding="async" to unblock Framer Motion animations */}
               <img
                 src={snakeSvgUrl}
                 alt="GitHub Contribution Snake Stream"
                 className="w-full min-w-[600px] h-auto object-contain transition-opacity duration-300"
                 loading="lazy"
+                decoding="async"
               />
             </div>
           </div>

@@ -1,0 +1,3 @@
+## 2025-02-28 - Image Decoding and Memoization Optimization
+**Learning:** High-resolution and external images can cause main thread blocking during the decoding phase, which leads to jank in Framer Motion animations. Additionally, purely visual components like `HeroAvatar` and `ThemeToggle` without props that change often can cause unnecessary React re-renders when the parent components update.
+**Action:** Always add `decoding="async"` to `<img>` tags (especially those loaded eagerly or with high fetch priority) to offload decoding from the main thread. Always wrap purely visual components with `React.memo` to prevent unnecessary re-renders.
