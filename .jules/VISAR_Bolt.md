@@ -1,0 +1,3 @@
+## 2025-02-28 - Image Decoding Async Optimization & React.memo Optimization
+**Learning:** Adding `decoding="async"` to `<img>` tags offloads image decoding from the main thread, unblocking the layout engine, which is particularly beneficial during complex Framer Motion animations. Also, wrapping purely visual components with no props in `React.memo` (like `HeroAvatar`) prevents unnecessary re-renders.
+**Action:** Always add `decoding="async"` to both eager and lazy loaded `<img>` tags and proactively apply `React.memo` to purely visual components that do not rely on props.
