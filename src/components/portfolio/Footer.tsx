@@ -169,7 +169,7 @@ export const Footer = React.memo(function Footer({ onNavigate }: FooterProps) {
               <span>github.com/RootDeveloperDS</span>
             </div>
             <div className="overflow-x-auto rounded-lg border border-border/60 bg-background/50 p-2 backdrop-blur-sm">
-              <img
+              <img decoding="async"
                 src={snakeSvgUrl}
                 alt="GitHub Contribution Snake Stream"
                 className="w-full min-w-[600px] h-auto object-contain transition-opacity duration-300"

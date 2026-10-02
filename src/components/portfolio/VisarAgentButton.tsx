@@ -38,7 +38,7 @@ export const VisarAgentButton = React.memo(function VisarAgentButton() {
       className="fixed bottom-6 right-6 z-50 flex h-14 w-14 items-center justify-center rounded-full bg-background/50 shadow-lg backdrop-blur-md border border-border hover:shadow-xl transition-shadow group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 ring-offset-background"
       aria-label="VISAR AI Agent"
     >
-      <img
+      <img decoding="async"
         src={optimizedUrl}
         alt="VISAR AI Agent"
         className="h-10 w-10 object-contain drop-shadow-sm group-hover:drop-shadow-md transition-all duration-300"
