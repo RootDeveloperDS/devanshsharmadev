@@ -110,7 +110,7 @@ export const ProjectsTab = memo(function ProjectsTab() {
             {/* Visual Payload OR Custom Mockups */}
             {project.image ? (
               <div className="relative mt-6 flex-1 flex flex-col justify-center items-center overflow-hidden">
-                <img 
+                <img decoding="async"
                   src={optimizeImage(project.image)} 
                   alt={`${project.name} Interface`} 
                   className={`max-w-full object-contain rounded-xl border border-primary/20 bg-black/40 p-1 shadow-[0_0_15px_rgba(var(--primary-rgb),0.1)] transition-transform duration-500 group-hover:scale-[1.03] ${

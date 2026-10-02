@@ -1,0 +1,3 @@
+## 2024-03-22 - Optimizing Image Decoding and Component Rendering
+**Learning:** Adding `decoding="async"` to all images offloads image decoding from the main thread, unblocking the layout engine and ensuring smooth Framer Motion animations. Additionally, wrapping purely structural or isolated visual components like `TerminalTab` in `React.memo` prevents unnecessary re-renders when the parent application state changes.
+**Action:** Always utilize `decoding="async"` on images, especially in complex animation environments, and proactively memoize isolated components that don't depend on rapidly changing props.
