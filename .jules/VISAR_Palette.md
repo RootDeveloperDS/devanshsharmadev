@@ -1,0 +1,3 @@
+## 2023-10-27 - Tactile Feedback and Typography Alignment
+**Learning:** Adding active tactile feedback (`active:scale-95`) to interactive elements greatly enhances the premium feel, while ensuring typography stays properly aligned within complex flexbox containers prevents layout awkwardness.
+**Action:** Apply `active:scale-95` systematically to primary interactions. Use `flex items-start` and wrap multi-line text blocks in `<span>` tags next to bullet counters to prevent wrapping under the indicator.
