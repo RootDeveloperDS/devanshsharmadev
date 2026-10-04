@@ -239,7 +239,7 @@ export function AccordionMatrix({ projects }: AccordionMatrixProps) {
                                   rel="noopener noreferrer"
                                   aria-label={`View repository for ${project.name}`}
                                   onClick={() => sendTelegramNotification("Clicked Project Repository", { project: project.name, repo: project.github })}
-                                  className="inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-wider text-primary border border-primary/30 px-4 py-2 rounded hover:bg-primary hover:text-background transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+                                  className="inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-wider text-primary border border-primary/30 px-4 py-2 rounded hover:bg-primary hover:text-background active:scale-95 transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background"
                                 >
                                   <Github className="h-4 w-4" />
                                   Repository
@@ -252,7 +252,7 @@ export function AccordionMatrix({ projects }: AccordionMatrixProps) {
                                   rel="noopener noreferrer"
                                   aria-label={`Execute live demo for ${project.name}`}
                                   onClick={() => sendTelegramNotification("Clicked Live Project Link", { project: project.name, url: project.live })}
-                                  className="inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-wider text-primary border border-primary/30 px-4 py-2 rounded hover:bg-primary hover:text-background transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+                                  className="inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-wider text-primary border border-primary/30 px-4 py-2 rounded hover:bg-primary hover:text-background active:scale-95 transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background"
                                 >
                                   <ArrowUpRight className="h-4 w-4" />
                                   Execute
