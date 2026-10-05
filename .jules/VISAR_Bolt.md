@@ -1,0 +1,3 @@
+## 2024-05-15 - Image Decoding and Telemetry Deferral Optimization
+**Learning:** Large images and synchronous telemetry processing can block the main thread, causing jank during complex animations (especially with Framer Motion). Using `decoding="async"` on all images, whether eagerly or lazily loaded, successfully offloads decoding to another thread. Similarly, wrapping non-essential synchronous tasks like telemetry collection inside `requestIdleCallback` ensures the browser prioritizes rendering and interactive tasks.
+**Action:** Always add `decoding="async"` to `<img />` tags, and defer tasks like analytics or pre-fetching non-critical data with `requestIdleCallback` (with a `setTimeout` fallback for cross-browser support).
