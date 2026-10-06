@@ -1,0 +1,3 @@
+## 2024-10-06 - Image Decoding & Telemetry Deferral Optimization
+**Learning:** Adding `decoding="async"` is a safe, zero-cost way to unblock the main thread during heavy framer motion animations on page mount or scroll. Deferring fire-and-forget telemetry via `requestIdleCallback` (with cross-browser fallbacks) ensures event handlers return to the event loop quickly, boosting user-perceived responsiveness.
+**Action:** Always wrap analytical/telemetry calls in `requestIdleCallback` when they involve heavy string parsing or network dispatch, and default to `decoding="async"` for non-critical/lazy images to reduce layout thrashing.
