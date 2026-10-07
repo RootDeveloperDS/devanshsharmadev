@@ -1,0 +1,3 @@
+## 2024-03-24 - Async Image Decoding and Memoization
+**Learning:** Adding `decoding="async"` to image tags allows the browser to offload image decoding to background threads, unblocking the main thread during image heavy loads and Framer Motion layout animations. Purely static and functional components such as `HeroAvatar` and `TerminalTab` were unnecessarily re-rendering on parent context changes.
+**Action:** Implemented `decoding="async"` across images with `eager` and `lazy` loading, and added `React.memo` to stateless visual components like `HeroAvatar` and `TerminalTab` to reduce the rendering overhead. Next time, preemptively look for static components missing `memo()` wrappers.

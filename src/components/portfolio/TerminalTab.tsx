@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, memo } from "react";
 import { motion } from "framer-motion";
 import { Copy, Check, Github, Linkedin, Mail, Send, Twitter, FolderGit2, Globe, MessageSquare } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -279,7 +279,7 @@ function ChannelItem({ icon: Icon, label, value, href, copy }: typeof channels[0
   );
 }
 
-export function TerminalTab() {
+export const TerminalTab = memo(function TerminalTab() {
   const { theme } = useTheme();
 
   return (
@@ -318,4 +318,4 @@ export function TerminalTab() {
       </div>
     </section>
   );
-}
+});
