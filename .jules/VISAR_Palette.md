@@ -1,0 +1,3 @@
+## 2025-02-20 - Tactile Interaction Feedback for Interactive Elements
+**Learning:** Replacing simple `transition-colors` with `transition-all` alongside tactile pseudo-classes like `active:scale-95` introduces a premium, satisfying feel for clickable elements such as primary buttons and navigation links without relying on heavy or complex animation libraries.
+**Action:** Consistently apply `transition-all active:scale-95` to core navigational and interactive elements throughout the app to enhance perceived responsiveness and provide immediate visual feedback.
