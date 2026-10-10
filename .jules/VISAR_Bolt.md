@@ -1,0 +1,3 @@
+## 2024-05-15 - Optimize Image Loading and Defer Telemetry Execution
+**Learning:** Heavy image decoding and non-essential telemetry operations (like fetching IP data and metadata) can block the main thread, leading to jittery Framer Motion animations and delayed layout rendering.
+**Action:** Always aggressively add `decoding="async"` to all `<img>` tags to unblock the layout engine. Defer non-critical, synchronous operations (like telemetry generation) using `requestIdleCallback` (with a `setTimeout` fallback for compatibility) to execute them only when the browser main thread is idle, ensuring a smoother initial paint and interaction experience.
