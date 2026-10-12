@@ -1,0 +1,3 @@
+## 2024-10-12 - Optimized Image Rendering and Telemetry Dispatching
+**Learning:** React rendering, particularly with Framer Motion animations, can be blocked by heavy main-thread work. Both synchronous image decoding and eager telemetry gathering directly contend with UI paint updates.
+**Action:** Always aggressively apply `decoding="async"` to `<img>` tags (even eagerly loaded ones) to offload decoding overhead. Defer non-critical monitoring tools, like telemetry functions traversing the DOM or user agent, behind a guarded `requestIdleCallback` to allow the layout engine to prioritize immediate route transitions and animations.
