@@ -1,0 +1,5 @@
+## 2025-01-20 - Fix Layout Reflows and Arbitrary Tailwind Shadow Colors
+
+**Learning:** Animating layout properties like `gap` on hover states causes the layout engine to reflow, resulting in jumpy text and a lower-quality user experience. Additionally, when a project uses HSL tokens for its CSS variables (e.g., `--primary: 210 100% 50%`), attempting to construct an arbitrary shadow value with `rgba(var(--primary-rgb), 0.1)` fails because the `-rgb` suffixed variable doesn't exist, breaking the premium visual glow.
+
+**Action:** For interactive element hover states, avoid transitioning margin or `gap`. Instead, apply a `group` class to the parent container and performant `transform` animations (like `group-hover:scale-110` or `group-hover:translate-x-1`) to inner icon child elements. For arbitrary color values, construct them using the correct `hsl()` syntax when dealing with HSL CSS variables, such as `shadow-[0_0_15px_hsl(var(--primary)/0.15)]`.
