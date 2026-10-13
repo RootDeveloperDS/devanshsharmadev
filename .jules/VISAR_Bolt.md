@@ -1,0 +1,3 @@
+## 2024-10-13 - Non-Critical Main Thread Optimization & Image Decoding
+**Learning:** `requestIdleCallback` is powerful for deferring non-essential operations like telemetry, but it requires fallback (`setTimeout`) and SSR-safety (`typeof window !== "undefined"`) when working in Next.js/Vite SSR environments. Additionally, `decoding="async"` on images is a small but highly effective way to unblock the main thread during render.
+**Action:** Always wrap heavy logging/analytics calls in a deferred idle callback, and systematically apply `decoding="async"` to `<img />` tags containing visual assets.
