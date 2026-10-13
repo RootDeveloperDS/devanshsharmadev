@@ -113,7 +113,7 @@ export const ProjectsTab = memo(function ProjectsTab() {
                 <img 
                   src={optimizeImage(project.image)} 
                   alt={`${project.name} Interface`} 
-                  className={`max-w-full object-contain rounded-xl border border-primary/20 bg-black/40 p-1 shadow-[0_0_15px_rgba(var(--primary-rgb),0.1)] transition-transform duration-500 group-hover:scale-[1.03] ${
+                  className={`max-w-full object-contain rounded-xl border border-primary/20 bg-black/40 p-1 shadow-[0_0_15px_hsl(var(--primary)/0.1)] transition-transform duration-500 group-hover:scale-[1.03] ${
                     project.span === "lg" ? "max-h-[24rem]" : "max-h-[14rem]"
                   }`}
                   loading={idx < 2 ? "eager" : "lazy"}
@@ -165,9 +165,9 @@ export const ProjectsTab = memo(function ProjectsTab() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={`View ${project.id === "jarvis" ? "Mark 1 → 21" : "GitHub"} repository for ${project.id === "visar-edge" ? "VISAR EDGE" : project.name}`}
-                  className={`inline-flex items-center gap-2 font-medium text-primary hover:gap-3 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 ring-offset-background rounded-sm ${project.span === "lg" ? "text-sm" : "text-xs"}`}
+                  className={`inline-flex items-center gap-2 font-medium text-primary group active:scale-95 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 ring-offset-background rounded-sm ${project.span === "lg" ? "text-sm" : "text-xs"}`}
                 >
-                  <Github className={project.span === "lg" ? "h-4 w-4" : "h-3.5 w-3.5"} /> {project.id === "jarvis" ? "Mark 1 → 21" : "GitHub"}
+                  <Github className={`transition-transform duration-300 group-hover:scale-110 ${project.span === "lg" ? "h-4 w-4" : "h-3.5 w-3.5"}`} /> {project.id === "jarvis" ? "Mark 1 → 21" : "GitHub"}
                 </a>
               )}
               {project.live && (
@@ -176,9 +176,9 @@ export const ProjectsTab = memo(function ProjectsTab() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={`View live demo for ${project.id === "visar-edge" ? "VISAR EDGE" : project.name}`}
-                  className={`inline-flex items-center gap-2 font-medium text-primary hover:gap-3 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 ring-offset-background rounded-sm ${project.span === "lg" ? "text-sm" : "text-xs"}`}
+                  className={`inline-flex items-center gap-2 font-medium text-primary group active:scale-95 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 ring-offset-background rounded-sm ${project.span === "lg" ? "text-sm" : "text-xs"}`}
                 >
-                  <ArrowUpRight className={project.span === "lg" ? "h-4 w-4" : "h-3.5 w-3.5"} /> Live Demo
+                  <ArrowUpRight className={`transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 ${project.span === "lg" ? "h-4 w-4" : "h-3.5 w-3.5"}`} /> Live Demo
                 </a>
               )}
             </div>

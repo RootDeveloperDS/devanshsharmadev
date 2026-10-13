@@ -1,0 +1,3 @@
+## 2024-05-18 - Fix HSL Shadow Values and Reflows
+**Learning:** Tailwind arbitrary shadow values using CSS variables require careful syntax. When the variable is an HSL value (like `--primary` in shadcn/ui), using `rgba(var(--primary-rgb), <alpha>)` breaks the CSS parser. It must be written as `hsl(var(--primary)/<alpha>)`. Also, animating margin/padding/gap on hover causes unwanted layout reflows (jumping text); animating transforms (`group-hover:scale`, `group-hover:translate`) combined with a `group` parent is safer and visually smoother.
+**Action:** Always check the root CSS variables format (RGB vs HSL) before constructing arbitrary colors in Tailwind, and prefer `transform` classes for hover animations to prevent layout shifts.
