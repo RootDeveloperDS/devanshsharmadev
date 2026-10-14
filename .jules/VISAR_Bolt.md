@@ -1,0 +1,3 @@
+## 2025-02-28 - Image Decoding & Telegram Notification Deferral
+**Learning:** Adding `decoding="async"` to images allows browsers to offload image decoding to a background thread, preventing main-thread blocking and improving layout rendering speed, especially during complex Framer Motion animations. Additionally, non-essential operations like telemetry (Telegram notifications) can block the main thread; deferring them using `requestIdleCallback` (with a `setTimeout` fallback) improves initial page responsiveness and interaction readiness.
+**Action:** Always include `decoding="async"` on all images, whether eagerly or lazily loaded, and use `requestIdleCallback` to defer non-critical analytics or tracking tasks outside the main execution path.
