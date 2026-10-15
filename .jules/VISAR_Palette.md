@@ -1,0 +1,3 @@
+## 2024-05-24 - Improve Interaction Feedback and Eliminate Reflows
+**Learning:** Adding layout-altering properties like `gap` on hover causes unintended text jumping and layout reflows, which degrade the premium feel of the application. Furthermore, many primary interactive buttons lacked tactile feedback, feeling "dead" when clicked.
+**Action:** Replaced `hover:gap` with a combination of `.group` on the parent and `group-hover:translate-x-1` on child elements for smooth visual feedback without reflows. Additionally, consistently applied Tailwind's `active:scale-95` to primary buttons and links (such as those in the TopNav and project cards) to provide subtle, premium tactile feedback upon interaction.
