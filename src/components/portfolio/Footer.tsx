@@ -260,7 +260,7 @@ export const Footer = React.memo(function Footer({ onNavigate }: FooterProps) {
                   target="_blank"
                   rel="noopener noreferrer"
                   onClick={() => sendTelegramNotification("Viewed Résumé (Footer Link)", { file: profile.resumeUrl })}
-                  className="flex items-center gap-2 text-xs sm:text-sm text-muted-foreground hover:text-primary transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-sm"
+                  className="flex items-center gap-2 text-xs sm:text-sm text-muted-foreground hover:text-primary transition-all duration-200 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-sm"
                 >
                   <Eye className="h-3.5 w-3.5 text-primary" />
                   <span>View Résumé</span>
@@ -271,7 +271,7 @@ export const Footer = React.memo(function Footer({ onNavigate }: FooterProps) {
                   href={profile.resumeUrl}
                   download
                   onClick={() => sendTelegramNotification("Downloaded Résumé (Footer Link)", { file: profile.resumeUrl })}
-                  className="flex items-center gap-2 text-xs sm:text-sm text-muted-foreground hover:text-primary transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-sm"
+                  className="flex items-center gap-2 text-xs sm:text-sm text-muted-foreground hover:text-primary transition-all duration-200 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-sm"
                 >
                   <FileDown className="h-3.5 w-3.5 text-primary" />
                   <span>Download Résumé</span>
