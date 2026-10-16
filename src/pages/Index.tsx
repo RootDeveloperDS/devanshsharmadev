@@ -45,7 +45,16 @@ function PortfolioShell() {
   }, [legacyTab, location.pathname, navigate]);
 
   useEffect(() => {
-    sendTelegramNotification("Entered Portfolio", { initialTab: active, pathname: location.pathname });
+    if (typeof window !== "undefined") {
+      const sendInitialTelemetry = () => {
+        sendTelegramNotification("Entered Portfolio", { initialTab: active, pathname: location.pathname });
+      };
+      if ('requestIdleCallback' in window) {
+        window.requestIdleCallback(sendInitialTelemetry);
+      } else {
+        setTimeout(sendInitialTelemetry, 1);
+      }
+    }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -53,7 +62,16 @@ function PortfolioShell() {
   const handleNavigate = useCallback(
     (id: TabId) => {
       if (id !== active) {
-        sendTelegramNotification("Navigated Tab", { from: active, to: id });
+        if (typeof window !== "undefined") {
+          const sendNavTelemetry = () => {
+            sendTelegramNotification("Navigated Tab", { from: active, to: id });
+          };
+          if ('requestIdleCallback' in window) {
+            window.requestIdleCallback(sendNavTelemetry);
+          } else {
+            setTimeout(sendNavTelemetry, 1);
+          }
+        }
       }
       const targetPath = id === "overview" ? "/" : `/${id}`;
       if (location.pathname !== targetPath) {
