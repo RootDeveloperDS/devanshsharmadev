@@ -1,0 +1,3 @@
+## 2024-05-20 - Image Decoding & Telemetry Offloading
+**Learning:** Adding `decoding="async"` to all images ensures large asset decoding does not block the main rendering thread. Additionally, deferring non-essential telemetry payloads via `requestIdleCallback` (with a `setTimeout` fallback) significantly improves Time to Interactive and prevents jank during complex UI interactions.
+**Action:** Always aggressively apply `decoding="async"` to `<img>` tags on heavily visual sites, and shift non-blocking background logic like telemetry tracking out of the immediate execution path using `requestIdleCallback`.
