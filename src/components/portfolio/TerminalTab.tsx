@@ -154,7 +154,7 @@ function TerminalView() {
             <Button
               onClick={handleSend}
               disabled={status === "sending"}
-              className="w-full rounded-md sm:w-auto"
+              className="w-full rounded-md sm:w-auto active:scale-95 transition-all duration-200"
             >
               <Send /> {status === "sending" ? "Transmitting..." : "Transmit"}
             </Button>
@@ -213,7 +213,7 @@ function ExecutiveContactForm() {
         <Label htmlFor="message">Message</Label>
         <Textarea id="message" name="message" placeholder="What are you building?" rows={6} className="mt-1.5" required />
       </div>
-      <Button type="submit" size="lg" className="rounded-md">
+      <Button type="submit" size="lg" className="rounded-md active:scale-95 transition-all duration-200">
         <Send /> Send message
       </Button>
     </form>
