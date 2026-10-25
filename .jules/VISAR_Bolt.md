@@ -1,0 +1,3 @@
+## 2026-10-25 - Image Loading and Telemetry Optimizations
+**Learning:** High-resolution and numerous images across the portfolio components (e.g., `ProjectsTab`, `HeroAvatar`) can block the main thread during HTML parsing and layout generation if decoded synchronously. Furthermore, non-essential operations like telemetry in `sendTelegramNotification` can delay critical rendering if not explicitly deferred.
+**Action:** Always aggressively add `decoding="async"` to `<img>` tags (both eager and lazy-loaded) to offload decoding work. Wrap non-critical async functionality, such as telemetry fetch requests, in `requestIdleCallback` (with a timeout fallback) to ensure they are deferred until the main thread is idle.
