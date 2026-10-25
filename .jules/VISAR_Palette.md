@@ -1,0 +1,3 @@
+## 2024-05-28 - Interaction and Focus Feedback Improvements
+**Learning:** Animating properties like `gap` on hover (`hover:gap-3`) causes unexpected layout reflows and jumping text, degrading the premium feel. Furthermore, text inputs with subtle focus borders can feel unresponsive or inaccessible without clear, animated focus rings.
+**Action:** Replace layout-shifting hover classes with parent `group` and smooth child `transform` animations (e.g., `group-hover:translate-x`, `group-hover:scale-110`). Ensure all inputs have clear focus rings (`focus:ring-1 focus:ring-primary transition-all`) to provide immediate, accessible visual feedback. Added `active:scale-95` to clickable elements for better tactile interaction.
