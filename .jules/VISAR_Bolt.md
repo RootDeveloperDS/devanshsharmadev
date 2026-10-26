@@ -1,0 +1,3 @@
+## 2024-10-26 - Non-blocking Telemetry & Async Image Decoding
+**Learning:** Adding `decoding="async"` on heavy `<img>` elements prevents layout jank by removing image decode operations from the main browser thread. Additionally, background network/telemetry actions (like `sendTelegramNotification`) block rendering if fired synchronously during component lifecycles.
+**Action:** Always aggressively add `decoding="async"` to images, and defer non-critical telemetry functions using `requestIdleCallback` (with a safe `setTimeout` and SSR `window` fallback) to keep the interaction frame budget clean.
