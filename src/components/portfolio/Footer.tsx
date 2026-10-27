@@ -174,6 +174,7 @@ export const Footer = React.memo(function Footer({ onNavigate }: FooterProps) {
                 alt="GitHub Contribution Snake Stream"
                 className="w-full min-w-[600px] h-auto object-contain transition-opacity duration-300"
                 loading="lazy"
+                decoding="async"
               />
             </div>
           </div>
