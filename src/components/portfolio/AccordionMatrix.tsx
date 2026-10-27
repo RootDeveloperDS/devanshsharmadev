@@ -181,7 +181,7 @@ export function AccordionMatrix({ projects }: AccordionMatrixProps) {
                           {/* Left: Uncropped Image Pane */}
                           {project.image && (
                             <div className="lg:w-[55%] shrink-0">
-                              <div className="relative rounded-lg border border-primary/20 bg-black/40 p-1.5 shadow-[0_0_20px_rgba(var(--primary-rgb),0.08)]">
+                              <div className="relative rounded-lg border border-primary/20 bg-black/40 p-1.5 shadow-[0_0_20px_hsl(var(--primary)/0.08)]">
                                 {/* Sci-Fi Corner Accents */}
                                 <div className="absolute -left-px -top-px h-3 w-3 border-l-2 border-t-2 border-primary/60 rounded-tl-sm" />
                                 <div className="absolute -right-px -top-px h-3 w-3 border-r-2 border-t-2 border-primary/60 rounded-tr-sm" />
@@ -239,7 +239,7 @@ export function AccordionMatrix({ projects }: AccordionMatrixProps) {
                                   rel="noopener noreferrer"
                                   aria-label={`View repository for ${project.name}`}
                                   onClick={() => sendTelegramNotification("Clicked Project Repository", { project: project.name, repo: project.github })}
-                                  className="inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-wider text-primary border border-primary/30 px-4 py-2 rounded hover:bg-primary hover:text-background transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+                                  className="inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-wider text-primary border border-primary/30 px-4 py-2 rounded hover:bg-primary hover:text-background transition-all duration-300 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background"
                                 >
                                   <Github className="h-4 w-4" />
                                   Repository
@@ -252,7 +252,7 @@ export function AccordionMatrix({ projects }: AccordionMatrixProps) {
                                   rel="noopener noreferrer"
                                   aria-label={`Execute live demo for ${project.name}`}
                                   onClick={() => sendTelegramNotification("Clicked Live Project Link", { project: project.name, url: project.live })}
-                                  className="inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-wider text-primary border border-primary/30 px-4 py-2 rounded hover:bg-primary hover:text-background transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+                                  className="inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-wider text-primary border border-primary/30 px-4 py-2 rounded hover:bg-primary hover:text-background transition-all duration-300 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background"
                                 >
                                   <ArrowUpRight className="h-4 w-4" />
                                   Execute
