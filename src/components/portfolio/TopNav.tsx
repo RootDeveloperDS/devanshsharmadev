@@ -18,7 +18,7 @@ export function TopNav({ active, onChange, onOpenPalette }: Props) {
         <button
           onClick={() => onChange("overview")}
           className="flex items-center gap-1.5 sm:gap-2 group shrink-0"
-          aria-label="Devansh Sharma — home"
+          aria-label="Devansh Sharma - home"
         >
           <span className="relative grid h-7 w-7 sm:h-8 sm:w-8 place-items-center">
             <Hexagon className="absolute h-7 w-7 sm:h-8 sm:w-8 text-primary opacity-90 transition-transform group-hover:rotate-12" />
@@ -69,7 +69,7 @@ export function TopNav({ active, onChange, onOpenPalette }: Props) {
             rel="noopener noreferrer"
             onClick={() => sendTelegramNotification("Clicked Open Source Button (TopNav)", { repo: socials.portfolioRepo })}
             className="inline-flex items-center gap-1 rounded-full border border-primary/40 bg-primary/10 p-1.5 sm:px-2.5 sm:py-1 text-xs font-medium text-primary shadow-sm hover:bg-primary/20 hover:border-primary transition-all duration-200"
-            title="Portfolio is 100% Open Source — View on GitHub"
+            title="Portfolio is 100% Open Source - View on GitHub"
           >
             <Github className="h-3.5 w-3.5" />
             <span className="hidden md:inline font-mono font-semibold text-[11px]">Open Source</span>

@@ -236,22 +236,49 @@ export const projects: Project[] = [
   {
     id: "visar-edge",
     name: "V.I.S.A.R. E.D.G.E.",
-    tagline: "Futuristic AI Cognitive OS Layer • Beta Soon",
+    tagline: "Autonomous Distributed AI Operating Mesh • Beta Soon",
     description:
-      "A futuristic AI Cognitive Operating System layer for your PC built to see, hear, speak, and evolve. Features an optimized asynchronous multi-threaded boot engine shrinking startup latency from 18s down to 1.92s, fully decoupled autonomous agentic brain channels, a FAISS-powered local semantic RAG network, vision core layers, and Multiple Tools pipeline.",
+      "An autonomous, distributed AI operating mesh engineered directly for local desktop hardware. Powered by a pure Python asynchronous kernel featuring a 10.2µs Synapse IPC event bus, dynamic multi-agent swarms (4.82ms turnaround), quad cognitive brain modes (AUTO, FAST, AGENTIC, SUPERVISOR), a 6-sense nervous system, 5-tier holographic memory, and unlimited Model Context Protocol (MCP) tool integration with two-tier human-in-the-loop safety gates.",
     live: "https://visaredge.vercel.app/",
     //github: "https://github.com/RootDeveloperDS/VISAR-EDGE-V1.0/",
     status: "BETA SOON",
     span: "lg",
     categories: ["ai-core", "desktop", "fullstack"],
     flagship: true,
-    tech: ["Python", "PySide6", "Chromium Core", "FAISS Vector", "Asynchronous Architecture"],
-    image: "https://github.com/RootDeveloperDS/CDN/blob/main/images/visar-dashboard1.png?raw=true",
+    tech: ["Python Async Kernel", "PySide6", "Multi-Agent Swarms", "MCP Hub", "FAISS / SQLite FTS5"],
+    image: "https://github.com/RootDeveloperDS/CDN/blob/main/images/VISAR-EDGE-PC/visar-dashboard-v1-16.png?raw=true",
+  },
+  {
+    id: "orbit-span",
+    name: "OrbitSpan",
+    tagline: "3D Planetary Scale, Real-Time Ephemeris & Newtonian Gravity Engine",
+    description:
+      "An interactive 3D astrophysics engine calculating real-time planetary positions using NASA's VSOP87 analytical theory, computing true Newtonian gravitational pull on user body mass (F = G·M·m / r²), and converting cosmic distances into human-scale physical benchmarks. Features high-framerate Three.js R185 WebGL rendering, PWA offline caching, and walkable city-scale models.",
+    live: "https://orbitspan.vercel.app/",
+    github: "https://github.com/RootDeveloperDS/Orbit-Span",
+    span: "wide",
+    flagship: true,
+    categories: ["frontend", "ai-core"],
+    tech: ["TypeScript", "React 19", "Three.js", "VSOP87 Ephemeris", "Tailwind CSS", "PWA"],
+    image: "https://github.com/RootDeveloperDS/Orbit-Span/blob/main/public/appview.png?raw=true",
+  },
+  {
+    id: "frame-my-avatar",
+    name: "Frame My Avatar",
+    tagline: "Client-Side Curved Text Avatar & Profile Frame Generator",
+    description:
+      "A high-performance client-side avatar framing studio for crafting circular profile picture frames with customizable curved typography, 4 perimeter watermark accents (Ribbon Trim, Crown Halo, Upper Quadrant, Radial Contour), multi-ring status palettes (#OPENTOWORK, #HIRING), full URL state serialization, and 1080x1080 HD PNG exports with embedded tEXt metadata. 100% private with zero server uploads.",
+    live: "https://framemyavatar.vercel.app/",
+    span: "wide",
+    flagship: true,
+    categories: ["frontend", "dev-tool"],
+    tech: ["TanStack Start", "React 19", "TypeScript", "Tailwind CSS v4", "Radix UI", "Canvas 2D"],
+    image: "https://github.com/RootDeveloperDS/CDN/blob/main/images/frame-my-avatar/preview-dark-1.png?raw=true",
   },
   {
     id: "jarvis",
     name: "J.A.R.V.I.S. (Mark 1 → 21)",
-    tagline: "Voice-enabled AI assistant • 21 iterations",
+    tagline: "Voice-enabled AI assistant: 21 iterations",
     description:
       "A comprehensive, voice-enabled AI assistant capable of executing deep system-level commands and opening local applications. Integrated conversational AI models facilitate reliable task execution across iterations.",
     github: "https://github.com/RootDeveloperDS/J.A.R.V.I.S./",
@@ -263,7 +290,8 @@ export const projects: Project[] = [
   },
   {
     id: "visar-edge-mobile",
-    name: "V.I.S.A.R. Edge Mobile - [ In Development ]",
+    name: "V.I.S.A.R. Edge Mobile",
+    status: "IN DEVELOPMENT",
     tagline: "Native Android HUD & PC Telemetry Daemon",
     description:
       "A futuristic remote control ecosystem. The native Android client features a 3-tier boot timeline and a 60Hz holographic trackpad. The zero-overhead Python PC companion daemon manages real-time hardware telemetry streams, secure Drop-Pod multi-file transfers, and zero-latency acoustic audio pipelines.",
@@ -291,7 +319,7 @@ export const projects: Project[] = [
   {
     id: "neon-notes",
     name: "Neon Notes",
-    tagline: "Cyberpunk note-taking • Zero-trust",
+    tagline: "Cyberpunk note-taking: Zero-trust",
     description:
       "A secure, cyberpunk-inspired note-taking workspace optimized for programming in shared computer labs. Engineered with a zero-trust mindset, featuring dual-session authentication and strict session lifecycle management.",
     live: "https://neon-notes.vercel.app/",
@@ -362,6 +390,56 @@ export const projects: Project[] = [
   // ---------------------------------------------------------
   // ZONE 3: THE ACCORDION MATRIX (Archive Systems)
   // ---------------------------------------------------------
+  
+  {
+    id: "git-uncommitted-scanner",
+    name: "Git Uncommitted Scanner (scanrepos)",
+    tagline: "High-Speed CLI & TUI Repository Scanner • PyPI Package",
+    description:
+      "A lightning-fast, cross-platform CLI and TUI utility that recursively deep-scans directories to instantly locate Git repositories with pending uncommitted changes, untracked files, and unpushed commits. Features an interactive Neon-Cyan Textual terminal UI, Rich progress tables, and one-command pip/uvx distribution on PyPI.",
+    github: "https://github.com/RootDeveloperDS/git-uncommitted-scanner",
+    live: "https://pypi.org/project/git-uncommitted-scanner/",
+    span: "sm",
+    categories: ["dev-tool", "automation"],
+    tech: ["Python 3.9+", "Typer", "Rich", "Textual (TUI)", "PyPI", "Git CLI"],
+    image: "https://github.com/RootDeveloperDS/CDN/blob/main/images/git-uncommit-scanner/preview-1.png?raw=true",
+  },
+  {
+    id: "formease",
+    name: "FormEase",
+    tagline: "Zero-Upload Client-Side Document & Exam Photo Formatter",
+    description:
+      "A privacy-first, 100% browser-based photo, signature, and document formatter & compressor engineered for government, visa, and entrance exam portals (UPSC, SSC, State PSC). Automatically handles strict pixel dimensions, target file size bounds (KB/MB), and format conversion entirely in client memory without uploading sensitive identity data to external servers.",
+    github: "https://github.com/RootDeveloperDS/FormEase",
+    live: "https://formease.deployxa.online/",
+    span: "sm",
+    categories: ["frontend", "dev-tool"],
+    tech: ["React", "TypeScript", "Tailwind CSS", "Canvas API", "Web Workers"],
+    image: "https://github.com/RootDeveloperDS/CDN/blob/main/images/formease/preview-dark-1.png?raw=true",
+  },
+  {
+    id: "netsage-ai",
+    name: "NetSage AI (Cisco-AICTE VIP 2026)",
+    tagline: "AI-Assisted Cisco Network Troubleshooter with Human Review",
+    description:
+      "A dual-engine hybrid network diagnostic platform built for the Cisco-AICTE Virtual Internship Program (VIP 2026) at Gyan Ganga Institute of Technology & Sciences (GGITS). Combines a deterministic rule checker with 26 regex parsers scanning raw Cisco IOS CLI outputs alongside context-constrained LLM diagnostics enforcing strict JSON schemas and verbatim evidence citation. Features an interactive Human-in-the-Loop (HITL) Streamlit review portal for NOC engineers.",
+    github: "https://github.com/RootDeveloperDS/DevanshSharma-GGITS-AI",
+    span: "sm",
+    categories: ["ai-core", "dev-tool"],
+    tech: ["Python 3.10+", "Streamlit", "Cisco IOS CLI", "Plotly", "LLM Prompting", "Regex Engine"],
+  },
+  {
+    id: "visar-openwakeword-model",
+    name: "VISAR Edge Wake Word Model",
+    tagline: "Offline Neural Wake-Word Engine for Indian Phonetics",
+    description:
+      "Custom offline neural wake-word detection engine fine-tuned for Indian phonetics (Devanagari 'वि-सार' / 'Vee-saar'). Convolved with MIT Room Impulse Responses (RIRs) and calibrated against 96 real-world microphone telemetry samples to achieve 80.4% accuracy, 61.2% recall, and ultra-low false positive rate (~0.35/hr). Exports production runtime inference graphs in ONNX and TensorFlow Lite with weights hosted on Hugging Face.",
+    github: "https://github.com/RootDeveloperDS/VISAR_OpenWakeWord_Model_Train",
+    live: "https://huggingface.co/RootDeveloperDS/Visar_OpenWakeWord_Model",
+    span: "sm",
+    categories: ["ai-core"],
+    tech: ["PyTorch", "openWakeWord", "ONNX", "TFLite", "Audio DSP", "MIT RIRs"],
+  },
   
   {
     id: "visar-edge-v0-5",
@@ -456,7 +534,7 @@ export const projects: Project[] = [
   {
     id: "automation",
     name: "Workflow Automation Suite",
-    tagline: "System optimization • File handling",
+    tagline: "System optimization: File handling",
     description:
       "Standalone Python scripts focused on system optimization, complex file handling, and localized workflow automation. Replaced repetitive manual operational tasks with intelligent, conditional automation logic.",
     span: "sm",
@@ -468,11 +546,11 @@ export const projects: Project[] = [
 export const experience = {
   role: "Applied AI Developer",
   company: "Independent Projects",
-  period: "2024 — Present",
+  period: "2024 - Present",
   bullets: [
-    "Architected and built AI-powered applications utilizing LLM APIs for task automation.",
-    "Developed real-time computing systems integrating speech recognition, text-to-speech, and direct system command execution.",
-    "Optimized heavy application performance by engineering asynchronous execution.",
+    "Architected autonomous multi-agent operating layers, local vector search pipelines, and Model Context Protocol (MCP) integrations.",
+    "Engineered low-latency audio pipelines and fine-tuned offline neural wake-word models calibrated for Indian phonetics.",
+    "Built high-performance client-side simulation engines and tools with React 19, Three.js WebGL, TanStack Start, and asynchronous Python.",
   ],
 };
 
@@ -487,6 +565,9 @@ export const techStack = {
     "FastAPI", 
     "Flask", 
     "Tkinter", 
+    "Streamlit",
+    "Textual (TUI)",
+    "Typer & Rich",
     "Framer Motion", 
     "GSAP 3", 
     "Three.js", 
@@ -495,20 +576,29 @@ export const techStack = {
     "Radix UI"
   ],
   ai: [
+    "Model Context Protocol (MCP)",
     "Google Genkit", 
     "Gemini 2.0 Flash", 
     "Groq SDK", 
     "OpenAI API", 
     "LangChain", 
     "FAISS Vector Core", 
+    "SQLite FTS5",
     "Open Wake Word", 
     "SpeechRecognition", 
     "Edge TTS", 
+    "Audio DSP & MIT RIRs",
     "Scikit-Learn", 
     "Pandas", 
     "NumPy"
   ],
   concepts: [
+    "Autonomous Multi-Agent Swarms",
+    "5-Tier Cognitive Memory Mesh",
+    "Model Context Protocol (MCP) Hub",
+    "Deterministic Regex Diagnostic Engines",
+    "Client-Side In-Memory Image Compression",
+    "VSOP87 Ephemeris & Orbit Mechanics",
     "Asynchronous Thread Optimization",
     "Multi-Threaded Module Pre-Warming",
     "Dual-Branch Semantic Routing",

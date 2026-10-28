@@ -42,12 +42,12 @@ export function ProjectsTab() {
           Systems & <span className="text-gradient">Projects</span>
         </h2>
         <p className="mt-3 max-w-2xl text-muted-foreground">
-          Each project is a standalone system — modular, async-first, built to evolve.
+          Each project is a standalone system: modular, async-first, built to evolve.
         </p>
       </motion.div>
 
       {/* ══════════════════════════════════════════════
-          ZONE 1: CORE SYSTEMS — Flagship Bento Grid
+          ZONE 1: CORE SYSTEMS - Flagship Bento Grid
       ══════════════════════════════════════════════ */}
       <div className="mb-6 flex flex-wrap items-center justify-between gap-2.5 border-b border-border/60 pb-3">
         <div className="flex flex-wrap items-center gap-2 sm:gap-2.5">

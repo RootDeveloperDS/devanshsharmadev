@@ -64,8 +64,8 @@ function TerminalView() {
       messageContent: trimmedMsg,
     });
 
-    const subject = `Portfolio contact — ${trimmedName}`;
-    const body = `${trimmedMsg}\n\n— ${trimmedName}`;
+    const subject = `Portfolio contact - ${trimmedName}`;
+    const body = `${trimmedMsg}\n\n- ${trimmedName}`;
     const mailto = `mailto:${socials.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
     window.setTimeout(() => {
       window.location.href = mailto;
@@ -191,8 +191,8 @@ function ExecutiveContactForm() {
       toast({ title: "Missing fields", description: "Please fill in your name and message." });
       return;
     }
-    const subject = `Portfolio contact — ${name}`;
-    const body = `${message}\n\n— ${name}${email ? ` (${email})` : ""}`;
+    const subject = `Portfolio contact - ${name}`;
+    const body = `${message}\n\n- ${name}${email ? ` (${email})` : ""}`;
     window.location.href = `mailto:${socials.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
     toast({ title: "Opening your mail app", description: `Ready to send to ${socials.email}` });
   };

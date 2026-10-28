@@ -55,8 +55,8 @@ export function AccordionMatrix({ projects }: AccordionMatrixProps) {
       const proj = projects.find((p) => p.id === id);
       sendTelegramNotification("Expanded Project Accordion", {
         projectId: id,
-        projectTitle: proj ? proj.title : id,
-        subtitle: proj ? proj.subtitle : "",
+        projectTitle: proj ? proj.name : id,
+        subtitle: proj ? proj.tagline : "",
       });
     }
     setSearchParams(newParams, { replace: true });
@@ -230,7 +230,7 @@ export function AccordionMatrix({ projects }: AccordionMatrixProps) {
                                   href={project.github}
                                   target="_blank"
                                   rel="noopener noreferrer"
-                                  onClick={() => sendTelegramNotification("Clicked Project Repository", { project: project.title, repo: project.github })}
+                                  onClick={() => sendTelegramNotification("Clicked Project Repository", { project: project.name, repo: project.github })}
                                   className="inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-wider text-primary border border-primary/30 px-4 py-2 rounded hover:bg-primary hover:text-background transition-all duration-300"
                                 >
                                   <Github className="h-4 w-4" />
@@ -242,7 +242,7 @@ export function AccordionMatrix({ projects }: AccordionMatrixProps) {
                                   href={project.live}
                                   target="_blank"
                                   rel="noopener noreferrer"
-                                  onClick={() => sendTelegramNotification("Clicked Live Project Link", { project: project.title, url: project.live })}
+                                  onClick={() => sendTelegramNotification("Clicked Live Project Link", { project: project.name, url: project.live })}
                                   className="inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-wider text-primary border border-primary/30 px-4 py-2 rounded hover:bg-primary hover:text-background transition-all duration-300"
                                 >
                                   <ArrowUpRight className="h-4 w-4" />

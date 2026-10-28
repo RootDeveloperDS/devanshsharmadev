@@ -1,7 +1,7 @@
 <div align="center">
   <img src="https://cdn.jsdelivr.net/gh/RootDeveloperDS/CDN@main/images/devansh-portfolio/main-dashboard-dark-1.png" alt="Devansh Sharma Portfolio Preview" width="100%" style="border-radius: 12px; margin-bottom: 16px;">
 
-  # Devansh Sharma — Developer Portfolio (v12.5.0)
+  # Devansh Sharma - Developer Portfolio (v12.6.0)
 
   **Full Stack AI Architect & Creator of VISAR Edge**  
   *Modular Cyberpunk & Executive Portfolio Hub built with React, Vite, Framer Motion, and Tailwind CSS.*
@@ -19,7 +19,7 @@
 
 ## 🌌 Overview
 
-This is the official personal portfolio, project matrix, and release hub for **Devansh Sharma** — Full Stack AI Architect, Cognitive Systems Engineer, and Creator of **VISAR Edge**.
+This is the official personal portfolio, project matrix, and release hub for **Devansh Sharma** - Full Stack AI Architect, Cognitive Systems Engineer, and Creator of **VISAR Edge**.
 
 The portfolio is engineered with a high-performance frontend architecture bridging interactive **Framer Motion** glassmorphism, dynamic data matrices, a simulated scifi terminal, and deep **Generative Engine Optimization (GEO)** structured data schemas.
 
@@ -37,7 +37,7 @@ The entire codebase is **100% Open Source** and hosted at:
   - Quick multi-column navigation links and résumé view/download triggers.
   - Interactive **18-Profile Social Matrix** categorized by network type with hover glow micro-animations.
 - **📱 Thin Mobile Screen Optimization (`TopNav.tsx`)**:
-  - Fluid padding and gap scaling for narrow viewports (320px–390px mobile screens).
+  - Fluid padding and gap scaling for narrow viewports (320px-390px mobile screens).
   - Glassmorphic header bar with brand monogram, compact tabs, theme toggle, and mobile-accessible ⌘K trigger.
 - **⚡ Command Palette (`Ctrl/Cmd + K`)**: Instant global search and direct navigation shortcuts for all portfolio sections, résumé actions, and social profiles.
 - **📊 Dynamic Content Matrix (`data.ts`)**: Centralized single source of truth for all projects, experience timelines, social profiles, and system skills.

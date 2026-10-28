@@ -114,7 +114,7 @@ export async function sendTelegramNotification(
       ipData = await fetchIpMetadata();
     }
     // 4. Format structured Telegram HTML message with clear project header
-    let messageHtml = `<b>🌐 [Devansh Portfolio] — Action Alert</b>\n\n`;
+    let messageHtml = `<b>🌐 [Devansh Portfolio] - Action Alert</b>\n\n`;
     messageHtml += `⚡ <b>Action:</b> <code>${escapeHtml(action)}</code>\n`;
 
     if (details && Object.keys(details).length > 0) {
