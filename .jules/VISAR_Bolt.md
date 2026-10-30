@@ -1,0 +1,3 @@
+## 2026-10-30 - Optimize Images and Component Rendering
+**Learning:** Adding decoding="async" to img tags allows the browser to decode images off the main thread, unblocking the layout engine and improving perceived performance. Wrapping purely visual components with no props like ThemeToggle and HeroAvatar in React.memo prevents unnecessary re-renders triggered by parent context/state changes.
+**Action:** Always eagerly use decoding="async" on img tags and proactively use React.memo on purely visual components during performance optimization passes.
