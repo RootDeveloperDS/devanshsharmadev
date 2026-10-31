@@ -1,0 +1,4 @@
+## 2024-05-18 - Tactile Feedback and Focus States
+
+**Learning:** Adding subtle active states (like `active:scale-95`) to interactive elements like buttons provides tactile feedback that significantly enhances the premium feel of an application without requiring complex animations. Furthermore, explicitly ensuring input fields have a visible focus ring (e.g., `focus:ring-1 focus:ring-primary`) improves accessibility and clarity during keyboard navigation or interaction.
+**Action:** Consistently apply `active:scale-95` to clickable items for subtle tactile feedback, and ensure all form elements and inputs have a clear, visible focus state that aligns with the application's theme colors.
