@@ -1,0 +1,3 @@
+## 2024-11-21 - Image Decoding Optimization and Telemetry Deferral
+**Learning:** Found that `<img />` tags, especially those rendered by lazily loaded components, block the main thread parsing. Additionally, telemetry functions invoked as side effects can cause main thread hitching if they include synchronous setup (e.g. metadata gathering).
+**Action:** Always add `decoding="async"` to `<img />` tags inside React components unless eager decoding is strictly necessary for Core Web Vitals. Always wrap non-critical telemetry API calls in a `requestIdleCallback` (with a timeout fallback) to shift the work off the main browser execution thread.
