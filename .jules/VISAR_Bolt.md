@@ -1,0 +1,3 @@
+## 2024-05-18 - Optimize Image Loading and Component Re-renders
+**Learning:** Found opportunities to add `decoding="async"` to image tags to offload image decoding from the main thread, especially important during complex animations. Also identified `HeroAvatar` and `ThemeToggle` as purely visual/interactive components without props that can be wrapped in `React.memo` to prevent unnecessary re-renders when parent states change.
+**Action:** Added `decoding="async"` to image tags in `Footer.tsx`, `ProjectsTab.tsx`, `AccordionMatrix.tsx`, `VisarAgentButton.tsx`, and `HeroAvatar.tsx`. Wrapped `HeroAvatar` and `ThemeToggle` in `React.memo`.
