@@ -1,0 +1,3 @@
+## 2024-11-02 - Tactile Interaction Feedback
+**Learning:** Adding active states (`active:scale-95`) alongside grouped hover animations (`group-hover:scale-110` on icons) significantly enhances the tactile and premium feel of interactive elements without complex, javascript-based animations or layout shifts.
+**Action:** Consistently apply `group`, `active:scale-95`, and targeted icon scaling on links and icon buttons to provide instant, meaningful micro-interaction feedback.
