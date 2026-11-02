@@ -57,14 +57,21 @@ ${urlsXml}
 export function buildSitemap() {
   const xml = generateSitemapXml();
   const distDir = path.join(rootDir, "dist");
+  const publicDir = path.join(rootDir, "public");
 
   if (!fs.existsSync(distDir)) {
     fs.mkdirSync(distDir, { recursive: true });
   }
 
-  const dest = path.join(distDir, "sitemap.xml");
-  fs.writeFileSync(dest, xml, "utf-8");
-  console.log(`[sitemap] Successfully generated dynamic sitemap at: ${dest}`);
+  const destDist = path.join(distDir, "sitemap.xml");
+  fs.writeFileSync(destDist, xml, "utf-8");
+
+  if (fs.existsSync(publicDir)) {
+    const destPublic = path.join(publicDir, "sitemap.xml");
+    fs.writeFileSync(destPublic, xml, "utf-8");
+  }
+
+  console.log(`[sitemap] Successfully generated dynamic sitemap at: ${destDist} and ${path.join(publicDir, "sitemap.xml")}`);
 }
 
 // Execute immediately when invoked directly

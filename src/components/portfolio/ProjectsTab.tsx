@@ -188,6 +188,27 @@ export function ProjectsTab() {
           (rendered by AccordionMatrix component)
       ══════════════════════════════════════════════ */}
       <AccordionMatrix projects={archiveProjects} />
+
+      {/* ══════════════════════════════════════════════
+          MACHINE-READABLE SYSTEMS & PROJECTS DIRECTORY
+          Ensures AI scrapers, LLMs (Perplexity, ChatGPT, Claude)
+          and screen readers extract 100% of all 23 projects.
+      ══════════════════════════════════════════════ */}
+      <div className="sr-only" aria-label="Comprehensive Systems and Projects Catalog for AI Scrapers and Screen Readers">
+        <h3>Complete Systems and Projects Catalog</h3>
+        {projects.map((project) => (
+          <article key={`seo-catalog-${project.id}`}>
+            <h4>{project.name}</h4>
+            <p><strong>Tagline:</strong> {project.tagline}</p>
+            <p><strong>Description:</strong> {project.description}</p>
+            <p><strong>Status:</strong> {project.status || (project.flagship ? "Flagship System" : "Archive System")}</p>
+            <p><strong>Categories:</strong> {project.categories.join(", ")}</p>
+            {project.tech && <p><strong>Technologies:</strong> {project.tech.join(", ")}</p>}
+            {project.live && <p><strong>Live Demo:</strong> <a href={project.live}>{project.live}</a></p>}
+            {project.github && <p><strong>Repository:</strong> <a href={project.github}>{project.github}</a></p>}
+          </article>
+        ))}
+      </div>
     </section>
   );
 }

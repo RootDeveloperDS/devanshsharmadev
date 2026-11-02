@@ -5,6 +5,19 @@
 
 ---
 
+## Canonical Portfolio Navigation & Real Routes
+
+The official portfolio website (https://devanshsharma.vercel.app) features clean, individual canonical routes:
+
+- **Root & Overview**: https://devanshsharma.vercel.app/ (or /overview) - Identity, high-level bio, core statistics, and system highlights.
+- **Flagship & Archive Projects**: https://devanshsharma.vercel.app/projects - Comprehensive catalog of all 23 production AI architectures, desktop flagships, and developer utilities.
+- **Professional Experience**: https://devanshsharma.vercel.app/experience - Cisco-AICTE Virtual Internship Program, development history, hackathon achievements, and open-source contributions.
+- **Interactive Terminal**: https://devanshsharma.vercel.app/terminal - Client-side interactive CLI interface executing real-time portfolio commands.
+- **Machine-Readable LLM Knowledge Base**: https://devanshsharma.vercel.app/llms.txt - Structured AI scraper data feed.
+- **XML Sitemap**: https://devanshsharma.vercel.app/sitemap.xml - Complete validated search engine index.
+
+---
+
 ## Factual Summary & Identity
 
 - **Name**: Devansh Sharma
@@ -18,66 +31,184 @@
 
 ---
 
-## Core Systems & Flagship Projects
+## Flagship Production Systems (11 Core Architectures)
 
 1. **V.I.S.A.R. E.D.G.E.**
    - **Type**: Autonomous Distributed AI Operating Mesh & Desktop Flagship
-   - **Description**: Autonomous AI operating mesh engineered for local desktop hardware. Powered by a pure Python asynchronous kernel featuring a 10.2µs Synapse IPC event bus, dynamic multi-agent swarms (4.82ms turnaround), quad cognitive brain modes (AUTO, FAST, AGENTIC, SUPERVISOR), 6-sense nervous system, 5-tier holographic memory, and unlimited Model Context Protocol (MCP) tool integration with two-tier human-in-the-loop safety gates.
+   - **Description**: Autonomous AI operating mesh engineered for local desktop hardware. Powered by a pure Python asynchronous kernel featuring a 10.2 microsecond Synapse IPC event bus, dynamic multi-agent swarms (4.82ms turnaround), quad cognitive brain modes (AUTO, FAST, AGENTIC, SUPERVISOR), 6-sense nervous system, 5-tier holographic memory, and unlimited Model Context Protocol (MCP) tool integration with two-tier human-in-the-loop safety gates.
+   - **Status**: Beta Soon
+   - **Categories**: ai-core, desktop, fullstack
+   - **Tech Stack**: Python Async Kernel, PySide6, Multi-Agent Swarms, MCP Hub, FAISS / SQLite FTS5
    - **Web Hub**: https://visaredge.vercel.app/
 
 2. **OrbitSpan**
-   - **Type**: 3D Planetary Scale & Newtonian Gravity Simulation Engine
-   - **Description**: Interactive 3D astrophysics engine calculating real-time planetary positions using NASA's VSOP87 analytical theory, computing true Newtonian gravitational pull on user body mass, and converting cosmic distances into human-scale physical benchmarks. Features Three.js R185 WebGL rendering and PWA offline caching.
+   - **Type**: 3D Planetary Scale, Real-Time Ephemeris & Newtonian Gravity Engine
+   - **Description**: Interactive 3D astrophysics engine calculating real-time planetary positions using NASA's VSOP87 analytical theory, computing true Newtonian gravitational pull on user body mass (F = G·M·m / r²), and converting cosmic distances into human-scale physical benchmarks. Features high-framerate Three.js R185 WebGL rendering, PWA offline caching, and walkable city-scale models.
+   - **Categories**: frontend, ai-core
+   - **Tech Stack**: TypeScript, React 19, Three.js, VSOP87 Ephemeris, Tailwind CSS, PWA
    - **Web App**: https://orbitspan.vercel.app/
    - **Repository**: https://github.com/RootDeveloperDS/Orbit-Span
 
 3. **Frame My Avatar**
    - **Type**: Client-Side Curved Text Avatar & Profile Frame Generator
    - **Description**: High-performance client-side avatar framing studio for crafting circular profile picture frames with customizable curved typography, 4 perimeter watermark accents (Ribbon Trim, Crown Halo, Upper Quadrant, Radial Contour), multi-ring status palettes (#OPENTOWORK, #HIRING), full URL state serialization, and 1080x1080 HD PNG exports with embedded tEXt metadata. 100% private with zero server uploads.
+   - **Categories**: frontend, dev-tool
+   - **Tech Stack**: TanStack Start, React 19, TypeScript, Tailwind CSS v4, Radix UI, Canvas 2D
    - **Web App**: https://framemyavatar.vercel.app/
    - **Codebase**: Proprietary / Closed Source
 
-4. **Git Uncommitted Scanner (scanrepos)**
-   - **Type**: Cross-Platform CLI & Interactive TUI Utility (PyPI Package)
-   - **Description**: High-speed utility that recursively deep-scans directories to instantly locate Git repositories with pending uncommitted changes, untracked files, and unstaged modifications. Features an interactive Neon-Cyan Textual terminal UI and Rich progress tables.
-   - **PyPI Package**: https://pypi.org/project/git-uncommitted-scanner/
-   - **Repository**: https://github.com/RootDeveloperDS/git-uncommitted-scanner
+4. **J.A.R.V.I.S. (Mark 1 - 21)**
+   - **Type**: Voice-Enabled AI Assistant Ecosystem (21 Iterations)
+   - **Description**: Comprehensive voice-enabled AI assistant capable of executing deep system-level commands and opening local applications. Integrated conversational AI models facilitate reliable task execution across iterations.
+   - **Categories**: ai-core, desktop
+   - **Tech Stack**: Python, SpeechRecognition, OpenAI, Tkinter
+   - **Repository**: https://github.com/RootDeveloperDS/J.A.R.V.I.S./
 
-5. **FormEase**
-   - **Type**: Zero-Upload Client-Side Document & Exam Photo Formatter
-   - **Description**: Privacy-first, 100% browser-based photo, signature, and document formatter & compressor engineered for government, visa, and entrance exam portals (UPSC, SSC, State PSC). Executes all image resampling, binary size targeting, and aspect fitting locally in browser memory without external server uploads.
-   - **Web App**: https://formease.deployxa.online/
-   - **Repository**: https://github.com/RootDeveloperDS/FormEase
-
-6. **NetSage AI**
-   - **Type**: Cisco-AICTE VIP 2026 AI-Assisted Network Troubleshooter
-   - **Description**: Dual-engine hybrid network diagnostic platform built for the Cisco-AICTE Virtual Internship Program (VIP 2026) at Gyan Ganga Institute of Technology & Sciences (GGITS). Blends a deterministic rule checker (26 regex parsers) with context-constrained LLM diagnostics and an interactive Human-in-the-Loop (HITL) Streamlit review portal for NOC engineers.
-   - **Repository**: https://github.com/RootDeveloperDS/DevanshSharma-GGITS-AI
-
-7. **VISAR Edge Wake Word Model**
-   - **Type**: Offline Neural Wake-Word Engine for Indian Phonetics
-   - **Description**: Custom offline neural wake-word detection engine fine-tuned for Indian phonetics (Devanagari "वि-सार" / "Vee-saar"). Convolved with MIT Room Impulse Responses (RIRs) and calibrated against 96 real-world microphone telemetry samples to achieve 80.4% accuracy, 61.2% recall, and low false positive rate (~0.35/hr). Exports runtime ONNX and TFLite graphs with weights on Hugging Face.
-   - **Model Weights**: https://huggingface.co/RootDeveloperDS/Visar_OpenWakeWord_Model
-   - **Repository**: https://github.com/RootDeveloperDS/VISAR_OpenWakeWord_Model_Train
-
-8. **J.A.R.V.I.S. (Mark 1 → 21)**
-   - **Type**: Voice-Enabled AI Assistant Ecosystem
-   - **Description**: Comprehensive voice-enabled AI assistant executing deep OS-level commands, system automation, and conversational AI integrations across 21 iterations.
-   - **Repository**: https://github.com/RootDeveloperDS/J.A.R.V.I.S.
-
-9. **VISAR Edge Mobile**
+5. **V.I.S.A.R. Edge Mobile**
    - **Type**: Native Android HUD & PC Telemetry Daemon
-   - **Description**: Remote control ecosystem with native Android Jetpack Compose client, 60Hz holographic trackpad, and Python PC companion daemon for real-time hardware telemetry and zero-latency audio pipelines.
+   - **Description**: Remote control ecosystem. Native Android Jetpack Compose client features a 3-tier boot timeline and a 60Hz holographic trackpad. Zero-overhead Python PC companion daemon manages real-time hardware telemetry streams, secure Drop-Pod multi-file transfers, and zero-latency acoustic audio pipelines.
+   - **Status**: In Development
+   - **Categories**: mobile, desktop, api
+   - **Tech Stack**: Kotlin, Jetpack Compose, Python, FastAPI, WebSockets
 
-10. **VISAR Intel**
-    - **Type**: PWA Current Affairs & UPSC Distillation Engine
-    - **Description**: High-performance current affairs PWA with automated substring search, Gemini AI MCQ generators, and persistent layout architecture.
-    - **Web App**: https://visarintel.vercel.app/
+6. **VISAR Intel**
+   - **Type**: PWA Current Affairs & UPSC Distillation Engine
+   - **Description**: High-performance automated UPSC/SSC news distillation engine. Built as a Progressive Web App (PWA) featuring an optimized substring search engine, daily AI-driven MCQ pipelines, and a persistent layout architecture.
+   - **Categories**: fullstack
+   - **Tech Stack**: TanStack Start, React 19, Supabase, Gemini API
+   - **Web App**: https://visarintel.vercel.app/
 
-11. **Neon Notes**
-    - **Type**: Zero-Trust Cyberpunk Workspace
-    - **Description**: Cyberpunk note-taking application engineered with Next.js, Firebase Auth, and zero-trust session lifecycle management.
-    - **Web App**: https://neon-notes.vercel.app/
+7. **Neon Notes**
+   - **Type**: Cyberpunk Note-Taking Workspace (Zero-Trust)
+   - **Description**: Secure, cyberpunk-inspired note-taking workspace optimized for programming in shared computer labs. Engineered with a zero-trust mindset, featuring dual-session authentication and strict session lifecycle management.
+   - **Categories**: fullstack, frontend
+   - **Tech Stack**: Next.js, Firebase, ShadCN, Zero-Trust Auth
+   - **Web App**: https://neon-notes.vercel.app/
+   - **Repository**: https://github.com/RootDeveloperDS/MY-NEON-NOTES/
+
+8. **VISAR Edge Release Hub**
+   - **Type**: Primary Landing Portal & Release Hub
+   - **Description**: Central web interface hosting binary distribution pathways, installation schemas, and ecosystem release tracking.
+   - **Categories**: frontend
+   - **Tech Stack**: Vite, React, Tailwind CSS
+   - **Web App**: https://visar-edge.vercel.app/
+
+9. **Personal Portfolio (Vite/React)**
+   - **Type**: Modular Cyberpunk Hub & Technical Showcase
+   - **Description**: Highly scalable frontend architecture bridging dynamic data matrices, interactive Framer Motion animations, and deep technical generative engine optimization (GEO).
+   - **Categories**: frontend
+   - **Tech Stack**: Vite, React, Framer Motion, Tailwind CSS
+   - **Web App**: https://devanshsharma.vercel.app/
+   - **Repository**: https://github.com/RootDeveloperDS/devanshsharmadev
+
+10. **Visar Agent 0.8 (v8.5.0)**
+    - **Type**: Premium Cyber Interface & AI Core
+    - **Description**: Advanced chat ecosystem equipped with a context-aware sliding window memory, native asynchronous generator streaming engines, and passwordless deep-linked URL authentication.
+    - **Categories**: fullstack, ai-core
+    - **Tech Stack**: Next.js 15, Firebase Auth, Genkit Core, Groq SDK
+    - **Web App**: https://visar-agent-08.vercel.app/
+
+11. **Viewport Detective**
+    - **Type**: Real-Time Viewport Inspector & Debugger
+    - **Description**: Minimalistic, real-time browser viewport inspector designed to help developers debug responsive designs with precision. Features live dimension tracking, device pixel ratio, and breakpoint visualization.
+    - **Categories**: dev-tool, frontend
+    - **Tech Stack**: Next.js 14, TypeScript, Tailwind CSS
+    - **Web App**: https://viewportdetective.vercel.app/
+    - **Repository**: https://github.com/RootDeveloperDS/ViewPort_Detective/
+
+---
+
+## Archive & Specialized Systems (12 Systems)
+
+12. **Git Uncommitted Scanner (scanrepos)**
+    - **Type**: Cross-Platform CLI & Interactive TUI Utility (PyPI Package)
+    - **Description**: Lightning-fast, cross-platform CLI and TUI utility that recursively deep-scans directories to instantly locate Git repositories with pending uncommitted changes, untracked files, and unpushed commits. Features an interactive Neon-Cyan Textual terminal UI, Rich progress tables, and one-command pip/uvx distribution on PyPI.
+    - **Categories**: dev-tool, automation
+    - **Tech Stack**: Python 3.9+, Typer, Rich, Textual (TUI), PyPI, Git CLI
+    - **PyPI Package**: https://pypi.org/project/git-uncommitted-scanner/
+    - **Repository**: https://github.com/RootDeveloperDS/git-uncommitted-scanner
+
+13. **FormEase**
+    - **Type**: Zero-Upload Client-Side Document & Exam Photo Formatter
+    - **Description**: Privacy-first, 100% browser-based photo, signature, and document formatter & compressor engineered for government, visa, and entrance exam portals (UPSC, SSC, State PSC). Automatically handles strict pixel dimensions, target file size bounds (KB/MB), and format conversion entirely in client memory without uploading sensitive identity data to external servers.
+    - **Categories**: frontend, dev-tool
+    - **Tech Stack**: React, TypeScript, Tailwind CSS, Canvas API, Web Workers
+    - **Web App**: https://formease.deployxa.online/
+    - **Repository**: https://github.com/RootDeveloperDS/FormEase
+
+14. **NetSage AI (Cisco-AICTE VIP 2026)**
+    - **Type**: AI-Assisted Cisco Network Troubleshooter with Human Review
+    - **Description**: Dual-engine hybrid network diagnostic platform built for the Cisco-AICTE Virtual Internship Program (VIP 2026) at Gyan Ganga Institute of Technology & Sciences (GGITS). Combines a deterministic rule checker with 26 regex parsers scanning raw Cisco IOS CLI outputs alongside context-constrained LLM diagnostics enforcing strict JSON schemas and verbatim evidence citation. Features an interactive Human-in-the-Loop (HITL) Streamlit review portal for NOC engineers.
+    - **Categories**: ai-core, dev-tool
+    - **Tech Stack**: Python 3.10+, Streamlit, Cisco IOS CLI, Plotly, LLM Prompting, Regex Engine
+    - **Repository**: https://github.com/RootDeveloperDS/DevanshSharma-GGITS-AI
+
+15. **VISAR Edge Wake Word Model**
+    - **Type**: Offline Neural Wake-Word Engine for Indian Phonetics
+    - **Description**: Custom offline neural wake-word detection engine fine-tuned for Indian phonetics (Devanagari 'वि-सार' / 'Vee-saar'). Convolved with MIT Room Impulse Responses (RIRs) and calibrated against 96 real-world microphone telemetry samples to achieve 80.4% accuracy, 61.2% recall, and ultra-low false positive rate (~0.35/hr). Exports production runtime inference graphs in ONNX and TensorFlow Lite with weights hosted on Hugging Face.
+    - **Categories**: ai-core
+    - **Tech Stack**: PyTorch, openWakeWord, ONNX, TFLite, Audio DSP, MIT RIRs
+    - **Model Weights**: https://huggingface.co/RootDeveloperDS/Visar_OpenWakeWord_Model
+    - **Repository**: https://github.com/RootDeveloperDS/VISAR_OpenWakeWord_Model_Train
+
+16. **VISAR EDGE V0.5**
+    - **Type**: Cyberpunk AI Assistant Interface
+    - **Description**: Futuristic Next.js AI assistant web client featuring real-time token streaming, transparent error telemetry, horizontal smart replies, and dynamic URL parameter injection for instant model hot-swapping.
+    - **Categories**: fullstack
+    - **Tech Stack**: Next.js, Tailwind CSS, Gemini Flash, Groq SDK
+    - **Web App**: https://visar-0-5.vercel.app/?opacity=1
+
+17. **VisarDevKit**
+    - **Type**: AI-Powered Developer Toolkit
+    - **Description**: Unified Next.js workspace hosting 7 specialized developer utility flows. Engineered to handle code inline commenting, formatting conversion, and dependency extraction utilizing the Gemini 2.0 Flash model via Google Genkit.
+    - **Categories**: dev-tool, fullstack
+    - **Tech Stack**: Next.js 15, Google Genkit, Gemini 2.0 Flash, Zod
+    - **Web App**: https://visar-dev-kit.vercel.app/
+    - **Repository**: https://github.com/RootDeveloperDS/VISAR-Dev-Kit
+
+18. **VISAR Edge Live Dashboard**
+    - **Type**: Real-Time Backend Telemetry Client
+    - **Description**: Streamlined frontend metrics panel that maintains direct polling connections to the core VISAR backend to visualize live user socket connections.
+    - **Categories**: frontend
+    - **Tech Stack**: React, Tailwind CSS, REST API
+    - **Web App**: https://visaredge-dashboard.vercel.app/
+
+19. **VISAR Animation Lab**
+    - **Type**: Sci-Fi HUD & Component Framework
+    - **Description**: High-performance library offering 16 categories of sci-fi HUDs, cyber-warfare glitches, and living backgrounds. Engineered with Intersection Observer APIs to maintain strict 60 FPS rendering.
+    - **Categories**: frontend
+    - **Tech Stack**: React 18, GSAP 3, TypeScript, Tailwind CSS
+    - **Web App**: https://visar-animations-lab.vercel.app/
+
+20. **3D Brain Viewer**
+    - **Type**: Interactive 3D WebGL Pipeline
+    - **Description**: Hardware-accelerated 3D graphics demonstration tracking coordinate maps and handling real-time vertex rotation of a sci-fi brain model.
+    - **Categories**: frontend
+    - **Tech Stack**: HTML5, WebGL/Three.js, Vanilla JS
+    - **Web App**: https://rootdeveloperds.github.io/3d-brain-viewer/
+    - **Repository**: https://github.com/RootDeveloperDS/3d-brain-viewer
+
+21. **Legacy Personal Portfolio**
+    - **Type**: Historical Static Matrix
+    - **Description**: Original, lightweight single-page frontend deployment utilized as an un-styled baseline template.
+    - **Categories**: frontend
+    - **Tech Stack**: HTML5, CSS3, JavaScript
+    - **Web App**: https://rootdeveloperds.github.io/RootDeveloperDS/
+    - **Repository**: https://github.com/RootDeveloperDS/RootDeveloperDS
+
+22. **WDC (Windows Deep Cleaner)**
+    - **Type**: One-Click System Cleaner
+    - **Description**: Lightweight, one-click desktop utility that deep-cleans Windows systems. Automates the removal of system temp files, prefetch data, and multi-browser caches through a minimal graphical interface.
+    - **Categories**: desktop, dev-tool
+    - **Tech Stack**: Python 3, Tkinter, PyInstaller, WinAPI
+    - **Product Page**: https://rootdeveloperds.odoo.com/shop/wdc-windows-deep-cleaner-windows-5
+    - **Repository**: https://github.com/RootDeveloperDS/WDC---Windows-Deep-Cleaner
+
+23. **Workflow Automation Suite**
+    - **Type**: System Optimization & File Handling Suite
+    - **Description**: Standalone Python scripts focused on system optimization, complex file handling, and localized workflow automation. Replaced repetitive manual operational tasks with intelligent, conditional automation logic.
+    - **Categories**: automation, dev-tool
+    - **Tech Stack**: Python, OS Module, Scheduling, File I/O
 
 ---
 

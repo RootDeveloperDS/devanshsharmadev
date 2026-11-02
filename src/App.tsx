@@ -16,7 +16,11 @@ const App = () => (
       <Sonner />
       <BrowserRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
         <Routes>
-          <Route path="/" element={<Index />} />
+          <Route path="/" element={<Index defaultTab="overview" />} />
+          <Route path="/overview" element={<Index defaultTab="overview" />} />
+          <Route path="/projects" element={<Index defaultTab="projects" />} />
+          <Route path="/experience" element={<Index defaultTab="experience" />} />
+          <Route path="/terminal" element={<Index defaultTab="terminal" />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
