@@ -1,0 +1,3 @@
+## 2024-03-05 - Asynchronous Image Decoding & Telemetry Deferral
+**Learning:** Large image payloads can block the main thread during DOM rendering, and non-essential telemetry operations executing immediately can delay interactive component hydration.
+**Action:** Next time, preemptively apply `decoding="async"` to image tags and defer non-critical background operations via `requestIdleCallback` (with a `setTimeout` fallback for cross-browser compatibility) to unblock the main execution thread.
