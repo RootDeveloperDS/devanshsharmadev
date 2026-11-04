@@ -30,6 +30,7 @@ import { profile, socials, socialItems, tabs, type TabId } from "./data";
 import { sendTelegramNotification } from "@/lib/telegram";
 import { Button } from "@/components/ui/button";
 import { useTheme } from "./ThemeProvider";
+import { FeedbackCollector } from "./FeedbackCollector";
 
 interface FooterProps {
   onNavigate: (id: TabId) => void;
@@ -78,7 +79,7 @@ export function Footer({ onNavigate }: FooterProps) {
   ] as const;
 
   return (
-    <footer className="relative border-t border-border/80 bg-background/80 backdrop-blur-xl pt-12 pb-8 overflow-hidden z-20">
+    <footer className="relative border-t border-border/50 bg-background/35 backdrop-blur-md pt-12 pb-8 overflow-hidden z-20">
       {/* Sci-fi top ambient line */}
       <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-primary/60 to-transparent" />
 
@@ -303,6 +304,13 @@ export function Footer({ onNavigate }: FooterProps) {
               </button>
             </div>
           </div>
+        </div>
+
+        {/* ------------------------------------------------------------- */}
+        {/* FEEDBACK & TELEMETRY COLLECTOR                                */}
+        {/* ------------------------------------------------------------- */}
+        <div className="my-8">
+          <FeedbackCollector projectId="devanshsharmadev" />
         </div>
 
         {/* ------------------------------------------------------------- */}
