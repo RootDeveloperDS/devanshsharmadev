@@ -11,7 +11,7 @@ export const profile = {
     "Cognitive Systems Engineer focused on applied AI and intelligent architectures. Strong capability in integrating LLMs, vision cores, and voice engines into high-performance, user-facing products with a strict focus on modularity, zero-idle telemetry, and production-level deployments.",
   philosophy: "If it can think, it can evolve.",
   resumeUrl: "/My Resume Latest 3.pdf",
-  profileImage: "/profile.png",
+  profileImage: "/profile2.png",
   status: {
     state: "ONLINE",
     location: "REMOTE",
@@ -210,7 +210,7 @@ export interface Project {
   github?: string;
   live?: string;
   status?: string;
-  span: "lg" | "wide" | "tall" | "sm";
+  span: "lg" | "wide" | "tall" | "sm" | "mobile";
   categories: (
     | "fullstack"     // Apps with Front + Back + DB (Neon Notes)
     | "frontend"      // UI, Landing Pages, single-page sites
@@ -247,6 +247,21 @@ export const projects: Project[] = [
     flagship: true,
     tech: ["Python Async Kernel", "PySide6", "Multi-Agent Swarms", "MCP Hub", "FAISS / SQLite FTS5"],
     image: "https://github.com/RootDeveloperDS/CDN/blob/main/images/VISAR-EDGE-PC/visar-dashboard-v1-16.png?raw=true",
+  },
+  {
+    id: "visar-edge-mobile",
+    name: "V.I.S.A.R. Edge Mobile",
+    status: "IN DEVELOPMENT",
+    tagline: "The neural cockpit & hardware bridge for your PC.",
+    description:
+      "A futuristic remote control ecosystem. An AI-native command layer: with 60Hz holographic trackpad, The zero-overhead Python PC companion daemon manages real-time hardware telemetry streams, secure Drop-Pod multi-file transfers, real-time WebRTC optical surveillance, live dual-node telemetry, Groq reasoning streams, and an MCP gateway that exposes native Android hardware to your AI agents - 100% local. zero-latency acoustic audio pipelines.",
+    //github: "https://github.com/RootDeveloperDS/visar-edge-mobile",
+    live: "https://visar-mobile.vercel.app/",
+    span: "mobile",
+    categories: ["mobile", "desktop", "api"],
+    flagship: true,
+    tech: ["Kotlin", "Jetpack Compose", "Python", "FastAPI", "WebSockets"],
+    image: "https://github.com/RootDeveloperDS/CDN/blob/main/images/VISAR-EDGE-MOBILE/app-tactical-grid.jpg?raw=true",
   },
   {
     id: "orbit-span",
@@ -287,20 +302,6 @@ export const projects: Project[] = [
     flagship: true,
     tech: ["Python", "SpeechRecognition", "OpenAI", "Tkinter"],
     image: "https://github.com/RootDeveloperDS/CDN/blob/main/images/JARVIS/jarvis-mark-20-blue.jpg?raw=true"
-  },
-  {
-    id: "visar-edge-mobile",
-    name: "V.I.S.A.R. Edge Mobile",
-    status: "IN DEVELOPMENT",
-    tagline: "Native Android HUD & PC Telemetry Daemon",
-    description:
-      "A futuristic remote control ecosystem. The native Android client features a 3-tier boot timeline and a 60Hz holographic trackpad. The zero-overhead Python PC companion daemon manages real-time hardware telemetry streams, secure Drop-Pod multi-file transfers, and zero-latency acoustic audio pipelines.",
-    //github: "https://github.com/RootDeveloperDS/visar-edge-mobile",
-    span: "wide",
-    categories: ["mobile", "desktop", "api"],
-    flagship: true,
-    tech: ["Kotlin", "Jetpack Compose", "Python", "FastAPI", "WebSockets"],
-    image: "https://github.com/RootDeveloperDS/CDN/blob/main/logos/visar-android-v1.png?raw=true",
   },
   {
     id: "visar-intel",

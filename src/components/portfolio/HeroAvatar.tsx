@@ -104,7 +104,7 @@ export function HeroAvatar() {
         {/* Center: profile.png if present, else monogram */}
         <div className="relative z-10 grid h-32 w-32 place-items-center sm:h-40 sm:w-40">
           <img
-            src="/profile.png"
+            src="/profile2.png"
             alt="Devansh Sharma - Applied AI Systems Developer Profile Picture"
             onError={(e) => ((e.currentTarget as HTMLImageElement).style.display = "none")}
             className="h-full w-full rounded-2xl object-cover"

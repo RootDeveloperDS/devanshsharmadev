@@ -1,7 +1,7 @@
 <div align="center">
   <img src="https://cdn.jsdelivr.net/gh/RootDeveloperDS/CDN@main/images/devansh-portfolio/main-dashboard-dark-1.png" alt="Devansh Sharma Portfolio Preview" width="100%" style="border-radius: 12px; margin-bottom: 16px;">
 
-  # Devansh Sharma - Developer Portfolio (v12.7.0)
+  # Devansh Sharma - Developer Portfolio (v12.8.0)
 
   **Full Stack AI Architect & Creator of VISAR Edge**  
   *Modular Cyberpunk & Executive Portfolio Hub built with React, Vite, Framer Motion, and Tailwind CSS.*
@@ -12,6 +12,7 @@
   [![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
   [![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
   [![Framer Motion](https://img.shields.io/badge/Framer_Motion-black?style=for-the-badge&logo=framer&logoColor=blue)](https://www.framer.com/motion/)
+  [![License: MIT](https://img.shields.io/badge/License-MIT-00E5FF?style=for-the-badge)](LICENSE)
 
 </div>
 

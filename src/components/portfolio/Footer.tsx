@@ -378,6 +378,8 @@ export function Footer({ onNavigate }: FooterProps) {
             <span className="hidden sm:inline opacity-40">•</span>
             <span>All rights reserved.</span>
             <span className="hidden sm:inline opacity-40">•</span>
+            <span className="text-primary font-medium">MIT License</span>
+            <span className="hidden sm:inline opacity-40">•</span>
             <a
               href={socials.portfolioRepo}
               target="_blank"
