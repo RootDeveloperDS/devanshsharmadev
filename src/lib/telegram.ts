@@ -74,9 +74,10 @@ export async function sendTelegramNotification(
   action: string,
   details?: NotificationDetails
 ): Promise<void> {
-  try {
-    // 1. Check environment toggle and credentials
-    const isEnabled = import.meta.env.VITE_ENABLE_TELEGRAM_NOTIFY !== "false";
+  const executeNotification = async () => {
+    try {
+      // 1. Check environment toggle and credentials
+      const isEnabled = import.meta.env.VITE_ENABLE_TELEGRAM_NOTIFY !== "false";
     const botToken = import.meta.env.VITE_TELEGRAM_BOT_TOKEN;
     const chatId = import.meta.env.VITE_TELEGRAM_USER_ID;
 
@@ -143,23 +144,34 @@ export async function sendTelegramNotification(
 
     messageHtml += `  • <b>Time:</b> ${escapeHtml(timestamp)}`;
 
-    // 5. Send payload via Telegram Bot API
-    const telegramUrl = `https://api.telegram.org/bot${botToken}/sendMessage`;
-    void fetch(telegramUrl, {
-      method: "POST",
-      keepalive: true,
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        chat_id: chatId,
-        text: messageHtml,
-        parse_mode: "HTML",
-        disable_web_page_preview: true,
-      }),
-    }).catch(() => {
-      // Fail silently without interrupting UI
+      // 5. Send payload via Telegram Bot API
+      const telegramUrl = `https://api.telegram.org/bot${botToken}/sendMessage`;
+      void fetch(telegramUrl, {
+        method: "POST",
+        keepalive: true,
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          chat_id: chatId,
+          text: messageHtml,
+          parse_mode: "HTML",
+          disable_web_page_preview: true,
+        }),
+      }).catch(() => {
+        // Fail silently without interrupting UI
+      });
+    } catch {
+      // Fail silently on any unexpected error
+    }
+  };
+
+  if (typeof window !== "undefined" && "requestIdleCallback" in window) {
+    (window as any).requestIdleCallback(() => {
+      void executeNotification();
     });
-  } catch {
-    // Fail silently on any unexpected error
+  } else {
+    setTimeout(() => {
+      void executeNotification();
+    }, 1);
   }
 }
 
