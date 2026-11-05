@@ -1,0 +1,3 @@
+## 2024-03-27 - [Image Decode Unblocking and Component Memoization]
+**Learning:** [Using `decoding="async"` on heavy `<img>` tags stops image decoding from blocking the main thread, particularly noticeable when rendering many Framer Motion animations or scrolling. Also, purely visual components like `HeroAvatar` and `ThemeToggle` without dynamic props were unnecessarily re-rendering alongside parent state shifts, burning CPU cycles.]
+**Action:** [I proactively wrapped `HeroAvatar` and `ThemeToggle` in `React.memo` since they don't depend on props. I also systematically injected `decoding="async"` to all images (`ProjectsTab.tsx`, `Footer.tsx`, `AccordionMatrix.tsx`, `HeroAvatar.tsx`, `VisarAgentButton.tsx`) to parallelize decoding workflows.]
