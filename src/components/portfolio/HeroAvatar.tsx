@@ -1,3 +1,4 @@
+import React from "react";
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 import { useEffect, useRef } from "react";
 import { useTheme } from "./ThemeProvider";
@@ -6,7 +7,8 @@ import { useTheme } from "./ThemeProvider";
  * Hexagonal stylized avatar — placeholder geometric DS monogram.
  * Tilts slightly with cursor for a 3D feel. Falls back gracefully if /profile.png exists.
  */
-export function HeroAvatar() {
+// ⚡ Bolt: Wrapped HeroAvatar in React.memo to prevent unnecessary re-renders from parent state changes
+export const HeroAvatar = React.memo(function HeroAvatar() {
   const { theme } = useTheme();
   const wrapRef = useRef<HTMLDivElement>(null);
   const mx = useMotionValue(0);
@@ -120,6 +122,7 @@ export function HeroAvatar() {
             onError={(e) => ((e.currentTarget as HTMLImageElement).style.display = "none")}
             className="h-full w-full rounded-2xl object-cover"
             loading="eager"
+            decoding="async" // ⚡ Bolt: Offload image decoding to background thread
           />
           <div className="absolute inset-0 -z-10 grid place-items-center">
             <span className="font-display text-5xl font-black text-gradient sm:text-6xl">
@@ -148,4 +151,4 @@ export function HeroAvatar() {
       )}
     </motion.div>
   );
-}
+});
