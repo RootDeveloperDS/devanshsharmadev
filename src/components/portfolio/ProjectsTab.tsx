@@ -153,22 +153,22 @@ export function ProjectsTab() {
                 {/* Right Column: PhoneFrame - Device Mockup matching visar-mobile-download */}
                 {project.image && (
                   <div className="relative w-full lg:w-auto shrink-0 flex items-center justify-center z-10 py-1 sm:py-2">
-                    <figure className="group/phone relative mx-auto w-full max-w-[210px] sm:max-w-[235px] lg:max-w-[245px] transition-all duration-700 [transition-timing-function:cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-1.5 hover:scale-[1.02]">
+                    <figure className="group/phone relative mx-auto w-[235px] sm:w-[245px] max-w-full transition-all duration-700 [transition-timing-function:cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-1.5 hover:scale-[1.02]">
                       {/* Subtle, minimal ambient glow that gently intensifies on hover */}
                       <div
                         aria-hidden
-                        className="pointer-events-none absolute inset-x-3 -bottom-2 top-4 rounded-[22px] bg-primary/20 blur-xl opacity-35 transition-opacity duration-700 [transition-timing-function:cubic-bezier(0.22,1,0.36,1)] group-hover/phone:opacity-80 group-hover:opacity-80"
+                        className="pointer-events-none absolute inset-x-2 -bottom-2 top-3 rounded-[16px] bg-primary/20 blur-xl opacity-35 transition-opacity duration-700 [transition-timing-function:cubic-bezier(0.22,1,0.36,1)] group-hover/phone:opacity-80 group-hover:opacity-80"
                       />
 
-                      {/* 3D Hardware Bezel: Black Titanium finish with ultra-slim 4px bezel */}
-                      <div className="relative overflow-hidden rounded-[22px] border border-neutral-800 bg-neutral-950 p-1 sm:p-[4.5px] shadow-[0_20px_50px_-15px_rgba(0,0,0,0.9)] transition-colors duration-500 group-hover/phone:border-primary/50 group-hover:border-primary/50">
-                        <div className="overflow-hidden rounded-[18px] bg-black">
+                      {/* 3D Hardware Bezel: Precision Black Titanium finish with concentric 3.5px bezel */}
+                      <div className="relative w-full overflow-hidden rounded-[16px] border border-neutral-700/80 bg-neutral-900 p-[3.5px] shadow-[0_20px_50px_-15px_rgba(0,0,0,0.9)] transition-colors duration-500 group-hover/phone:border-primary/50 group-hover:border-primary/50">
+                        <div className="overflow-hidden rounded-[12.5px] bg-black">
                           <img
                             src={optimizeImage(project.image)}
                             alt={`${project.name} Interface`}
                             loading={idx < 2 ? "eager" : "lazy"}
                             decoding="async"
-                            className="block h-auto w-full max-h-[25rem] sm:max-h-[27rem] object-contain"
+                            className="block h-auto w-full select-none"
                             onError={(e) => {
                               const target = e.currentTarget;
                               if (project.image && target.src !== project.image) {
