@@ -24,7 +24,7 @@ export const TopNav = memo(function TopNav({ active, onChange, onOpenPalette }: 
             e.preventDefault();
             onChange("overview");
           }}
-          className="flex items-center gap-1.5 sm:gap-2 group shrink-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 ring-offset-background rounded-full p-1"
+          className="flex items-center gap-1.5 sm:gap-2 group shrink-0 transition-all active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 ring-offset-background rounded-full p-1"
           aria-label="Devansh Sharma — home"
         >
           <span className="relative grid h-7 w-7 sm:h-8 sm:w-8 place-items-center">
@@ -55,7 +55,7 @@ export const TopNav = memo(function TopNav({ active, onChange, onOpenPalette }: 
                   else if (t.id === "experience") import("@/components/portfolio/ExperienceTab");
                   else if (t.id === "terminal") import("@/components/portfolio/TerminalTab");
                 }}
-                className="relative px-2 py-1 sm:px-3 sm:py-1.5 text-xs font-medium tracking-wide focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 ring-offset-background rounded-full"
+                className="relative px-2 py-1 sm:px-3 sm:py-1.5 text-xs font-medium tracking-wide transition-all active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 ring-offset-background rounded-full"
                 aria-current={isActive ? "page" : undefined}
               >
                 {isActive && (
