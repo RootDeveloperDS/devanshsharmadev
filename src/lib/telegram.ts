@@ -145,19 +145,27 @@ export async function sendTelegramNotification(
 
     // 5. Send payload via Telegram Bot API
     const telegramUrl = `https://api.telegram.org/bot${botToken}/sendMessage`;
-    void fetch(telegramUrl, {
-      method: "POST",
-      keepalive: true,
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        chat_id: chatId,
-        text: messageHtml,
-        parse_mode: "HTML",
-        disable_web_page_preview: true,
-      }),
-    }).catch(() => {
-      // Fail silently without interrupting UI
-    });
+    const sendPayload = () => {
+      void fetch(telegramUrl, {
+        method: "POST",
+        keepalive: true,
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          chat_id: chatId,
+          text: messageHtml,
+          parse_mode: "HTML",
+          disable_web_page_preview: true,
+        }),
+      }).catch(() => {
+        // Fail silently without interrupting UI
+      });
+    };
+
+    if (typeof window !== "undefined" && 'requestIdleCallback' in window) {
+      window.requestIdleCallback(sendPayload);
+    } else {
+      setTimeout(sendPayload, 1);
+    }
   } catch {
     // Fail silently on any unexpected error
   }
